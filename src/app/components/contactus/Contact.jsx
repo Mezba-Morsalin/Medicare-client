@@ -2,8 +2,12 @@
 
 import {
   Button,
+  Form,
+  TextField,
+  Label,
   Input,
   TextArea,
+  FieldError,
 } from "@heroui/react";
 
 import {
@@ -14,12 +18,21 @@ import {
 } from "react-icons/fi";
 
 const Contact = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    console.log(data);
+  };
+
   return (
     <section className="bg-slate-50 py-20">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <p className="uppercase tracking-widest text-sky-600 text-sm font-semibold">
+          <p className="uppercase tracking-widest text-sky-600 bg-sky-50 mx-auto p-3 w-70 rounded-xl text-sm font-semibold">
             Get In Touch
           </p>
 
@@ -36,13 +49,12 @@ const Contact = () => {
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Left Side */}
           <div className="lg:col-span-4">
-            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
+            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm h-full">
               <h3 className="text-2xl font-bold text-slate-900 mb-8">
                 Corporate Headquarters
               </h3>
 
               <div className="space-y-6">
-                {/* Address */}
                 <div className="flex gap-4">
                   <div className="h-12 w-12 rounded-xl bg-sky-50 flex items-center justify-center">
                     <FiMapPin className="text-sky-600 text-xl" />
@@ -58,7 +70,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Phone */}
                 <div className="flex gap-4">
                   <div className="h-12 w-12 rounded-xl bg-blue-50 flex items-center justify-center">
                     <FiPhone className="text-blue-600 text-xl" />
@@ -74,7 +85,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div className="flex gap-4">
                   <div className="h-12 w-12 rounded-xl bg-purple-50 flex items-center justify-center">
                     <FiMail className="text-purple-600 text-xl" />
@@ -91,7 +101,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Emergency Box */}
               <div className="mt-10 rounded-2xl border border-red-200 bg-red-50 p-5">
                 <div className="flex items-center gap-2 text-red-600 font-bold mb-3">
                   <FiAlertTriangle />
@@ -100,51 +109,91 @@ const Contact = () => {
 
                 <p className="text-red-500 text-sm leading-relaxed">
                   This digital dashboard is for standard appointment
-                  scheduling. If you are undergoing an active clinical
-                  crisis, please call 911 immediately or visit your
-                  closest physical hospital.
+                  scheduling. If you are undergoing an active clinical crisis,
+                  please call 911 immediately or visit your closest physical
+                  hospital.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Right Side Form */}
+          {/* Right Side */}
           <div className="lg:col-span-8">
             <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
               <h3 className="text-2xl font-bold text-slate-900 mb-8">
                 Submit Electronic Inquiry Form
               </h3>
 
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Input
-                    label="Your Full Name *"
-                    placeholder="e.g. Alice Miller"
-                  />
+              <Form
+                onSubmit={onSubmit}
+                className="w-full flex flex-col gap-5"
+              >
+                <div className="grid md:grid-cols-2 gap-4 w-full">
+                  <TextField
+                    isRequired
+                    name="name"
+                    className="w-full"
+                  >
+                    <Label>Your Full Name *</Label>
+                    <Input placeholder="e.g. Alice Miller" />
+                    <FieldError />
+                  </TextField>
 
-                  <Input
+                  <TextField
+                    isRequired
+                    name="email"
                     type="email"
-                    label="Your Email Address *"
-                    placeholder="e.g. alice@gmail.com"
-                  />
+                    className="w-full"
+                    validate={(value) => {
+                      if (
+                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                          value
+                        )
+                      ) {
+                        return "Please enter a valid email address";
+                      }
+
+                      return null;
+                    }}
+                  >
+                    <Label>Your Email Address *</Label>
+                    <Input placeholder="e.g. alice@gmail.com" />
+                    <FieldError />
+                  </TextField>
                 </div>
 
-                <Input
-                  label="Subject of Inquiry"
-                  placeholder="e.g. Roster reschedule help / Doctor credentials validation"
-                />
+                <TextField
+                  name="subject"
+                  className="w-full"
+                >
+                  <Label>Subject of Inquiry</Label>
+                  <Input placeholder="e.g. Doctor credentials validation" />
+                  <FieldError />
+                </TextField>
 
-               <TextArea
-    placeholder="Briefly explain what support is needed..."
-    className="min-h-32"
-  />
+                <TextField
+                  isRequired
+                  name="message"
+                  className="w-full"
+                >
+                  <Label>Detailed Message *</Label>
+
+                  <TextArea
+                    placeholder="Briefly explain what support is needed..."
+                    className="min-h-36"
+                  />
+
+                  <FieldError />
+                </TextField>
+
                 <Button
+                  type="submit"
                   className="bg-sky-600 hover:bg-sky-700 text-white px-8"
                   size="lg"
                 >
                   Dispatch Electronic Message
                 </Button>
-              </form>
+              </Form>
             </div>
           </div>
         </div>
