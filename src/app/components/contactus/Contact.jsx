@@ -32,7 +32,7 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <p className="uppercase tracking-widest text-sky-600 bg-sky-50 mx-auto p-3 w-70 rounded-xl text-sm font-semibold">
+          <p className="uppercase tracking-widest text-sky-600 border border-sky-100 bg-sky-50 mx-auto p-3 w-70 rounded-xl text-sm font-semibold">
             Get In Touch
           </p>
 

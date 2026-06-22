@@ -1,7 +1,7 @@
 
 "use client";
 
-import { outfit } from "@/lib/font";
+
 
 import {
   Button,
@@ -12,7 +12,7 @@ import {
   Select,
   ListBox,
 } from "@heroui/react";
-import Image from "next/image";
+
 import Link from "next/link";
 
 import { FcGoogle } from "react-icons/fc";

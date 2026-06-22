@@ -16,7 +16,7 @@ export default function Hero() {
 
           {/* Left */}
           <div>
-  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-sm font-semibold">
+  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-50 border border-sky-100 text-sky-600 text-sm font-semibold">
     <FiShield />
     TRUSTED DIGITAL HEALTHCARE PLATFORM
   </div>
