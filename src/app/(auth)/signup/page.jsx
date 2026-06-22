@@ -1,4 +1,7 @@
+
 "use client";
+
+import { outfit } from "@/lib/font";
 
 import {
   Button,
@@ -6,7 +9,12 @@ import {
   Input,
   Label,
   TextField,
+  Select,
+  ListBox,
 } from "@heroui/react";
+import Image from "next/image";
+
+import { FcGoogle } from "react-icons/fc";
 
 import {
   FiUser,
@@ -27,166 +35,251 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-5">
-      <div className="w-full max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-900">
-            Launch Patient Account
+    <div className="min-h-screen bg-slate-50 py-16 px-4">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 ">
+        {/* LEFT SIDE */}
+        <div>
+          {/* Logo */}
+          <div className="flex items-center gap-3 mb-5">
+            <div className="flex gap-3 items-center">
+
+         <h3 className={`${outfit.className} text-2xl md:text-3xl font-extrabold`}>
+  Medicare <span className="text-sky-600">Connect</span>
+</h3>
+          </div>
+          </div>
+
+          <h1 className="text-3xl md:text-5xl font-extrabold leading-tight text-slate-900 max-w-xl">
+            Secure Administrative &
+            <br />
+            Clinical Patient Gateway
           </h1>
 
-          <p className="mt-2 text-sm text-slate-500">
-            Instantly record database registry profiles for appointment
-            schedules
+          <p className="mt-8 text-lg text-slate-600 max-w-xl leading-relaxed">
+            Log in with your electronic healthcare credentials or activate
+            our pre-configured Sandbox Demo accounts below to explore
+            Patient, Doctor, and Administrative rosters instantly.
           </p>
         </div>
 
-        <Form
-          onSubmit={handleSubmit}
-          className="flex flex-col gap-5"
-        >
-          {/* Full Name */}
-          <TextField
-            isRequired
-            name="name"
-            className="w-full"
+        {/* RIGHT SIDE */}
+        <div className="w-full max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-slate-900">
+              Launch Patient Account
+            </h1>
+
+            <p className="mt-2 text-sm text-slate-500">
+              Instantly record database registry profiles for appointment
+              schedules
+            </p>
+          </div>
+
+          <Form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-5"
           >
-            <Label>Full Legal Name *</Label>
-
-            <div className="relative">
-              <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
-
-              <Input
-                className="pl-10"
-                placeholder="e.g. Alice Miller"
-              />
-            </div>
-          </TextField>
-
-          {/* Email + Role */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            {/* Name */}
             <TextField
               isRequired
-              name="email"
+              name="name"
               className="w-full"
             >
-              <Label>Email Coordinates *</Label>
+              <Label>Full Legal Name *</Label>
 
-              <div className="relative">
-                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
+              <div className="relative w-full">
+                <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
 
                 <Input
-                  type="email"
-                  className="pl-10"
-                  placeholder="e.g. alice@gmail.com"
+                  className="w-full pl-10"
+                  placeholder="e.g. Alice Miller"
                 />
               </div>
             </TextField>
 
-            <div className="w-full">
-              <Label>Account Role *</Label>
+            {/* Email + Role */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+              <TextField
+                isRequired
+                name="email"
+                className="w-full"
+              >
+                <Label>Email Coordinates *</Label>
 
-              <select
+                <div className="relative w-full">
+                  <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
+
+                  <Input
+                    type="email"
+                    className="w-full pl-10"
+                    placeholder="e.g. alice@gmail.com"
+                  />
+                </div>
+              </TextField>
+
+              <Select
                 name="role"
-                className="mt-2 h-12 w-full rounded-xl border border-zinc-300 px-4 outline-none focus:border-sky-500"
+                className="w-full"
+                placeholder="Select role"
               >
-                <option value="patient">
-                  Patient Client
-                </option>
+                <Label>Account Role *</Label>
 
-                <option value="doctor">
-                  Doctor
-                </option>
+                <Select.Trigger>
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
 
-                <option value="admin">
-                  Admin
-                </option>
-              </select>
+                <Select.Popover>
+                  <ListBox>
+                    <ListBox.Item
+                      id="patient"
+                      textValue="Patient Client"
+                    >
+                      Patient Client
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="doctor"
+                      textValue="Doctor"
+                    >
+                      Doctor
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="admin"
+                      textValue="Admin"
+                    >
+                      Admin
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
             </div>
-          </div>
 
-          {/* Phone + Gender */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+            {/* Phone + Gender */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+              <TextField
+                name="phone"
+                className="w-full"
+              >
+                <Label>Primary Voice Phone</Label>
+
+                <div className="relative w-full">
+                  <FiPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
+
+                  <Input
+                    className="w-full pl-10"
+                    placeholder="+1 555-019-2834"
+                  />
+                </div>
+              </TextField>
+
+              <Select
+                name="gender"
+                className="w-full"
+                placeholder="Select gender"
+              >
+                <Label>Gender Identity</Label>
+
+                <Select.Trigger>
+                  <Select.Value />
+                  <Select.Indicator />
+                </Select.Trigger>
+
+                <Select.Popover>
+                  <ListBox>
+                    <ListBox.Item
+                      id="male"
+                      textValue="Male"
+                    >
+                      Male
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="female"
+                      textValue="Female"
+                    >
+                      Female
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+
+                    <ListBox.Item
+                      id="other"
+                      textValue="Other"
+                    >
+                      Other
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+                  </ListBox>
+                </Select.Popover>
+              </Select>
+            </div>
+
+            {/* Photo */}
             <TextField
-              name="phone"
+              name="photo"
               className="w-full"
             >
-              <Label>Primary Voice Phone</Label>
+              <Label>Photo URL (Optional)</Label>
 
-              <div className="relative">
-                <FiPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
+              <div className="relative w-full">
+                <FiImage className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
 
                 <Input
-                  className="pl-10"
-                  placeholder="+1 555-019-2834"
+                  className="w-full pl-10"
+                  placeholder="https://images.unsplash.com/..."
                 />
               </div>
             </TextField>
 
-            <div className="w-full">
-              <Label>Gender Identity</Label>
+            {/* Password */}
+            <TextField
+              isRequired
+              name="password"
+              className="w-full"
+            >
+              <Label>Account Passkey *</Label>
 
-              <select
-                name="gender"
-                className="mt-2 h-12 w-full rounded-xl border border-zinc-300 px-4 outline-none focus:border-sky-500"
-              >
-                <option value="male">
-                  Male
-                </option>
+              <div className="relative w-full">
+                <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
 
-                <option value="female">
-                  Female
-                </option>
+                <Input
+                  type="password"
+                  className="w-full pl-10"
+                  placeholder="6+ chars, 1 number, 1 special sign"
+                />
+              </div>
+            </TextField>
 
-                <option value="other">
-                  Other
-                </option>
-              </select>
-            </div>
+            <Button
+              type="submit"
+              className="mt-2 h-12 w-full rounded-xl bg-sky-600 text-white font-semibold"
+            >
+              Publish Registry & Launch Signup
+            </Button>
+          </Form>
+
+          <div className="flex items-center gap-4 mt-6">
+            <div className="flex-1 border-t border-zinc-300"></div>
+
+            <p className="text-sm text-zinc-500 font-medium">
+              OR
+            </p>
+
+            <div className="flex-1 border-t border-zinc-300"></div>
           </div>
-
-          {/* Photo URL */}
-          <TextField
-            name="photo"
-            className="w-full"
-          >
-            <Label>Photo URL (Optional)</Label>
-
-            <div className="relative">
-              <FiImage className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
-
-              <Input
-                className="pl-10"
-                placeholder="https://images.unsplash.com/..."
-              />
-            </div>
-          </TextField>
-
-          {/* Password */}
-          <TextField
-            isRequired
-            name="password"
-            className="w-full"
-          >
-            <Label>Account Passkey *</Label>
-
-            <div className="relative">
-              <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
-
-              <Input
-                type="password"
-                className="pl-10"
-                placeholder="6+ chars, 1 number, 1 special sign"
-              />
-            </div>
-          </TextField>
 
           <Button
-            type="submit"
-            className="mt-2 h-12 w-full bg-[#0284c7] text-white font-semibold"
+            className="mt-6 w-full bg-white border border-zinc-300 text-zinc-700 rounded-xl"
           >
-            Publish Registry & Launch Login
+            <FcGoogle size={22} />
+            Sign Up With Google
           </Button>
-        </Form>
+        </div>
       </div>
     </div>
   );
