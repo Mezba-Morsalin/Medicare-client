@@ -135,7 +135,7 @@ const About = () => {
                 </div>
         
                 {/* Mission */}
-                <div className="mt-24 text-center max-w-4xl mx-auto">
+                <div className="mt-24 text-center max-w-4xl mx-auto bg-sky-50 p-5 rounded-xl border border-slate-200">
                   <h2 className="text-4xl font-extrabold text-slate-900">
                     Our Mission
                   </h2>
