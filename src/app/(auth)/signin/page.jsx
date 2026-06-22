@@ -2,6 +2,7 @@
 
 import { outfit } from '@/lib/font';
 import { Button, Form, Input, Label, ListBox, TextField, Select } from '@heroui/react';
+import Link from 'next/link';
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { FiImage, FiLock, FiMail, FiPhone, FiUser } from 'react-icons/fi';
@@ -20,134 +21,37 @@ const SigninPage = () => {
               <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 ">
                 {/* LEFT SIDE */}
                 <div>
-                  {/* Logo */}
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="flex gap-3 items-center">
-        
-                 <h3 className={`${outfit.className} text-2xl md:text-3xl font-extrabold`}>
-          Medicare <span className="text-sky-600">Connect</span>
-        </h3>
-                  </div>
-                  </div>
-        
                   <h1 className="text-3xl md:text-5xl font-extrabold leading-tight text-slate-900 max-w-xl">
-                    Secure Administrative & <br /> Clinical Patient Gateway
-                  </h1>
-        
-                  <p className="mt-8 text-lg text-slate-600 max-w-xl leading-relaxed">
-                    Log in with your electronic healthcare credentials or activate our pre-configured Sandbox Demo accounts below to explore Patient, Doctor, and Administrative rosters instantly.
-                  </p>
-        
-                  {/* Demo Card */}
-                  {/* <div className="mt-10 bg-white border border-slate-200 rounded-3xl p-6 shadow-sm max-w-xl">
-                    <h4 className="text-sm font-bold tracking-wide text-slate-400 uppercase">
-                      🔑 Vetted Sandbox Profiles (One-Click Bypass)
-                    </h4>
-        
-                    <div className="grid grid-cols-3 gap-3 mt-5">
-                      <Button
-                        variant="bordered"
-                        className="border-sky-200 text-sky-600 bg-sky-50"
-                      >
-                        Demo Patient
-                      </Button>
-        
-                      <Button
-                        variant="bordered"
-                        className="border-blue-200 text-blue-600 bg-blue-50"
-                      >
-                        Demo Doctor
-                      </Button>
-        
-                      <Button
-                        variant="bordered"
-                        className="border-purple-200 text-purple-600 bg-purple-50"
-                      >
-                        Demo Admin
-                      </Button>
-                    </div>
-        
-                    <div className="mt-6 border-t pt-6">
-                      <p className="font-semibold text-slate-500 text-sm mb-4">
-                        MANUAL CREDENTIALS CHECK
-                      </p>
-        
-                      <div className="space-y-3 text-sm">
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-blue-600">
-                            Patient:
-                          </span>
-        
-                          <span>alice.miller@demo.com</span>
-                        </div>
-        
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-blue-600">
-                            Doctor:
-                          </span>
-        
-                          <span>adrian.vance@medicare.com</span>
-                        </div>
-        
-                        <div className="flex justify-between">
-                          <span className="font-semibold text-purple-600">
-                            Admin:
-                          </span>
-        
-                          <span>admin@medicare.com</span>
-                        </div>
-                      </div>
-        
-                      <div className="mt-5 flex justify-between items-center border-t pt-4">
-                        <span className="text-sm text-slate-500">
-                          Standard Password:
-                        </span>
-        
-                        <span className="px-3 py-1 bg-slate-100 rounded-lg font-bold">
-                          Demo123!
-                        </span>
-                      </div>
-                    </div>
-                  </div> */}
+  Welcome Back to <br /> Medicare <span className="text-sky-600">Connect</span>
+</h1>
+
+<p className="mt-8 text-lg text-slate-600 max-w-xl leading-relaxed">
+  Sign in to access your healthcare dashboard, manage upcoming
+  appointments, review medical information, and stay connected with
+  trusted healthcare professionals anytime.
+</p>
                 </div>
         
                 {/* RIGHT SIDE */}
                 <div className="w-full max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
                   <div className="mb-8">
-                    <h1 className="text-4xl font-bold text-slate-900">
-                      Launch Patient Account
-                    </h1>
-        
-                    <p className="mt-2 text-sm text-slate-500">
-                      Instantly record database registry profiles for appointment
-                      schedules
-                    </p>
+                    <h1 className="text-3xl font-bold text-slate-900">
+  Access Your Healthcare Dashboard
+</h1>
+
+<p className="mt-2 text-sm text-slate-500">
+  Securely sign in to continue managing appointments, patient records, and healthcare services.
+</p>
                   </div>
         
                   <Form
                     onSubmit={handleSubmit}
                     className="flex flex-col gap-5"
                   >
-                    {/* Name */}
-                    <TextField
-                      isRequired
-                      name="name"
-                      className="w-full"
-                    >
-                      <Label>Full Legal Name *</Label>
-        
-                      <div className="relative w-full">
-                        <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
-        
-                        <Input
-                          className="w-full pl-10"
-                          placeholder="e.g. Alice Miller"
-                        />
-                      </div>
-                    </TextField>
+
         
                     {/* Email + Role */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                    <div className="">
                       <TextField
                         isRequired
                         name="email"
@@ -165,125 +69,9 @@ const SigninPage = () => {
                           />
                         </div>
                       </TextField>
-        
-                      <Select
-                        name="role"
-                        className="w-full"
-                        placeholder="Select role"
-                      >
-                        <Label>Account Role *</Label>
-        
-                        <Select.Trigger>
-                          <Select.Value />
-                          <Select.Indicator />
-                        </Select.Trigger>
-        
-                        <Select.Popover>
-                          <ListBox>
-                            <ListBox.Item
-                              id="patient"
-                              textValue="Patient Client"
-                            >
-                              Patient Client
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-        
-                            <ListBox.Item
-                              id="doctor"
-                              textValue="Doctor"
-                            >
-                              Doctor
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-        
-                            <ListBox.Item
-                              id="admin"
-                              textValue="Admin"
-                            >
-                              Admin
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-                          </ListBox>
-                        </Select.Popover>
-                      </Select>
+
                     </div>
-        
-                    {/* Phone + Gender */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                      <TextField
-                        name="phone"
-                        className="w-full"
-                      >
-                        <Label>Primary Voice Phone</Label>
-        
-                        <div className="relative w-full">
-                          <FiPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
-        
-                          <Input
-                            className="w-full pl-10"
-                            placeholder="+1 555-019-2834"
-                          />
-                        </div>
-                      </TextField>
-        
-                      <Select
-                        name="gender"
-                        className="w-full"
-                        placeholder="Select gender"
-                      >
-                        <Label>Gender Identity</Label>
-        
-                        <Select.Trigger>
-                          <Select.Value />
-                          <Select.Indicator />
-                        </Select.Trigger>
-        
-                        <Select.Popover>
-                          <ListBox>
-                            <ListBox.Item
-                              id="male"
-                              textValue="Male"
-                            >
-                              Male
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-        
-                            <ListBox.Item
-                              id="female"
-                              textValue="Female"
-                            >
-                              Female
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-        
-                            <ListBox.Item
-                              id="other"
-                              textValue="Other"
-                            >
-                              Other
-                              <ListBox.ItemIndicator />
-                            </ListBox.Item>
-                          </ListBox>
-                        </Select.Popover>
-                      </Select>
-                    </div>
-        
-                    {/* Photo */}
-                    <TextField
-                      name="photo"
-                      className="w-full"
-                    >
-                      <Label>Photo URL (Optional)</Label>
-        
-                      <div className="relative w-full">
-                        <FiImage className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
-        
-                        <Input
-                          className="w-full pl-10"
-                          placeholder="https://images.unsplash.com/..."
-                        />
-                      </div>
-                    </TextField>
+
         
                     {/* Password */}
                     <TextField
@@ -308,7 +96,7 @@ const SigninPage = () => {
                       type="submit"
                       className="mt-2 h-12 w-full rounded-xl bg-sky-600 text-white font-semibold"
                     >
-                      Publish Registry & Launch Signup
+                      Sign In Your Account
                     </Button>
                   </Form>
         
@@ -326,8 +114,11 @@ const SigninPage = () => {
                     className="mt-6 w-full bg-white border border-zinc-300 text-zinc-700 rounded-xl"
                   >
                     <FcGoogle size={22} />
-                    Sign Up With Google
+                    Sign In With Google
                   </Button>
+                  <div className='flex justify-center mt-5'>
+                    <p className='text-slate-600'>Don&#39;t have an account? <span className='text-sky-600 font-bold'><Link href={'/signup'}>Sign Up</Link></span></p>
+                  </div>
                 </div>
               </div>
             </div>

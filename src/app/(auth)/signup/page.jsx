@@ -13,6 +13,7 @@ import {
   ListBox,
 } from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { FcGoogle } from "react-icons/fc";
 
@@ -39,40 +40,28 @@ export default function SignUpPage() {
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 ">
         {/* LEFT SIDE */}
         <div>
-          {/* Logo */}
-          <div className="flex items-center gap-3 mb-5">
-            <div className="flex gap-3 items-center">
-
-         <h3 className={`${outfit.className} text-2xl md:text-3xl font-extrabold`}>
-  Medicare <span className="text-sky-600">Connect</span>
-</h3>
-          </div>
-          </div>
 
           <h1 className="text-3xl md:text-5xl font-extrabold leading-tight text-slate-900 max-w-xl">
-            Secure Administrative &
-            <br />
-            Clinical Patient Gateway
-          </h1>
+  Launch Your Digital <br /> Medicare <span className="text-sky-600">Connect</span> Account
+</h1>
 
-          <p className="mt-8 text-lg text-slate-600 max-w-xl leading-relaxed">
-            Log in with your electronic healthcare credentials or activate
-            our pre-configured Sandbox Demo accounts below to explore
-            Patient, Doctor, and Administrative rosters instantly.
-          </p>
+<p className="mt-8 text-lg text-slate-600 max-w-xl leading-relaxed">
+  Create your MediCare Connect profile to schedule appointments,
+  connect with verified doctors, access medical records, and manage
+  your healthcare journey from a single secure platform.
+</p>
         </div>
 
         {/* RIGHT SIDE */}
         <div className="w-full max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-slate-900">
-              Launch Patient Account
-            </h1>
+            <h1 className="text-3xl font-bold text-slate-900">
+  Launch Your MediCare Profile
+</h1>
 
-            <p className="mt-2 text-sm text-slate-500">
-              Instantly record database registry profiles for appointment
-              schedules
-            </p>
+<p className="mt-2 text-sm text-slate-500">
+  Set up your secure healthcare account and connect with trusted medical professionals in minutes.
+</p>
           </div>
 
           <Form
@@ -259,7 +248,7 @@ export default function SignUpPage() {
               type="submit"
               className="mt-2 h-12 w-full rounded-xl bg-sky-600 text-white font-semibold"
             >
-              Publish Registry & Launch Signup
+              Create Your Medicare Profile
             </Button>
           </Form>
 
@@ -279,6 +268,9 @@ export default function SignUpPage() {
             <FcGoogle size={22} />
             Sign Up With Google
           </Button>
+          <div className='flex justify-center mt-5'>
+                    <p className='text-slate-600'>Already have an account? <span className='text-sky-600 font-bold'><Link href={'/signin'}>Sign In</Link></span></p>
+                  </div>
         </div>
       </div>
     </div>
