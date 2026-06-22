@@ -65,9 +65,9 @@ const Navbar = () => {
   const dashboardLink =
   user?.role === "admin"
     ? "/dashboard/admin"
-    : user?.role === "recruiter"
-    ? "/dashboard/recruiter"
-    : "/dashboard/seeker";
+    : user?.role === "doctor"
+    ? "/dashboard/doctor"
+    : "/dashboard/patient";
 
 const MainLinks = [
   <li key="scroll" onClick={() => setOpen(false)}>
@@ -96,39 +96,39 @@ if (user) {
 }
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-[#fefdff]/95 border-b border-white/10 shadow">
-      <nav className="relative max-w-7xl mx-auto px-4 py-4 sm:px-6">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-[#fefdff]/95 border-b border-slate-100 shadow-sm">
+      <nav className="relative max-w-7xl mx-auto px-4 py-3 sm:px-6">
         <div className="flex items-center justify-between">
 
           {/* Logo */}
           <div className="flex gap-3 items-center">
             <Link href="/">
-            <Image
-              src={navImg}
-              alt="Logo"
-              width={60}
-              height={60}
-              priority
-              className="bg-sky-50 p-4 rounded-xl"
-            />
-          </Link>
-         <h3 className={`${outfit.className} text-2xl font-extrabold`}>
-  Medicare <span className="text-sky-600">Connect</span>
-</h3>
+              <Image
+                src={navImg}
+                alt="Logo"
+                width={50}
+                height={50}
+                priority
+                className="bg-sky-50 p-3 rounded-xl"
+              />
+            </Link>
+            <h3 className={`${outfit.className} text-2xl font-extrabold text-slate-800`}>
+              Medicare <span className="text-sky-600">Connect</span>
+            </h3>
           </div>
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-6">
-            <ul className="flex gap-5 text-sm lg:text-base">
+            <ul className="flex gap-5 text-sm lg:text-base text-slate-600 font-medium">
               {MainLinks}
             </ul>
 
-            <div className="h-5 border-l border-gray-600" />
+            <div className="h-5 border-l border-slate-200" />
 
             <div className="flex items-center gap-3">
 
               {isPending ? (
-                <PuffLoader color="#6366f1" size={30} />
+                <PuffLoader color="#0284c7" size={30} />
               ) : user ? (
                 <div ref={dropdownRef} className="relative">
 
@@ -136,21 +136,21 @@ if (user) {
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     onClick={() => setShowMenu(!showMenu)}
-                    className="flex items-center gap-3 border border-gray-600 hover:bg-black/20 p-3 rounded-full cursor-pointer"
+                    className="flex items-center gap-3 border border-slate-200 hover:bg-slate-50 p-1.5 pr-4 rounded-full cursor-pointer transition"
                   >
-                    {/* <Image
+                    <Image
                       src={avatarSrc}
                       alt="User"
-                      width={42}
-                      height={42}
-                      className="rounded-full border border-indigo-500"
-                    /> */}
+                      width={38}
+                      height={38}
+                      className="rounded-full border-2 border-sky-500 object-cover"
+                    />
 
-                    <div className="hidden lg:flex flex-col">
-                      <span className="text-white text-sm font-medium">
+                    <div className="hidden lg:flex flex-col text-left">
+                      <span className="text-slate-800 text-sm font-semibold leading-tight">
                         {user.name}
                       </span>
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs text-slate-500 leading-tight">
                         {user.email}
                       </span>
                     </div>
@@ -158,8 +158,9 @@ if (user) {
                     <motion.div
                       animate={{ rotate: showMenu ? 180 : 0 }}
                       transition={{ duration: 0.2 }}
+                      className="ml-1"
                     >
-                      <FaChevronDown className="text-gray-400" />
+                      <FaChevronDown className="text-slate-400 text-xs" />
                     </motion.div>
                   </motion.div>
 
@@ -171,12 +172,16 @@ if (user) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
-                        className="absolute right-0 top-20 w-56 bg-[#1b1b1b] border border-white/10 rounded-2xl p-4 shadow-xl backdrop-blur-md"
+                        className="absolute right-0 top-14 w-52 bg-white border border-slate-100 rounded-2xl p-3 shadow-xl z-50"
                       >
-
+                        <Link href="/profile" onClick={() => setOpen(false)}>
+    <Button className="w-full bg-transparent border border-sky-500 hover:bg-sky-50 text-sky-500 hover:text-sky-600 font-medium rounded-xl mb-4">
+      Profile
+    </Button>
+  </Link>
                         <Button
                           onClick={handleSignOut}
-                          className="mt-4 w-full border border-indigo-500 bg-transparent text-white"
+                          className="w-full border border-red-200 bg-transparent hover:bg-red-50 text-red-600 font-medium rounded-xl transition duration-200"
                         >
                           Sign Out
                         </Button>
@@ -186,24 +191,27 @@ if (user) {
                 </div>
               ) : (
                 <Link href="/signin">
-                  <Button className="border border-sky-600 hover:bg-gray-100 text-sky-600 bg-transparent rounded-xl">
+                  <Button className="border border-sky-600 hover:bg-sky-50 text-sky-600 bg-transparent rounded-xl font-medium">
                     Sign In
                   </Button>
                 </Link>
               )}
 
-              <Link href="/signup">
-                <Button className="bg-sky-600 hover:bg-sky-700 transition duration-300 text-white rounded-xl px-4 py-2">
-                  Sign Up
-                </Button>
-              </Link>
+              {!user && (
+
+                <Link href="/signup">
+                  <Button className="bg-sky-600 hover:bg-sky-700 transition duration-300 text-white rounded-xl px-4 py-2 font-medium shadow-sm">
+                    Sign Up
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
 
           {/* Mobile Toggle */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden  p-2"
+            className="md:hidden p-2 text-slate-700 hover:bg-slate-50 rounded-lg transition cursor-pointer"
           >
             {open ? <FaTimes size={22} /> : <FaBars size={22} />}
           </button>
@@ -219,60 +227,66 @@ if (user) {
               transition={{ duration: 0.2 }}
               className="md:hidden mt-4"
             >
-              <div className="bg-[#ffffff] shadow rounded-2xl border border-white/10 p-5 space-y-5">
+              <div className="bg-white shadow-xl rounded-2xl border border-slate-100 p-5 space-y-5">
 
-                <ul className="flex flex-col gap-4">
+                <ul className="flex flex-col gap-4 text-slate-700 font-medium">
                   {MainLinks}
                 </ul>
 
-                <div className="border-t border-white/10" />
+                <div className="border-t border-slate-100" />
 
                 {isPending ? (
                   <div className="flex justify-center">
-                    <PuffLoader color="#6366f1" size={30} />
+                    <PuffLoader color="#0284c7" size={30} />
                   </div>
                 ) : user ? (
                   <div className="space-y-4">
+  <div className="flex items-center gap-3">
+    <Image
+      src={avatarSrc}
+      alt="User"
+      width={46}
+      height={46}
+      className="rounded-full border-2 border-sky-500 object-cover"
+    />
 
-                    <div className="flex items-center gap-3">
-                      {/* <Image
-                        src={avatarSrc}
-                        alt="User"
-                        width={50}
-                        height={50}
-                        className="rounded-full border border-indigo-500"
-                      /> */}
+    <div>
+      <h4 className="text-slate-800 font-semibold">
+        {user.name}
+      </h4>
+      <p className="text-xs text-slate-500">
+        {user.email}
+      </p>
+    </div>
+  </div>
 
-                      <div>
-                        <h4 className="text-white font-medium">
-                          {user.name}
-                        </h4>
-                        <p className="text-xs text-gray-400">
-                          {user.email}
-                        </p>
-                      </div>
-                    </div>
+  <Link href="/profile" onClick={() => setOpen(false)}>
+    <Button className="w-full bg-sky-600 hover:bg-sky-700 text-white font-medium rounded-xl mb-4">
+      Profile
+    </Button>
+  </Link>
 
-                    <Button
-                      onClick={handleSignOut}
-                      className="w-full bg-red-500 text-white"
-                    >
-                      Sign Out
-                    </Button>
-                  </div>
+  <Button
+    onClick={handleSignOut}
+    className="w-full bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl"
+  >
+    Sign Out
+  </Button>
+</div>
                 ) : (
-                  <Link href="/signin" onClick={() => setOpen(false)}>
-                    <Button className="border border-sky-600 text-sky-600 bg-transparent rounded-xl mr-4">
-                      Sign In
-                    </Button>
-                  </Link>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Link href="/signin" className="w-full" onClick={() => setOpen(false)}>
+                      <Button className="w-full border border-sky-600 text-sky-600 bg-transparent rounded-xl font-medium">
+                        Sign In
+                      </Button>
+                    </Link>
+                    <Link href="/signup" className="w-full" onClick={() => setOpen(false)}>
+                      <Button className="w-full bg-sky-600 hover:bg-sky-700 transition duration-300 text-white rounded-xl font-medium">
+                        Sign Up
+                      </Button>
+                    </Link>
+                  </div>
                 )}
-
-                <Link href="/signup" onClick={() => setOpen(false)}>
-                  <Button className=" bg-sky-600 hover:bg-sky-700 transition duration-300 text-white rounded-xl px-4 py-2">
-                    Sign Up
-                  </Button>
-                </Link>
 
               </div>
             </motion.div>

@@ -1,3 +1,6 @@
+import dns from "node:dns/promises";
+dns.setServers(['8.8.8.8' , '8.8.4.4']);
+
 import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
@@ -13,4 +16,14 @@ export const auth = betterAuth({
     emailAndPassword: { 
     enabled: true, 
   }, 
+  user : {
+    additionalFields : {
+      role : {
+        default : "patient"
+      },
+      plan : {
+        default : "patient_free"
+      }
+    }
+  }
 });
