@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @import "@heroui/styles"; 
+
+body{
+    background: #f7f9fb;
+}

@@ -11,6 +11,8 @@ import { PuffLoader } from "react-spinners";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import NavLinks from "./shared/Navlinks";
+import navImg from '../../../public/assets/navbar.png'
+import { outfit } from "@/lib/font";
 
 const Navbar = () => {
   const router = useRouter()
@@ -68,16 +70,20 @@ const Navbar = () => {
     : "/dashboard/seeker";
 
 const MainLinks = [
+  <li key="scroll" onClick={() => setOpen(false)}>
+    <NavLinks href="/">Home</NavLinks>
+  </li>,
+
   <li key="browse" onClick={() => setOpen(false)}>
-    <NavLinks href="/browse-jobs">Browse Jobs</NavLinks>
+    <NavLinks href="/find-doctor">Find Doctor</NavLinks>
   </li>,
 
   <li key="company" onClick={() => setOpen(false)}>
-    <NavLinks href="/company">Company</NavLinks>
+    <NavLinks href="/about">About Us</NavLinks>
   </li>,
 
   <li key="pricing" onClick={() => setOpen(false)}>
-    <NavLinks href="/pricing">Pricing</NavLinks>
+    <NavLinks href="/contact">Contact Us</NavLinks>
   </li>,
 ];
 
@@ -90,21 +96,26 @@ if (user) {
 }
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-[#222222]/95 border-b border-white/10">
-      <nav className="relative max-w-7xl mx-auto px-4 sm:px-6">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-[#fefdff]/95 border-b border-white/10 shadow">
+      <nav className="relative max-w-7xl mx-auto px-4 py-4 sm:px-6">
         <div className="flex items-center justify-between">
 
           {/* Logo */}
-          <Link href="/">
-            {/* <Image
+          <div className="flex gap-3 items-center">
+            <Link href="/">
+            <Image
               src={navImg}
               alt="Logo"
-              width={150}
-              height={150}
+              width={60}
+              height={60}
               priority
-              className="w-[120px] sm:w-[140px] lg:w-[150px]"
-            /> */}
+              className="bg-sky-50 p-4 rounded-xl"
+            />
           </Link>
+         <h3 className={`${outfit.className} text-2xl font-extrabold`}>
+  Medicare <span className="text-sky-600">Connect</span>
+</h3>
+          </div>
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-6">
@@ -175,15 +186,15 @@ if (user) {
                 </div>
               ) : (
                 <Link href="/signin">
-                  <Button className="border border-indigo-500 bg-transparent text-white rounded-xl">
+                  <Button className="border border-sky-600 hover:bg-gray-100 text-sky-600 bg-transparent rounded-xl">
                     Sign In
                   </Button>
                 </Link>
               )}
 
-              <Link href="/">
-                <Button className="bg-linear-to-r from-indigo-500 to-indigo-600 text-white rounded-xl px-5 shadow-lg">
-                  Get Started
+              <Link href="/signup">
+                <Button className="bg-sky-600 hover:bg-sky-700 transition duration-300 text-white rounded-xl px-4 py-2">
+                  Sign Up
                 </Button>
               </Link>
             </div>
@@ -192,7 +203,7 @@ if (user) {
           {/* Mobile Toggle */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-white p-2"
+            className="md:hidden  p-2"
           >
             {open ? <FaTimes size={22} /> : <FaBars size={22} />}
           </button>
@@ -208,7 +219,7 @@ if (user) {
               transition={{ duration: 0.2 }}
               className="md:hidden mt-4"
             >
-              <div className="bg-[#1b1b1b] rounded-2xl border border-white/10 p-5 space-y-5">
+              <div className="bg-[#ffffff] shadow rounded-2xl border border-white/10 p-5 space-y-5">
 
                 <ul className="flex flex-col gap-4">
                   {MainLinks}
@@ -251,15 +262,15 @@ if (user) {
                   </div>
                 ) : (
                   <Link href="/signin" onClick={() => setOpen(false)}>
-                    <Button className="w-full border border-indigo-500 bg-transparent text-white">
+                    <Button className="border border-sky-600 text-sky-600 bg-transparent rounded-xl mr-4">
                       Sign In
                     </Button>
                   </Link>
                 )}
 
-                <Link href="/" onClick={() => setOpen(false)}>
-                  <Button className="w-full bg-linear-to-r from-indigo-500 to-indigo-600 text-white mt-5">
-                    Get Started
+                <Link href="/signup" onClick={() => setOpen(false)}>
+                  <Button className=" bg-sky-600 hover:bg-sky-700 transition duration-300 text-white rounded-xl px-4 py-2">
+                    Sign Up
                   </Button>
                 </Link>
 
