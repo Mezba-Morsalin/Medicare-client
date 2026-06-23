@@ -8,7 +8,6 @@ const DoctorPage = async () => {
     });
     const data = await res.json();
     const doctors = data.data
-    console.log("doctors",doctors)
     return (
         <div className='max-w-7xl mx-auto px-5 lg:px-0 py-10'>
             <div className="text-center mb-10">

@@ -79,7 +79,7 @@ const AllDoctors = ({ doctor }) => {
         href={`/find-doctor/${doctor._id}`}
         className="mt-5 flex items-center justify-center w-full border border-sky-300 text-sky-600 font-semibold rounded-xl py-3 hover:bg-sky-50 transition"
       >
-        View Clinician Profile →
+        Meet the Specialist →
       </Link>
     </div>
   );
