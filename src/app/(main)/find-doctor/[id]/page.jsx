@@ -191,7 +191,7 @@ if (!doctor) {
                 CONSULTATION RATE
               </p>
 
-              <h3 className="text-4xl font-bold mt-1">
+              <h3 className="text-4xl text-sky-600 font-bold mt-1">
                 ${doctor.fee}
               </h3>
 
@@ -201,7 +201,7 @@ if (!doctor) {
             </div>
 
             <h3 className="font-bold mt-6 mb-4">
-              Roster Booker
+              Book Appointment
             </h3>
 
             <form className="space-y-4">
