@@ -16,14 +16,32 @@ export const auth = betterAuth({
     emailAndPassword: { 
     enabled: true, 
   }, 
-  user : {
-    additionalFields : {
-      role : {
-        default : "patient"
+   user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        default: "patient",
       },
-      plan : {
-        default : "patient_free"
-      }
-    }
-  }
+
+      plan: {
+        type: "string",
+        default: "patient_free",
+      },
+
+      specialization: {
+        type: "string",
+        required: false,
+      },
+
+      gender: {
+        type: "string",
+        required: false,
+      },
+
+      phone: {
+        type: "string",
+        required: false,
+      },
+    },
+  },
 });

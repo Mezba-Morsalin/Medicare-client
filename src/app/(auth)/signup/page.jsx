@@ -30,6 +30,7 @@ import {
 } from "react-icons/fi";
 
 export default function SignUpPage() {
+
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false)
@@ -43,7 +44,7 @@ setLoading(true);
     const user = Object.fromEntries(formData.entries());
 
     console.log(user);
-     const plan = user.role === "patient" ? "doctor" : "admin"
+     const plan = user.role === "doctor" ? "doctor" : "patient"
     try {
       const {data, error } = await authClient.signUp.email({
         name: user.name,
@@ -54,6 +55,7 @@ setLoading(true);
   role: user.role,
   gender: user.gender,
   phone: user.phone,
+  specialization: user.specialization,
         plan
       });
 
@@ -254,6 +256,60 @@ setLoading(true);
                   </ListBox>
                 </Select.Popover>
               </Select>
+              <Select
+  name="specialization"
+  className="w-full"
+  placeholder="Select Specialization (Doctors Only)"
+>
+  <Label>Medical Specialization</Label>
+
+  <Select.Trigger>
+    <Select.Value />
+    <Select.Indicator />
+  </Select.Trigger>
+
+  <Select.Popover>
+    <ListBox>
+      <ListBox.Item id="cardiology">Cardiology</ListBox.Item>
+
+      <ListBox.Item id="neurology">Neurology</ListBox.Item>
+
+      <ListBox.Item id="dentistry">Dentistry</ListBox.Item>
+
+      <ListBox.Item id="pediatrics">Pediatrics</ListBox.Item>
+
+      <ListBox.Item id="dermatology">Dermatology</ListBox.Item>
+
+      <ListBox.Item id="orthopedics">Orthopedics</ListBox.Item>
+
+      <ListBox.Item id="gynecology">Gynecology</ListBox.Item>
+
+      <ListBox.Item id="ophthalmology">Ophthalmology</ListBox.Item>
+
+      <ListBox.Item id="psychiatry">Psychiatry</ListBox.Item>
+
+      <ListBox.Item id="ent-specialist">ENT Specialist</ListBox.Item>
+
+      <ListBox.Item id="oncology">Oncology</ListBox.Item>
+
+      <ListBox.Item id="urology">Urology</ListBox.Item>
+
+      <ListBox.Item id="endocrinology">Endocrinology</ListBox.Item>
+
+      <ListBox.Item id="general-physician">
+        General Physician
+      </ListBox.Item>
+
+      <ListBox.Item id="pulmonology">
+        Pulmonology
+      </ListBox.Item>
+
+      <ListBox.Item id="gastroenterology">
+        Gastroenterology
+      </ListBox.Item>
+    </ListBox>
+  </Select.Popover>
+</Select>
             </div>
 
             {/* Photo */}
@@ -279,7 +335,7 @@ setLoading(true);
               name="password"
               className="w-full relative"
             >
-              <Label>Account Passkey *</Label>
+              <Label>Account Password</Label>
 
               <div className="relative w-full">
                 <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
@@ -287,7 +343,7 @@ setLoading(true);
                 <Input
                   type={showPassword ? "text" : "password"}
                   className="w-full pl-10"
-                  placeholder="6+ chars, 1 number, 1 special sign"
+                  placeholder="Type Your Password"
                 />
                  <span onClick={()=> setShowPassword(!showPassword)} className="absolute top-3 cursor-pointer right-5">
                       {

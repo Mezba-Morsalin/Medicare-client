@@ -151,7 +151,7 @@ if (user) {
                         {user.name}
                       </span>
                       <span className="text-xs text-slate-500 leading-tight">
-                        {user.email}
+                        {user.role}
                       </span>
                     </div>
 
@@ -255,7 +255,7 @@ if (user) {
         {user.name}
       </h4>
       <p className="text-xs text-slate-500">
-        {user.email}
+        {user.role}
       </p>
     </div>
   </div>
