@@ -44,7 +44,7 @@ setLoading(true);
     const user = Object.fromEntries(formData.entries());
 
     console.log(user);
-     const plan = user.role === "doctor" ? "doctor" : "patient"
+     const plan = user.role === "doctor" ? "doctor_free" : "patient_free"
     try {
       const {data, error } = await authClient.signUp.email({
         name: user.name,
@@ -172,9 +172,9 @@ setLoading(true);
                   <ListBox>
                     <ListBox.Item
                       id="patient"
-                      textValue="Patient Client"
+                      textValue="Patient"
                     >
-                      Patient Client
+                      Patient
                       <ListBox.ItemIndicator />
                     </ListBox.Item>
 
@@ -183,14 +183,6 @@ setLoading(true);
                       textValue="Doctor"
                     >
                       Doctor
-                      <ListBox.ItemIndicator />
-                    </ListBox.Item>
-
-                    <ListBox.Item
-                      id="admin"
-                      textValue="Admin"
-                    >
-                      Admin
                       <ListBox.ItemIndicator />
                     </ListBox.Item>
                   </ListBox>

@@ -57,9 +57,11 @@ if (!doctor) {
                   className="rounded-xl object-cover"
                 />
 
-                <p className="text-center text-xs mt-2 font-semibold text-slate-500">
-                  VERIFIED EXPERT
+                <div className="flex justify-center">
+                  <p className="text-center inline-block  text-orange-600 py-1 px-4 rounded-full bg-amber-200 text-xs mt-2 font-semibold ">
+                  {doctor.status}
                 </p>
+                </div>
               </div>
 
               <div className="flex-1">
