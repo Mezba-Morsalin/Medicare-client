@@ -8,6 +8,8 @@ import {
   TextArea,
   TextField,
 } from "@heroui/react";
+import Link from "next/link";
+import { FaArrowLeft } from "react-icons/fa6";
 
 const PrescriptionForm = () => {
   const handleSubmit = (e) => {
@@ -36,6 +38,9 @@ const PrescriptionForm = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
+        <div className="mb-5">
+            <Link href={'/dashboard/doctor/prescriptions'}><Button className="bg-white text-sky-600 shadow"><FaArrowLeft/> Back</Button></Link>
+        </div>
       <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
         <div className="mb-8">
           <h2 className="text-3xl font-bold">
