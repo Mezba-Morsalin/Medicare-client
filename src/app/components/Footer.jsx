@@ -1,4 +1,6 @@
+"use client"
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import {
   FiMapPin,
@@ -9,6 +11,10 @@ import {
 } from "react-icons/fi";
 
 const Footer = () => {
+  const pathName = usePathname()
+  if (pathName.includes('dashboard')) {
+    return null
+  }
   return (
     <footer className="bg-[#041336] text-white">
       <div className="max-w-7xl mx-auto px-6 py-20">

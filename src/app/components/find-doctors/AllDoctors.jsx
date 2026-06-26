@@ -23,9 +23,9 @@ const AllDoctors = ({ doctor }) => {
         <Image
           src={doctor.image || userPng}
           alt={doctor.name}
-          width={200}
-          height={200}
-          className="rounded-full object-cover border-4 border-slate-100"
+          width={250}
+          height={250}
+          className="rounded-xl object-cover border-4 border-slate-100"
         />
       </div>
 

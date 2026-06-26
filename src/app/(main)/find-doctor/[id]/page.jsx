@@ -58,9 +58,20 @@ if (!doctor) {
                 />
 
                 <div className="flex justify-center">
-                  <p className="text-center inline-block  text-orange-600 py-1 px-4 rounded-full bg-amber-200 text-xs mt-2 font-semibold ">
-                  {doctor.status}
-                </p>
+                  <p
+  className={`text-center inline-block py-1 px-4 rounded-full text-xs mt-2 font-semibold
+    ${
+      doctor.status === "approved"
+        ? "bg-green-100 text-green-600"
+        : doctor.status === "Pending"
+        ? "bg-amber-100 text-amber-500"
+        : doctor.status === "rejected"
+        ? "bg-red-100 text-red-600"
+        : "bg-slate-100 text-slate-600"
+    }`}
+>
+  {doctor.status}
+</p>
                 </div>
               </div>
 

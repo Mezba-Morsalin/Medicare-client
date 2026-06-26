@@ -11,19 +11,22 @@ const About = () => {
               <div className="max-w-7xl mx-auto px-4">
                 {/* Header */}
                 <div className="text-center max-w-4xl mx-auto">
-                  <p className="text-sky-600 border border-sky-200 bg-sky-50 p-3 w-80 rounded-full mx-auto uppercase tracking-widest text-sm font-semibold">
-                    Redefining Patient Care
-                  </p>
-        
-                  <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 mt-4 leading-tight">
-                    Pioneering a Connected Healthcare Ecosystem
-                  </h1>
-        
-                  <p className="mt-6 text-lg text-slate-600 leading-relaxed">
-                    MediCare Connect serves as the modern cloud infrastructure linking
-                    patients with board-certified clinical specialists instantly,
-                    avoiding paper friction and bottlenecked workflows.
-                  </p>
+                  <p className="text-sky-600 border border-sky-200 bg-sky-50 p-2 w-fit px-6 rounded-full mx-auto uppercase tracking-[0.25em] text-sm font-semibold">
+  Trusted Healthcare Platform
+</p>
+
+<h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 mt-4 leading-tight">
+  Connecting Patients with
+  <span className="block text-sky-600">
+    Verified Healthcare Professionals
+  </span>
+</h1>
+
+<p className="mt-8 text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+  Discover qualified specialists, schedule appointments instantly, and
+  access healthcare services with confidence through a secure and reliable
+  digital ecosystem.
+</p>
                 </div>
         
                 {/* Feature Cards */}

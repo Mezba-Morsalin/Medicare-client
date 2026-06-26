@@ -60,10 +60,10 @@ export default function DashboardNavbar({ onMenuClick }) {
                 </h4>
 <div className="flex gap-2 text-xs text-gray-500">
   {user?.specialization && (
-    <p>{user.specialization.toUpperCase()}</p>
+    <p>{user?.specialization.toUpperCase()}</p>
   )}
 
-  <p>{user.role.toUpperCase()}</p>
+  <p>{user?.role.toUpperCase()}</p>
 </div>
               </div>
             </div>

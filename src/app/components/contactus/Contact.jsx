@@ -33,17 +33,18 @@ const Contact = () => {
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-16">
           <p className="uppercase tracking-widest text-sky-600 border border-sky-200 bg-sky-50 mx-auto p-3 w-70 rounded-full text-sm font-semibold">
-            Get In Touch
-          </p>
+  Contact & Support Center
+</p>
 
-          <h1 className="text-5xl font-extrabold text-slate-900 mt-3 leading-tight">
-            How can we help your Clinical workflow today?
-          </h1>
+<h1 className="text-5xl font-extrabold text-slate-900 mt-3 leading-tight">
+  We are Here to Assist You with Your Healthcare Needs
+</h1>
 
-          <p className="mt-6 text-lg text-slate-500">
-            Questions regarding your billing history or physician schedules?
-            Dispatch an electronic request or reach our 24/7 hotline.
-          </p>
+<p className="mt-6 text-lg text-slate-500">
+  Have questions about appointments, doctor verification, account access,
+  payments, or healthcare services? Our support team is available to provide
+  prompt assistance and guidance.
+</p>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8">
@@ -51,8 +52,8 @@ const Contact = () => {
           <div className="lg:col-span-4">
             <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm h-full">
               <h3 className="text-2xl font-bold text-slate-900 mb-8">
-                Corporate Headquarters
-              </h3>
+  Contact Information
+</h3>
 
               <div className="space-y-6">
                 <div className="flex gap-4">
@@ -61,12 +62,17 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-slate-900">
-                      Hospital Tech Plaza, Ste 400
-                    </h4>
-                    <p className="text-slate-500">
-                      Silicon District, CA 94016
-                    </p>
+                   <h4 className="font-semibold text-slate-900">
+  Corporate Office
+</h4>
+
+<p className="text-slate-500">
+  MediCare Connect Headquarters, Healthcare Innovation Center
+</p>
+
+<p className="text-slate-500">
+  Dhaka, Bangladesh
+</p>
                   </div>
                 </div>
 
@@ -76,12 +82,13 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <h4 className="font-semibold text-slate-900">
-                      Support Desk (24/7 Toll-Free)
-                    </h4>
-                    <p className="text-slate-500">
-                      +1 (800) 555-CARE (2273)
-                    </p>
+                   <h4 className="font-semibold text-slate-900">
+  Customer Support Hotline
+</h4>
+
+<p className="text-slate-500">
+  Available 24 Hours a Day, 7 Days a Week
+</p>
                   </div>
                 </div>
 
@@ -92,37 +99,35 @@ const Contact = () => {
 
                   <div>
                     <h4 className="font-semibold text-slate-900">
-                      Electronic Mail
-                    </h4>
-                    <p className="text-slate-500">
-                      support@medicareconnect.com
-                    </p>
+  Support Email
+</h4>
+
+<p className="text-slate-500">
+  support@medicareconnect.com
+</p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-10 rounded-2xl border border-red-200 bg-red-50 p-5">
-                <div className="flex items-center gap-2 text-red-600 font-bold mb-3">
-                  <FiAlertTriangle />
-                  EMERGENCY NOTE:
-                </div>
+              <div className="flex items-center gap-2 text-red-600 font-bold mb-3 mt-5">
+  <FiAlertTriangle />
+  Important Notice
+</div>
 
-                <p className="text-red-500 text-sm leading-relaxed">
-                  This digital dashboard is for standard appointment
-                  scheduling. If you are undergoing an active clinical crisis,
-                  please call 911 immediately or visit your closest physical
-                  hospital.
-                </p>
-              </div>
+<p className="text-red-500 text-sm leading-relaxed">
+  MediCare Connect is designed for appointment management and healthcare
+  coordination. For medical emergencies, immediately contact your local
+  emergency services or visit the nearest hospital emergency department.
+</p>
             </div>
           </div>
 
           {/* Right Side */}
           <div className="lg:col-span-8">
             <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
-              <h3 className="text-2xl font-bold text-slate-900 mb-8">
-                Submit Electronic Inquiry Form
-              </h3>
+             <h3 className="text-2xl font-bold text-slate-900 mb-8">
+  Send Us a Message
+</h3>
 
               <Form
                 onSubmit={onSubmit}
@@ -166,8 +171,8 @@ const Contact = () => {
                   name="subject"
                   className="w-full"
                 >
-                  <Label>Subject of Inquiry</Label>
-                  <Input placeholder="e.g. Doctor credentials validation" />
+                  <Label>Subject</Label>
+                  <Input placeholder="Briefly describe your inquiry" />
                   <FieldError />
                 </TextField>
 
@@ -176,10 +181,10 @@ const Contact = () => {
                   name="message"
                   className="w-full"
                 >
-                  <Label>Detailed Message *</Label>
+                  <Label>How Can We Help You? *</Label>
 
                   <TextArea
-                    placeholder="Briefly explain what support is needed..."
+                    placeholder="Provide details about your question, concern, or support request..."
                     className="min-h-36"
                   />
 
@@ -191,7 +196,7 @@ const Contact = () => {
                   className="bg-sky-600 hover:bg-sky-700 text-white px-8"
                   size="lg"
                 >
-                  Dispatch Electronic Message
+                  Submit Support Request
                 </Button>
               </Form>
             </div>
