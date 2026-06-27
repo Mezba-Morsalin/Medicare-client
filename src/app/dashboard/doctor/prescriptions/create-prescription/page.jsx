@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Form,
@@ -12,12 +13,16 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 
 const PrescriptionForm = () => {
+  const { data: session, isPending } = authClient.useSession();
+    const doctor = session?.user ?? null;
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
 
     const prescription = {
+      doctorId : doctor?.id,
+      doctorName : doctor?.name,
       patientName: formData.get("patientName"),
       diagnosis: formData.get("diagnosis"),
       symptoms: formData.get("symptoms"),

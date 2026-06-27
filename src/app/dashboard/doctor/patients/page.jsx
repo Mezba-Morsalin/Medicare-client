@@ -39,7 +39,7 @@ const page = async () => {
                 <p>{doctor && (
           <span
             className={`inline-block mt-3 px-3 py-1 rounded-full text-xs font-semibold ${
-              doctor.status === "Approved"
+              doctor.status === "Verified"
                 ? "bg-green-100 text-green-600"
                 : doctor.status === "Rejected"
                 ? "bg-red-100 text-red-600"

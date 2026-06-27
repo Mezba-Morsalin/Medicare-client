@@ -48,7 +48,7 @@ doctorId: user?.id,
 
     availableSlots: formData.getAll("availableSlots"),
 
-    status: "pending",
+    status: doctor ? doctor.status : "Pending",
 
 
     }

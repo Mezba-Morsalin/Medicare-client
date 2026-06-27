@@ -8,6 +8,7 @@ import {
   FaClock,
   FaStethoscope,
 } from "react-icons/fa";
+import AppointmentForm from "./AppointmentForm";
 
 const DoctorDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -61,11 +62,11 @@ if (!doctor) {
                   <p
   className={`text-center inline-block py-1 px-4 rounded-full text-xs mt-2 font-semibold
     ${
-      doctor.status === "approved"
+      doctor.status === "Verified"
         ? "bg-green-100 text-green-600"
         : doctor.status === "Pending"
         ? "bg-amber-100 text-amber-500"
-        : doctor.status === "rejected"
+        : doctor.status === "Rejected"
         ? "bg-red-100 text-red-600"
         : "bg-slate-100 text-slate-600"
     }`}
@@ -217,39 +218,7 @@ if (!doctor) {
               Book Appointment
             </h3>
 
-            <form className="space-y-4">
-              <input
-                type="date"
-                className="w-full border rounded-xl px-4 py-3"
-              />
-
-              <select className="w-full border rounded-xl px-4 py-3">
-                <option>Choose a slot</option>
-
-                {doctor.availableSlots?.map((slot) => (
-                  <option key={slot}>{slot}</option>
-                ))}
-              </select>
-
-              <textarea
-                rows={4}
-                placeholder="Symptoms / Medical Disclosure"
-                className="w-full border rounded-xl px-4 py-3"
-              />
-
-              <div className="bg-sky-50 border rounded-xl p-4 text-xs text-slate-500">
-                Appointment booking requires confirmation
-                and payment verification before schedule
-                activation.
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-700 transition"
-              >
-                BOOK APPOINTMENT SESSION
-              </button>
-            </form>
+            <AppointmentForm doctor = {doctor}/>
           </div>
         </div>
       </div>
