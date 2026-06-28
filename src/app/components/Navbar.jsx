@@ -101,8 +101,8 @@ if (user) {
         <div className="flex items-center justify-between">
 
           {/* Logo */}
-          <div className="flex gap-3 items-center">
-            <Link href="/">
+          <div>
+            <Link className="flex gap-3 items-center" href="/">
               <Image
                 src={navImg}
                 alt="Logo"
@@ -111,14 +111,15 @@ if (user) {
                 priority
                 className="bg-sky-50 p-3 rounded-xl"
               />
-            </Link>
+            
             <h3 className={`${outfit.className} text-2xl font-extrabold text-slate-800`}>
               Medicare <span className="text-sky-600">Connect</span>
             </h3>
+            </Link>
           </div>
 
           {/* Desktop */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6">
             <ul className="flex gap-5 text-sm lg:text-base text-slate-600 font-medium">
               {MainLinks}
             </ul>
@@ -174,11 +175,22 @@ if (user) {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute right-0 top-14 w-52 bg-white border border-slate-100 rounded-2xl p-3 shadow-xl z-50"
                       >
-                        <Link href="/profile" onClick={() => setOpen(false)}>
-    <Button className="w-full bg-transparent border border-sky-500 hover:bg-sky-50 text-sky-500 hover:text-sky-600 font-medium rounded-xl mb-4">
-      Profile
-    </Button>
-  </Link>
+                        <Link
+  href={`/dashboard/${user?.role}`}
+  onClick={() => setOpen(false)}
+>
+  <Button className="w-full bg-transparent border border-sky-500 hover:bg-sky-50 text-sky-500 hover:text-sky-600 font-medium rounded-xl mb-4">
+    Dashboard
+  </Button>
+</Link>
+                        <Link
+  href={`/dashboard/${user?.role}/profile`}
+  onClick={() => setOpen(false)}
+>
+  <Button className="w-full bg-transparent border border-sky-500 hover:bg-sky-50 text-sky-500 hover:text-sky-600 font-medium rounded-xl mb-4">
+    Profile
+  </Button>
+</Link>
                         <Button
                           onClick={handleSignOut}
                           className="w-full border border-red-200 bg-transparent hover:bg-red-50 text-red-600 font-medium rounded-xl transition duration-200"
@@ -211,7 +223,7 @@ if (user) {
           {/* Mobile Toggle */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden p-2 text-slate-700 hover:bg-slate-50 rounded-lg transition cursor-pointer"
+            className="lg:hidden p-2 text-slate-700 hover:bg-slate-50 rounded-lg transition cursor-pointer"
           >
             {open ? <FaTimes size={22} /> : <FaBars size={22} />}
           </button>
@@ -225,7 +237,7 @@ if (user) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mt-4"
+              className="lg:hidden mt-4"
             >
               <div className="bg-white shadow-xl rounded-2xl border border-slate-100 p-5 space-y-5">
 

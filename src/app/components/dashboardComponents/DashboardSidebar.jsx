@@ -216,7 +216,7 @@ export default function DashboardSidebar({
             )}
 
             <button
-              className="lg:hidden"
+              className="lg:hidden cursor-pointer"
               onClick={() =>
                 setIsOpen(false)
               }
