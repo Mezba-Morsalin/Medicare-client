@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaCalendarCheck } from 'react-icons/fa6';
+import RescheduleAppointmentForm from './Reschedule';
+import CancelAppointment from './CancelAppointment';
 
 const page = async () => {
      const session = await auth.api.getSession({
@@ -28,6 +30,12 @@ const payments = await patientRes.json();
 
 console.log("Payments:", payments);
 
+const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors`, {
+  cache: "no-store",
+});
+
+const data = await res.json();
+const doctors = data.data;
 
     return (
         <div className='space-y-8'>
@@ -100,7 +108,12 @@ console.log("Payments:", payments);
          </Link>
        </div>
      </div> : <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  {payments.map((payment) => (
+  {payments.map((payment) => {
+  const doctorInfo = doctors.find(
+    (doc) => doc._id === payment.doctorId
+  );
+
+  return (
     <div
       key={payment._id}
       className="w-full bg-white rounded-3xl border border-gray-200 shadow-md p-4 sm:p-6 hover:shadow-lg transition"
@@ -199,17 +212,16 @@ console.log("Payments:", payments);
 
       {/* Buttons */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+        <RescheduleAppointmentForm
+          payment={payment}
+          availableSlots={doctorInfo?.availableSlots || []}
+        />
 
-        <Button className="h-11 w-full rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold transition">
-          Reschedule
-        </Button>
-
-        <Button className="h-11 w-full rounded-full bg-red-50 hover:bg-red-100 text-red-600 font-semibold transition">
-          Cancel
-        </Button>
+       <CancelAppointment payment={payment}/>
       </div>
     </div>
-  ))}
+  );
+})}
 </div>}
         </div>
     );
