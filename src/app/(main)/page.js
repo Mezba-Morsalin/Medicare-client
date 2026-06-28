@@ -1,8 +1,8 @@
 import FeatureDoctor from "../components/home/FeatureDoctor";
 import Hero from "../components/home/Hero";
+import Reviews from "../components/home/Reviews";
 import Specialties from "../components/home/Specialties";
 import Stats from "../components/home/Stats";
-import Testimonials from "../components/home/Tesimonials";
 import WhyChooseUs from "../components/home/WhyChooseUs";
 
 
@@ -15,7 +15,7 @@ export default function Home() {
       <FeatureDoctor/>
       <Specialties/>
       <WhyChooseUs/>
-      <Testimonials/>
+      <Reviews/>
     </div>
   );
 }
