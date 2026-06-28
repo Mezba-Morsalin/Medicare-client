@@ -1,7 +1,17 @@
 import Image from "next/image";
 import { FaCalendarAlt, FaDollarSign, FaStar } from "react-icons/fa";
 
-export default function DashboardHeader({user}) {
+export default function DashboardHeader({user, payments = [], reviews = [],}) {
+   const totalSpent = payments.reduce(
+    (total, item) => total + Number(item.amount || 0),
+    0
+  );
+
+  const activeBookings = payments.filter(
+    (item) =>
+      item.appointmentStatus === "Pending" ||
+      item.appointmentStatus === "Confirmed"
+  ).length;
   return (
     <div className="space-y-6">
       {/* Welcome Card */}
@@ -54,7 +64,7 @@ export default function DashboardHeader({user}) {
             </p>
 
             <h3 className="font-bold text-xl">
-              2 Scheduled
+              {activeBookings} Scheduled
             </h3>
           </div>
         </div>
@@ -70,7 +80,7 @@ export default function DashboardHeader({user}) {
             </p>
 
             <h3 className="font-bold text-xl text-green-600">
-              $330.00
+               ${totalSpent.toFixed(2)}
             </h3>
           </div>
         </div>
@@ -86,7 +96,7 @@ export default function DashboardHeader({user}) {
             </p>
 
             <h3 className="font-bold text-xl text-amber-500">
-              3 Submitted
+               {reviews.length} Submitted
             </h3>
           </div>
         </div>

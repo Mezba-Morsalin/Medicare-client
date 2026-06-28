@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   LineChart,
   Line,
@@ -10,100 +11,134 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { name: "Jun 20", amount: 150 },
-  { name: "Jun 18", amount: 180 },
-];
+const DashboardOverview = ({ payments = [] }) => {
+  // Upcoming Appointments
+  const upcomingAppointments = payments.filter(
+    (item) =>
+      item.appointmentStatus === "Pending" ||
+      item.appointmentStatus === "Confirmed"
+  );
 
-export default function DashboardOverview() {
+  // Chart Data
+  const chartData = [...payments]
+    .sort(
+      (a, b) =>
+        new Date(a.appointmentDate) - new Date(b.appointmentDate)
+    )
+    .map((payment) => ({
+      name: new Date(payment.appointmentDate).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      }),
+      amount: Number(payment.amount),
+    }));
+
   return (
     <div className="space-y-6">
-      {/* Appointments */}
+      {/* Upcoming Appointments */}
       <div className="bg-white border rounded-3xl p-6">
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-bold uppercase tracking-wide">
             Upcoming Consultation Schedule
           </h2>
 
-          <button className="text-sky-600 font-semibold">
+          <Link
+            href="/dashboard/patient/appointments"
+            className="text-sky-600 font-semibold hover:underline"
+          >
             View All →
-          </button>
+          </Link>
         </div>
 
         <div className="space-y-4">
-          <div className="border rounded-2xl p-5">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="font-bold text-xl">
-                  Dr. Adrian Vance, MD
-                </h3>
+          {upcomingAppointments.length === 0 ? (
+            <div className="border rounded-2xl p-10 text-center">
+              <h3 className="text-xl font-bold text-slate-700">
+                No Upcoming Appointments
+              </h3>
 
-                <p className="text-gray-500 mt-1">
-                  Date: 2026-06-23 at 10:00 AM
-                </p>
-
-                <p className="italic text-sm text-gray-400 mt-2">
-                  Symptoms: Mild coronary tightness during
-                  workout sessions.
-                </p>
-              </div>
-
-              <span className="bg-green-100 text-green-600 px-4 py-1 rounded-full text-xs font-bold h-fit">
-                ACCEPTED
-              </span>
+              <p className="text-slate-500 mt-2">
+                Your upcoming consultations will appear here.
+              </p>
             </div>
-          </div>
+          ) : (
+            upcomingAppointments.slice(0, 3).map((appointment) => (
+              <div
+                key={appointment._id}
+                className="border rounded-2xl p-5 hover:border-sky-200 transition"
+              >
+                <div className="flex flex-col md:flex-row md:justify-between gap-4">
+                  <div>
+                    <h3 className="font-bold text-xl">
+                      {appointment.doctorName}
+                    </h3>
 
-          <div className="border rounded-2xl p-5">
-            <div className="flex justify-between">
-              <div>
-                <h3 className="font-bold text-xl">
-                  Dr. Marcus Brody, DDS
-                </h3>
+                    <p className="text-gray-500 mt-1">
+                      Date:{" "}
+                      {new Date(
+                        appointment.appointmentDate
+                      ).toLocaleDateString()}{" "}
+                      at {appointment.appointmentSlot}
+                    </p>
 
-                <p className="text-gray-500 mt-1">
-                  Date: 2026-06-26 at 01:00 PM
-                </p>
+                    <p className="italic text-sm text-gray-400 mt-2">
+                      Symptoms: {appointment.symptoms}
+                    </p>
+                  </div>
 
-                <p className="italic text-sm text-gray-400 mt-2">
-                  Symptoms: Routine checkup and preventive
-                  scaling.
-                </p>
+                  <span
+                    className={`px-4 py-1 rounded-full text-xs font-bold h-fit ${
+                      appointment.appointmentStatus === "Confirmed"
+                        ? "bg-green-100 text-green-600"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {appointment.appointmentStatus.toUpperCase()}
+                  </span>
+                </div>
               </div>
-
-              <div className="flex gap-2 h-6">
-                <span className="bg-amber-100 text-amber-600 px-4 py-1 rounded-xl text-xs font-bold">
-                  PENDING
-                </span>
-              </div>
-            </div>
-          </div>
+            ))
+          )}
         </div>
       </div>
 
-      {/* Chart */}
+      {/* Spend Chart */}
       <div className="bg-white border rounded-3xl p-6">
         <h2 className="font-bold uppercase mb-6">
-          Outpatient Spend Trend
+          Healthcare Expenses
         </h2>
 
-        <div className="h-[250px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data}>
-              <CartesianGrid strokeDasharray="4 4" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="amount"
-                stroke="#0ea5e9"
-                strokeWidth={3}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </div>
+        {chartData.length === 0 ? (
+          <div className="h-[250px] flex items-center justify-center text-slate-500">
+            No payment history available.
+          </div>
+        ) : (
+          <div className="h-[250px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData}>
+                <CartesianGrid strokeDasharray="4 4" />
+
+                <XAxis dataKey="name" />
+
+                <YAxis />
+
+                <Tooltip />
+
+                <Line
+                  type="monotone"
+                  dataKey="amount"
+                  stroke="#0ea5e9"
+                  strokeWidth={3}
+                  dot={{ r: 5 }}
+                  activeDot={{ r: 7 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default DashboardOverview;
