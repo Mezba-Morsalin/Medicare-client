@@ -58,7 +58,7 @@ const CancelAppointment = ({ payment }) => {
                 <p className="text-gray-600">
                   Are you sure you want to cancel your appointment with{" "}
                   <span className="font-semibold text-slate-900">
-                    Dr. {payment.doctorName}
+                    {payment.doctorName}
                   </span>
                   ?
                 </p>

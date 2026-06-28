@@ -7,6 +7,7 @@ import React from 'react';
 import { FaArrowLeft, FaRegStar } from 'react-icons/fa6';
 import ReviewForm from './ReviewForm';
 import EditReview from './EditReview';
+import DeleteReview from './DeleteReview';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -155,9 +156,7 @@ console.log("reviews",reviews)
               <div className="flex justify-end gap-3 mt-5">
                 <EditReview doctors = {doctors} review = {review}/>
 
-                <button className="px-5 py-2 rounded-xl bg-red-50 text-red-600 font-semibold hover:bg-red-100">
-                  🗑 Delete
-                </button>
+                <DeleteReview doctors = {doctors} review = {review}/>
               </div>
             </div>
           ))}
