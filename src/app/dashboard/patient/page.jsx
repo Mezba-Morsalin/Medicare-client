@@ -11,6 +11,7 @@ export default async function PatientDashboard() {
            });
          
            const user = session?.user;
+
   return (
     <div className="space-y-6">
       <DashboardHeader user ={user} />

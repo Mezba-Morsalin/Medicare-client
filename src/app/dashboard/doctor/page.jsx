@@ -17,7 +17,7 @@ export default async function DoctorDashboard() {
        const user = session?.user;
        
      const res = await fetch(
-  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors?doctorId=${user?.id}`,
+  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user?.id}`,
   {
     cache: "no-store",
   }

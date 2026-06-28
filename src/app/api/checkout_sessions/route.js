@@ -11,6 +11,12 @@ export async function POST(request) {
     const doctorId = formData.get("doctorId");
     const doctorName = formData.get("doctorName");
     const fee = formData.get("fee");
+    const appointmentDate = formData.get("appointmentDate");
+const appointmentSlot = formData.get("appointmentSlot");
+const symptoms = formData.get("symptoms");
+const doctorImage = formData.get("doctorImage");
+const doctorSpecialization = formData.get("doctorSpecialization");
+const doctorHospital = formData.get("doctorHospital");
 
     const sessionData = await auth.api.getSession({
       headers: await headers(),
@@ -24,24 +30,42 @@ export async function POST(request) {
       customer_email: user?.email,
 
       line_items: [
-        {
-          price: process.env.STRIPE_PRICE_ID,
-          quantity: 1,
-        },
-      ],
+  {
+    price_data: {
+      currency: "usd",
+
+      product_data: {
+        name: `Appointment with ${doctorName}`,
+      },
+
+      unit_amount: fee * 100,
+    },
+
+    quantity: 1,
+  },
+],
 
       mode: "payment",
 
       metadata: {
-        appointmentId,
-        doctorId,
-        doctorName,
-        fee,
+  appointmentId,
 
-        patientId: user?.id || "",
-        patientName: user?.name || "",
-        patientEmail: user?.email || "",
-      },
+  doctorId,
+  doctorName,
+  doctorImage,
+  doctorSpecialization,
+  doctorHospital,
+  fee,
+
+  appointmentDate,
+  appointmentSlot,
+  symptoms,
+
+  patientId: user?.id || "",
+  patientName: user?.name || "",
+  patientEmail: user?.email || "",
+  appointmentStatus: "Pending",
+},
 
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/find-doctor/${doctorId}`,

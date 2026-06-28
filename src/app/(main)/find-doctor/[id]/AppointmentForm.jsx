@@ -35,6 +35,21 @@ const AppointmentForm = ({ doctor }) => {
         className="w-full border rounded-xl px-4 py-3"
         required
       />
+      <input
+  type="hidden"
+  name="doctorImage"
+  value={doctor.image}
+/>
+      <input
+  type="hidden"
+  name="doctorSpecialization"
+  value={doctor.specialization}
+/>
+      <input
+  type="hidden"
+  name="doctorHospital"
+  value={doctor.hospital}
+/>
 
       {/* Time Slot */}
       <select

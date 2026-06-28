@@ -10,8 +10,9 @@ export default async function Success({ searchParams }) {
     throw new Error("Invalid Stripe Session.");
   }
 
-  const session = await stripe.checkout.sessions.retrieve(session_id);
-  
+  const session = await stripe.checkout.sessions.retrieve(session_id, {
+    expand: ["payment_intent"],
+  });
 
   if (session.status === "open") {
     redirect("/");
@@ -20,6 +21,38 @@ export default async function Success({ searchParams }) {
   if (session.status !== "complete") {
     redirect("/");
   }
+
+  // Save payment to backend
+  await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      patientId: session.metadata.patientId,
+patientName: session.metadata.patientName,
+patientEmail: session.metadata.patientEmail,
+
+      doctorId: session.metadata.doctorId,
+      doctorName: session.metadata.doctorName,
+      doctorImage: session.metadata.doctorImage,
+      doctorSpecialization: session.metadata.doctorSpecialization,
+      doctorHospital: session.metadata.doctorHospital,
+
+      appointmentDate: session.metadata.appointmentDate,
+      appointmentSlot: session.metadata.appointmentSlot,
+      symptoms: session.metadata.symptoms,
+
+      amount: Number(session.metadata.fee),
+
+      stripeSessionId: session.id,
+      paymentIntentId: session.payment_intent.id,
+
+      paymentStatus: "Paid",
+      appointmentStatus: session.metadata.appointmentStatus || "Pending",
+    }),
+    cache: "no-store",
+  });
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-5">
@@ -58,21 +91,21 @@ export default async function Success({ searchParams }) {
         <div className="grid grid-cols-2 gap-4 mt-8">
           <Link
             href="/dashboard/patient/appointments"
-            className="py-3 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-700 transition"
+            className="py-3 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-700 transition text-center"
           >
             My Appointments
           </Link>
 
           <Link
             href="/find-doctor"
-            className="py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-100 transition"
+            className="py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-100 transition text-center"
           >
             Find Doctors
           </Link>
         </div>
 
         <p className="text-xs text-slate-400 mt-8">
-          Transaction ID: {session.payment_intent}
+          Transaction ID: {session.payment_intent.id}
         </p>
       </div>
     </div>
