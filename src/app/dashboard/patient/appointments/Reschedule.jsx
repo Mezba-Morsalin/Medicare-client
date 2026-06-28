@@ -20,6 +20,7 @@ const RescheduleAppointmentForm = ({  payment, availableSlots = [],}) => {
     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments/${payment._id}`,
     {
       method: "PATCH",
+      cache : "no-store",
       headers: {
         "Content-Type": "application/json",
       },

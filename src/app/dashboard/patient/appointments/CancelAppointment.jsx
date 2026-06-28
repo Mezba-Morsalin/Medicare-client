@@ -14,6 +14,7 @@ const CancelAppointment = ({ payment }) => {
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments/${payment._id}`,
         {
           method: "DELETE",
+          cache : "no-store"
         }
       );
 
