@@ -1,110 +1,80 @@
-"use client";
+import React from 'react';
+import DoctorProfile from './DoctorProfile';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { FaStethoscope } from 'react-icons/fa';
 
-import {
-  Button,
-  Form,
-  Input,
-  Label,
-  TextField,
-  TextArea,
-} from "@heroui/react";
-
-export default function UserProfilePage() {
+const page = async () => {
+  const session = await auth.api.getSession({
+               headers: await headers(),
+             });
+           
+             const user = session?.user;
+             
+           const res = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user?.id}`,
+        {
+          cache: "no-store",
+        }
+      );
+      
+      const data = await res.json();
+      const doctor = data?.data?.[0];
+      if (!doctor) {
+    return (
+      <div className="p-10 text-center">
+        Doctor profile not found
+      </div>
+    );
+  }
   return (
-    <div className="space-y-6">
-      {/* Hero Section */}
-      <div className="rounded-3xl bg-gradient-to-r from-sky-600 to-blue-700 p-8 text-white">
-        <p className="text-xs font-semibold uppercase tracking-wider">
-          Patient Portal
-        </p>
-
-        <h1 className="mt-2 text-4xl font-bold">
-          Profile Settings
-        </h1>
-
-        <p className="mt-3 max-w-2xl text-white/90">
-          Manage your personal information, healthcare profile,
-          and contact details.
-        </p>
-      </div>
-
-      {/* Form Card */}
-      <div className="rounded-3xl border bg-white p-6 shadow-sm">
-        <h2 className="text-2xl font-bold text-slate-900">
-          Personal Information
-        </h2>
-
-        <div className="mt-4 border-b" />
-
-        <Form className="mt-6 flex flex-col gap-5">
-          {/* Name + Email */}
-          <div className="grid w-full gap-4 md:grid-cols-2">
-            <TextField name="name">
-              <Label>Full Name *</Label>
-              <Input defaultValue="John Smith" />
-            </TextField>
-
-            <TextField name="email">
-              <Label>Email Address *</Label>
-              <Input
-                type="email"
-                defaultValue="john@example.com"
-              />
-            </TextField>
-          </div>
-
-          {/* Phone + Gender */}
-          <div className="grid w-full gap-4 md:grid-cols-2">
-            <TextField name="phone">
-              <Label>Phone Number</Label>
-              <Input defaultValue="+1 555-123-4567" />
-            </TextField>
-
-            <TextField name="gender">
-              <Label>Gender</Label>
-              <Input defaultValue="Male" />
-            </TextField>
-          </div>
-
-          {/* Age + Blood Group */}
-          <div className="grid w-full gap-4 md:grid-cols-2">
-            <TextField name="age">
-              <Label>Age</Label>
-              <Input defaultValue="28" />
-            </TextField>
-
-            <TextField name="bloodGroup">
-              <Label>Blood Group</Label>
-              <Input defaultValue="O+" />
-            </TextField>
-          </div>
-
-          {/* Address */}
-          <TextField name="address">
-            <Label>Address</Label>
-            <Input defaultValue="New York, USA" />
-          </TextField>
-
-          {/* Medical Notes */}
-          <TextField name="medicalNotes">
-            <Label>Medical Notes</Label>
-
-            <TextArea
-              rows={4}
-              defaultValue="No known allergies."
-            />
-          </TextField>
-
-          <div className="flex justify-end">
-            <Button
-              className="bg-sky-600 text-white"
-              size="lg"
-            >
-              Save Profile Changes
-            </Button>
-          </div>
-        </Form>
-      </div>
+    <div className='space-y-8'>
+      <div className="rounded-3xl bg-sky-600 text-white p-8 flex justify-between items-start">
+                    <div>
+                      <div className="flex items-center gap-2 text-xs uppercase font-semibold opacity-90">
+                        <FaStethoscope />
+                        Licensed Clinical Practitioner
+                      </div>
+              
+                      <div>
+                        <h1 className="text-4xl font-bold mt-3">
+                        Greetings, {user?.name}
+                      </h1>
+                      <p>{doctor && (
+                <span
+                  className={`inline-block mt-3 px-3 py-1 rounded-full text-xs font-semibold ${
+                    doctor.status === "Verified"
+                      ? "bg-green-100 text-green-600"
+                      : doctor.status === "Rejected"
+                      ? "bg-red-100 text-red-600"
+                      : "bg-amber-100 text-amber-600"
+                  }`}
+                >
+                  {doctor.status}
+                </span>
+              )}</p>
+                      </div>
+              
+                      <p className="mt-4 text-white/90 max-w-2xl leading-relaxed">
+                Streamline patient care, oversee appointment management,
+                coordinate treatment plans, and enhance clinical outcomes
+                with your comprehensive physician workspace.
+              </p>
+                    </div>
+              
+                    <div className="hidden md:block bg-sky-600 rounded-2xl px-5 py-4">
+                     <p className="text-xs font-semibold uppercase">
+                Medical Specialty
+              </p>
+              
+                      <p className="font-bold mt-1">
+                        {user?.specialization || "patient"}
+                      </p>
+                    </div>
+                  </div>
+      <DoctorProfile doctor = {doctor}/>
     </div>
   );
-}
+};
+
+export default page;
