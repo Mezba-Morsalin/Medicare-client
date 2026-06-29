@@ -93,11 +93,6 @@ export default function DashboardSidebar({
       icon: FiUserCheck,
     },
     {
-      title: "Appointment Management",
-      href: "/dashboard/admin/appointments",
-      icon: FiCalendar,
-    },
-    {
       title: "Payment Management",
       href: "/dashboard/admin/payments",
       icon: FiDollarSign,
@@ -106,11 +101,6 @@ export default function DashboardSidebar({
       title: "Analytics Dashboard",
       href: "/dashboard/admin/analytics",
       icon: FiTrendingUp,
-    },
-    {
-      title: "Admin Profile",
-      href: "/dashboard/admin/profile",
-      icon: FiSettings,
     },
   ];
 
