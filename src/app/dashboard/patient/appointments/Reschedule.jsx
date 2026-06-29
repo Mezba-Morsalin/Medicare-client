@@ -5,7 +5,7 @@ import { div } from "motion/react-client";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
-const RescheduleAppointmentForm = ({  payment, availableSlots = [],}) => {
+const RescheduleAppointmentForm = ({  payment, availableSlots = [], isDisabled}) => {
     const router = useRouter()
     const handleReschedule = async (e) => {
   e.preventDefault();
@@ -50,7 +50,7 @@ const RescheduleAppointmentForm = ({  payment, availableSlots = [],}) => {
   return (
     <div>
         <Modal>
-      <Button className="h-11 w-full rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold transition">
+      <Button  isDisabled={isDisabled} className="h-11 w-full rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold transition">
                 Reschedule
               </Button>
       <Modal.Backdrop>

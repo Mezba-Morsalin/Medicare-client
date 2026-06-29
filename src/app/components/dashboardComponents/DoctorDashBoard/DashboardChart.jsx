@@ -8,27 +8,31 @@ import {
   YAxis,
 } from "recharts";
 
-export default function DashboardChart({ payments }) {
-  const completed = payments.filter(
-    (payment) => payment.appointmentStatus === "Completed"
-  ).length;
+export default function DashboardChart({ payments }) {;
 
   const pending = payments.filter(
     (payment) => payment.appointmentStatus === "Pending"
   ).length;
 
-  const confirmed = payments.filter(
-    (payment) => payment.appointmentStatus === "Confirmed"
+  const approved = payments.filter(
+    (payment) => payment.appointmentStatus === "Approved"
+  ).length;
+  const rejected = payments.filter(
+    (payment) => payment.appointmentStatus === "Rejected"
   ).length;
 
   const data = [
     {
-      name: "Confirmed",
-      value: confirmed,
+      name: "Approved",
+      value: approved,
     },
     {
       name: "Pending",
       value: pending,
+    },
+    {
+      name: "Rejected",
+      value: rejected,
     },
   ];
 

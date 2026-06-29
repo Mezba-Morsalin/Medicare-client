@@ -14,8 +14,7 @@ const page = async () => {
                });
              
                const user = session?.user;
-               const patientRes = await fetch(
-  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${user.id}`,
+               const patientRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${user.id}`,
   {
     cache: "no-store",
   }

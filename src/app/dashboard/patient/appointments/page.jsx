@@ -37,6 +37,8 @@ const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors`, {
 const data = await res.json();
 const doctors = data.data;
 
+
+
     return (
         <div className='space-y-8'>
             <div className="bg-white border rounded-3xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -113,6 +115,9 @@ const doctors = data.data;
     (doc) => doc._id === payment.doctorId
   );
 
+    const isDisabled =
+    payment.appointmentStatus === "Approved" ||
+    payment.appointmentStatus === "Rejected";
   return (
     <div
       key={payment._id}
@@ -149,11 +154,10 @@ const doctors = data.data;
             className={`px-4 py-1 h-6 rounded-full text-xs font-bold uppercase ${
               payment.appointmentStatus === "Pending"
                 ? "bg-yellow-100 text-yellow-700"
-                : payment.appointmentStatus === "Confirmed"
-                ? "bg-blue-100 text-blue-700"
-                : payment.appointmentStatus === "Completed"
+                
+                : payment.appointmentStatus === "Approved"
                 ? "bg-green-100 text-green-700"
-                : payment.appointmentStatus === "Cancelled"
+                : payment.appointmentStatus === "Rejected"
                 ? "bg-red-100 text-red-700"
                 : "bg-gray-100 text-gray-700"
             }`}
@@ -211,14 +215,19 @@ const doctors = data.data;
       </div>
 
       {/* Buttons */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-        <RescheduleAppointmentForm
-          payment={payment}
-          availableSlots={doctorInfo?.availableSlots || []}
-        />
+      {/* Buttons */}
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+  <RescheduleAppointmentForm
+    payment={payment}
+    availableSlots={doctorInfo?.availableSlots || []}
+    isDisabled={isDisabled}
+  />
 
-       <CancelAppointment payment={payment}/>
-      </div>
+  <CancelAppointment
+    payment={payment}
+    isDisabled={isDisabled}
+  />
+</div>
     </div>
   );
 })}

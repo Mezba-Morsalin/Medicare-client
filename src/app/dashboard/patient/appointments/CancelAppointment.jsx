@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 
-const CancelAppointment = ({ payment }) => {
+const CancelAppointment = ({ payment, isDisabled }) => {
   const router = useRouter();
 
   const handleCancel = async () => {
@@ -36,7 +36,7 @@ const CancelAppointment = ({ payment }) => {
 
   return (
     <AlertDialog>
-      <Button className="h-11 w-full rounded-full bg-red-50 hover:bg-red-100 text-red-600 font-semibold transition">
+      <Button  isDisabled={isDisabled} className="h-11 w-full rounded-full bg-red-50 hover:bg-red-100 text-red-600 font-semibold transition">
         Cancel
       </Button>
 
