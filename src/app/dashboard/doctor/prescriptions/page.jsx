@@ -6,6 +6,7 @@ import React from 'react';
 import { FaCalendarTimes } from 'react-icons/fa';
 import { FaPlus, FaStethoscope, FaUserInjured } from 'react-icons/fa6';
 import { GiMedicines } from 'react-icons/gi';
+import UpdatePrescription from './UpdatePrescription';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -15,7 +16,7 @@ const page = async () => {
            const user = session?.user;
            
          const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors?doctorId=${user?.id}`,
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user?.id}`,
       {
         cache: "no-store",
       }
@@ -23,6 +24,23 @@ const page = async () => {
     
     const data = await res.json();
     const doctor = data?.data?.[0];
+    if (!doctor) {
+  return (
+    <div className="p-10 text-center">
+      Doctor profile not found
+    </div>
+  );
+}
+
+const prescriptionRes = await fetch(
+  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/prescriptions?doctorId=${user?.id}`,
+  {
+    cache: "no-store",
+  }
+);
+
+const prescriptionData = await prescriptionRes.json();
+const prescriptions = prescriptionData.data || [];
 
     return (
          <div className='space-y-8'>
@@ -69,38 +87,135 @@ const page = async () => {
                 </p>
               </div>
             </div>
-            <div className="bg-white border border-slate-200 rounded-3xl p-10">
-      <div className="flex flex-col items-center justify-center text-center py-12">
-        <div className="w-24 h-24 rounded-full bg-sky-50 border border-sky-100 flex items-center justify-center">
-          <GiMedicines className="text-5xl text-sky-600" />
-        </div>
+           {prescriptions.length === 0 ? (
+  <div className="bg-white border border-slate-200 rounded-3xl p-10">
+    <div className="flex flex-col items-center justify-center text-center py-12">
+      <div className="w-24 h-24 rounded-full bg-sky-50 border border-sky-100 flex items-center justify-center">
+        <GiMedicines className="text-5xl text-sky-600" />
+      </div>
 
-        <h2 className="mt-6 text-3xl font-bold text-slate-900">
-          No Prescriptions Found
-        </h2>
+      <h2 className="mt-6 text-3xl font-bold text-slate-900">
+        No Prescriptions Found
+      </h2>
 
-        <p className="mt-3 max-w-xl text-slate-500 leading-7">
-          There are no prescription records available at the moment.
-          Create a new prescription to maintain organized treatment
-          history and provide patients with accurate medication details.
-        </p>
+      <p className="mt-3 max-w-xl text-slate-500 leading-7">
+        There are no prescription records available at the moment.
+      </p>
 
-        <div className="flex items-center gap-4 mt-8">
-          <Link href="/dashboard/doctor/prescriptions/create-prescription">
-            <Button className="bg-sky-600 rounded-xl text-white px-6">
-              <FaPlus />
-              Create Prescription
-            </Button>
-          </Link>
+      <div className="flex gap-4 mt-8">
+        <Link href="/dashboard/doctor/prescriptions/create-prescription">
+          <Button className="bg-sky-600 text-white rounded-xl">
+            <FaPlus />
+            Create Prescription
+          </Button>
+        </Link>
 
-          <Link href="/dashboard/doctor">
-            <Button className="border border-sky-600 text-sky-600 rounded-xl" variant="bordered">
-              Back to Dashboard
-            </Button>
-          </Link>
-        </div>
+        <Link href="/dashboard/doctor">
+          <Button
+            variant="bordered"
+            className="border-sky-600 text-sky-600 rounded-xl"
+          >
+            Back to Dashboard
+          </Button>
+        </Link>
       </div>
     </div>
+  </div>
+) : (
+  <div className="grid gap-6">
+    {prescriptions.map((prescription) => (
+      <div
+        key={prescription._id}
+        className="bg-white border rounded-3xl p-6 shadow-sm hover:shadow-md transition"
+      >
+        <div className="flex flex-col lg:flex-row lg:justify-between gap-8">
+
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900">
+              {prescription.patientName}
+            </h2>
+
+            <p className="mt-2 text-sm font-semibold uppercase text-sky-600">
+              Patient
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-8">
+            <div>
+              <p className="text-xs uppercase text-gray-400">
+                Diagnosis
+              </p>
+
+              <h4 className="font-semibold mt-2">
+                {prescription.diagnosis}
+              </h4>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase text-gray-400">
+                Follow Up
+              </p>
+
+              <h4 className="font-semibold mt-2">
+                {prescription.followUp}
+              </h4>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase text-gray-400">
+                Medicines
+              </p>
+
+              <h4 className="font-semibold mt-2">
+                {[prescription.medicine1, prescription.medicine2]
+                  .filter(Boolean)
+                  .length}
+              </h4>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl bg-slate-50 p-5 space-y-2">
+          <p>
+            <span className="font-semibold">Symptoms:</span>{" "}
+            {prescription.symptoms}
+          </p>
+
+          <p>
+            <span className="font-semibold">Medicine 1:</span>{" "}
+            {prescription.medicine1} ({prescription.dosage1}) •{" "}
+            {prescription.frequency1} • {prescription.duration1} Days
+          </p>
+
+          {prescription.medicine2 && (
+            <p>
+              <span className="font-semibold">Medicine 2:</span>{" "}
+              {prescription.medicine2} ({prescription.dosage2}) •{" "}
+              {prescription.frequency2} • {prescription.duration2} Days
+            </p>
+          )}
+
+          <p>
+            <span className="font-semibold">Advice:</span>{" "}
+            {prescription.advice}
+          </p>
+        </div>
+
+        <div className="mt-6 flex justify-end gap-3">
+
+          <UpdatePrescription prescription ={prescription}/>
+
+          <Button
+            variant="danger-soft"
+            className="rounded-xl"
+          >
+            Delete
+          </Button>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
          </div>
             
     );

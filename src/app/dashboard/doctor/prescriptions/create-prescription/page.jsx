@@ -10,12 +10,15 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 import { FaArrowLeft } from "react-icons/fa6";
 
 const PrescriptionForm = () => {
-  const { data: session, isPending } = authClient.useSession();
+  const router = useRouter()
+  const { data: session } = authClient.useSession();
     const doctor = session?.user ?? null;
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -39,7 +42,39 @@ const PrescriptionForm = () => {
     };
 
     console.log(prescription);
-  };
+    try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/prescriptions`,
+      {
+        method: "POST",
+        cache : "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(prescription),
+      }
+    );
+
+    const data = await res.json();
+
+    if (data.success) {
+      toast.success("Prescription created successfully");
+
+      e.target.reset();
+
+      setTimeout(() => {
+        router.push("/dashboard/doctor/prescriptions");
+        router.refresh();
+      }, 1000);
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong");
+  }
+};
+
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -206,6 +241,7 @@ const PrescriptionForm = () => {
           </div>
         </Form>
       </div>
+      <Toaster/>
     </div>
   );
 };

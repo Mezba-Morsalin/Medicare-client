@@ -58,9 +58,9 @@ const RemoveSchedule = ({ appointment}) => {
             <AlertDialog.Body>
               <div className="space-y-3">
                 <p className="text-gray-600">
-                  Are you sure you want to cancel your appointment with{" "}
+                  Are you sure you want to remove your schedule with{" "}
                   <span className="font-semibold text-slate-900">
-                    {appointment.doctorName}
+                    {appointment.patientName}
                   </span>
                   ?
                 </p>
