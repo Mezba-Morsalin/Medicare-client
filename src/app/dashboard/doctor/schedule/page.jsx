@@ -1,12 +1,12 @@
 import { auth } from '@/lib/auth';
 import { Button } from '@heroui/react';
 import { headers } from 'next/headers';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaStethoscope } from 'react-icons/fa6';
 import { RiCalendarScheduleLine } from 'react-icons/ri';
 import UpdateSchedule from './UpdateSchedule';
+import RemoveSchedule from './RemoveSchedule';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -184,11 +184,7 @@ const page = async () => {
         <div className="mt-6 flex flex-wrap gap-3 justify-end">
           <UpdateSchedule appointment ={appointment} availableSlots={doctor.availableSlots}/>
 
-          <Button
-            variant="danger-soft"
-            className="font-semibold">
-            Remove Schedule
-          </Button>
+          <RemoveSchedule appointment={appointment}/>
         </div>
       </div>
     ))}
