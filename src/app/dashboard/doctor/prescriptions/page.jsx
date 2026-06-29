@@ -7,6 +7,7 @@ import { FaCalendarTimes } from 'react-icons/fa';
 import { FaPlus, FaStethoscope, FaUserInjured } from 'react-icons/fa6';
 import { GiMedicines } from 'react-icons/gi';
 import UpdatePrescription from './UpdatePrescription';
+import DeletePrescription from './DeletePrescription';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -124,8 +125,9 @@ const prescriptions = prescriptionData.data || [];
 ) : (
   <div className="grid gap-6">
     {prescriptions.map((prescription) => (
-      <div
-        key={prescription._id}
+      <div key={prescription._id}>
+        <div
+        
         className="bg-white border rounded-3xl p-6 shadow-sm hover:shadow-md transition"
       >
         <div className="flex flex-col lg:flex-row lg:justify-between gap-8">
@@ -205,13 +207,17 @@ const prescriptions = prescriptionData.data || [];
 
           <UpdatePrescription prescription ={prescription}/>
 
-          <Button
-            variant="danger-soft"
-            className="rounded-xl"
-          >
-            Delete
-          </Button>
+          <DeletePrescription prescription ={prescription}/>
         </div>
+      </div>
+      <div className="flex justify-center mt-8">
+        <Link href="/dashboard/doctor/prescriptions/create-prescription">
+          <Button className="bg-sky-600 text-white rounded-xl">
+            <FaPlus />
+            Create Prescription
+          </Button>
+        </Link>
+      </div>
       </div>
     ))}
   </div>
