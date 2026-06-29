@@ -80,7 +80,7 @@ const Testimonials = ({ reviews = [] }) => {
                     </h4>
 
                     <p className="text-sm text-slate-500">
-                      Reviewed Dr. {review.doctorName}
+                      Reviewed {review.doctorName}
                     </p>
 
                     <p className="text-xs text-sky-600">

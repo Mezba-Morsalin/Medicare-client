@@ -4,28 +4,32 @@ import {
   FaStar,
 } from "react-icons/fa";
 
-const stats = [
-  {
-    title: "Unique Clients",
-    value: "1 Medical Records",
-    icon: FaUsers,
-    color: "text-blue-500",
-  },
-  {
-    title: "Roster Pending",
-    value: "0 Inquiries",
-    icon: FaCalendarCheck,
-    color: "text-green-500",
-  },
-  {
-    title: "Average Testimonials",
-    value: "5.0 Rating",
-    icon: FaStar,
-    color: "text-purple-500",
-  },
-];
+export default function DashboardStats({
+  totalPatients,
+  totalAppointments,
+  averageRating,
+}) {
+  const stats = [
+    {
+      title: "Unique Patients",
+      value: `${totalPatients} Patients`,
+      icon: FaUsers,
+      color: "text-blue-500",
+    },
+    {
+      title: "Appointments",
+      value: `${totalAppointments} Bookings`,
+      icon: FaCalendarCheck,
+      color: "text-green-500",
+    },
+    {
+      title: "Average Rating",
+      value: `${averageRating} / 5`,
+      icon: FaStar,
+      color: "text-yellow-500",
+    },
+  ];
 
-export default function DashboardStats() {
   return (
     <div className="grid md:grid-cols-3 gap-6">
       {stats.map((item) => {

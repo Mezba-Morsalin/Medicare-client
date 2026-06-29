@@ -8,34 +8,42 @@ import {
   YAxis,
 } from "recharts";
 
-const data = [
-  {
-    name: "Active Confirmed",
-    value: 1,
-  },
-  {
-    name: "Pending Inquiries",
-    value: 0,
-  },
-  {
-    name: "Completed",
-    value: 0,
-  },
-];
+export default function DashboardChart({ payments }) {
+  const completed = payments.filter(
+    (payment) => payment.appointmentStatus === "Completed"
+  ).length;
 
-export default function DashboardChart() {
+  const pending = payments.filter(
+    (payment) => payment.appointmentStatus === "Pending"
+  ).length;
+
+  const confirmed = payments.filter(
+    (payment) => payment.appointmentStatus === "Confirmed"
+  ).length;
+
+  const data = [
+    {
+      name: "Confirmed",
+      value: confirmed,
+    },
+    {
+      name: "Pending",
+      value: pending,
+    },
+  ];
+
   return (
     <div className="bg-white border rounded-3xl p-6">
       <h2 className="font-bold uppercase text-sm mb-6">
-        Clinical Appointment Splits
+        Clinical Appointment Status
       </h2>
 
       <div className="h-72">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data}>
             <XAxis dataKey="name" />
-            <YAxis />
-            <Bar dataKey="value" fill="#0084d1" />
+            <YAxis allowDecimals={false} />
+            <Bar dataKey="value" fill="#0284c7" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

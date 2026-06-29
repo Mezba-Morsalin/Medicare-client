@@ -135,7 +135,7 @@ const doctors = data.data;
             </h2>
 
             <p className="uppercase text-sm tracking-wide text-sky-600 font-semibold">
-              Cardiology
+              {payment.doctorSpecialization}
             </p>
 
             <p className="text-sm text-gray-500">

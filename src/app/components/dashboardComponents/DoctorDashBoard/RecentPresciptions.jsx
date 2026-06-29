@@ -11,7 +11,7 @@ export default function RecentPrescriptions() {
         </h2>
 
         <Link
-          href="/dashboard/prescriptions"
+          href="/dashboard/doctor/prescriptions"
           className="text-sky-600 text-sm font-semibold"
         >
           View All
