@@ -1,8 +1,6 @@
 
 import DashboardStats from "@/app/components/dashboardComponents/DoctorDashBoard/DashboardStats";
 import DashboardChart from "@/app/components/dashboardComponents/DoctorDashBoard/DashboardChart";
-
-import RecentPrescriptions from "@/app/components/dashboardComponents/DoctorDashBoard/RecentPresciptions";
 import { FaStar, FaStethoscope } from "react-icons/fa";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
@@ -182,8 +180,6 @@ if (!doctor) {
   </div>
 </div>
       </div>
-
-      <RecentPrescriptions />
     </div>
   );
 }

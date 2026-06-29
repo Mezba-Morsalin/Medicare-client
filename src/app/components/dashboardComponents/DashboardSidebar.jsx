@@ -9,8 +9,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   FaTimes,
   FaThLarge,
-  FaCalendarAlt,
-  FaUserInjured,
+  FaCalendarAlt,d,
   FaStar,
   FaUserCog,
   FaSignOutAlt,
@@ -29,6 +28,7 @@ import {
 } from "react-icons/fi";
 
 import { GiMedicines } from "react-icons/gi";
+import { RiCalendarScheduleLine } from "react-icons/ri";
 import { PuffLoader } from "react-spinners";
 
 export default function DashboardSidebar({
@@ -60,19 +60,14 @@ export default function DashboardSidebar({
       icon: FaCalendarAlt,
     },
     {
-      title: "Patients",
-      href: "/dashboard/doctor/patients",
-      icon: FaUserInjured,
+      title: "Manage Schedule",
+      href: "/dashboard/doctor/schedule",
+      icon: RiCalendarScheduleLine,
     },
     {
       title: "Prescriptions",
       href: "/dashboard/doctor/prescriptions",
       icon: GiMedicines,
-    },
-    {
-      title: "Reviews",
-      href: "/dashboard/doctor/reviews",
-      icon: FaStar,
     },
     {
       title: "Profile",
