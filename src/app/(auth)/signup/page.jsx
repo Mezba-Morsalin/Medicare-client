@@ -56,6 +56,7 @@ setLoading(true);
   gender: user.gender,
   phone: user.phone,
   specialization: user.specialization,
+  status: "Active",
         plan
       });
 

@@ -16,10 +16,10 @@ const DoctorVerificationQueue = ({ doctors }) => {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}`,
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}`,
         {
           method: "PATCH",
+          cache : "no-store",
           headers: {
             "Content-Type": "application/json",
           },
@@ -53,7 +53,7 @@ const DoctorVerificationQueue = ({ doctors }) => {
           </span>
 
           <Link href="/dashboard/admin/doctors">
-            <Button className="bg-sky-600 rounded-xl text-white flex items-center gap-2">
+            <Button className="bg-sky-600 rounded-xl text-white flex items-center gap-2 hover:bg-sky-700 transition duration-300">
               See Doctor Management <FaArrowRight />
             </Button>
           </Link>

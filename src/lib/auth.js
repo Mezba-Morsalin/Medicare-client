@@ -22,6 +22,10 @@ export const auth = betterAuth({
         type: "string",
         default: "patient",
       },
+      status: {
+      type: "string",
+      default: "Active",
+    },
 
       plan: {
         type: "string",
