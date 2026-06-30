@@ -99,8 +99,9 @@ const DoctorVerificationQueue = ({ doctors }) => {
       <Button
         onPress={() => updateStatus(doctor._id, "Rejected")}
         variant="danger"
+        className="rounded-xl"
       >
-        Reject
+        Suspend
       </Button>
     </>
   )}
