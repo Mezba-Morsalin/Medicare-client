@@ -6,8 +6,13 @@ import SuspendUser from './SuspendUser';
 
 const UserDirectory = ({users}) => {
     return (
-        <div>
+        <div className='bg-white shadow p-6 rounded-2xl'>
+          <div className='space-y-2 mb-7'>
+              <h2 className='text-2xl font-bold'>System Users Directory</h2>
+              <p className='text-slate-600'>Audit patient and doctors profiles, medical practitioner entries, and freeze active credentials directories.</p>
+            </div>
            <Table>
+            
              <Table.ScrollContainer>
                <Table.Content
                  aria-label="Recent System Activity"

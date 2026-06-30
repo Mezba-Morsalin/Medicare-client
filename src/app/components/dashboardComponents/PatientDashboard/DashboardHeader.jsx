@@ -33,12 +33,20 @@ export default function DashboardHeader({user, payments = [], reviews = [],}) {
         <div className="flex items-center gap-4">
           <div className="text-right">
             <p className="text-xs uppercase text-gray-400 font-semibold">
-              Health Identity Verified
+              Health Identity
             </p>
 
-            <p className="text-green-600 font-bold">
-              HIPAA Secured
-            </p>
+            <p
+  className={`font-bold ${
+    user.status === "Active"
+      ? "text-green-600"
+      : user.status === "Suspended"
+      ? "text-red-600"
+      : "text-amber-600"
+  }`}
+>
+  {user.status}
+</p>
           </div>
 
           <Image

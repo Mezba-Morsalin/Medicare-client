@@ -5,11 +5,12 @@ import { Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 import {
   FaTimes,
   FaThLarge,
-  FaCalendarAlt,d,
+  FaCalendarAlt,
   FaStar,
   FaUserCog,
   FaSignOutAlt,
@@ -42,6 +43,18 @@ export default function DashboardSidebar({
     authClient.useSession();
 
   const user = session?.user ?? null;
+
+  useEffect(() => {
+  if (!user) return;
+
+  // Suspended user can only access dashboard home
+  if (
+    user.status === "Suspended" &&
+    pathname !== `/dashboard/${user.role}`
+  ) {
+    router.replace("/unauthorized");
+  }
+}, [user, pathname, router]);
 
   const avatarSrc =
     user?.image?.trim()
@@ -137,14 +150,19 @@ export default function DashboardSidebar({
     },
   ];
 
-  const navLinkMap = {
-    patient: patientLinks,
-    doctor: doctorMenu,
-    admin: adminLinks,
-  };
+const navLinkMap = {
+  patient: patientLinks,
+  doctor: doctorMenu,
+  admin: adminLinks,
+};
 
-  const navItems =
-    navLinkMap[user?.role] || [];
+const allNavItems =
+  navLinkMap[user?.role] || [];
+
+const navItems =
+  user?.status === "Suspended"
+    ? [allNavItems[0]]
+    : allNavItems;
 
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -211,33 +229,47 @@ export default function DashboardSidebar({
           </div>
 
           <div className="flex-1 p-4 space-y-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
+  {navItems.map((item) => {
+    const Icon = item.icon;
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() =>
-                    setIsOpen(false)
-                  }
-                  className={`
-                    flex items-center gap-3
-                    px-4 py-3 rounded-xl
-                    transition
-                    ${
-                      pathname === item.href
-                        ? "bg-sky-600 text-white"
-                        : "hover:bg-slate-100"
-                    }
-                  `}
-                >
-                  <Icon />
-                  {item.title}
-                </Link>
-              );
-            })}
-          </div>
+    return (
+      <Link
+        key={item.href}
+        href={item.href}
+        onClick={() => setIsOpen(false)}
+        className={`
+          flex items-center gap-3
+          px-4 py-3 rounded-xl
+          transition
+          ${
+            pathname === item.href
+              ? "bg-sky-600 text-white"
+              : "hover:bg-slate-100"
+          }
+        `}
+      >
+        <Icon />
+        {item.title}
+      </Link>
+    );
+  })}
+
+  {user?.status === "Suspended" && (
+    <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4">
+      <h3 className="font-bold text-red-700">
+        Account Suspended
+      </h3>
+
+      <p className="mt-2 text-sm text-red-600 leading-6">
+        Your account has been suspended by the administrator.
+        <br />
+        Only Dashboard is available.
+        <br />
+        Please contact support.
+      </p>
+    </div>
+  )}
+</div>
 
           <div className="p-4 border-t">
             <Button

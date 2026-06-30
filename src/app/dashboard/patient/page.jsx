@@ -30,20 +30,42 @@ const reviewData = await reviewRes.json();
 const reviews = reviewData.data;
 
 
-  return (
-    <div className="space-y-6">
-  <DashboardHeader
-    user={user}
-    payments={payments}
-    reviews={reviews}
-  />
+  return user?.status === "Suspended" ? (
+  <div className="min-h-[70vh] flex items-center justify-center">
+    <div className="max-w-xl w-full bg-white border border-red-200 rounded-3xl shadow-lg p-10 text-center">
+      <div className="w-24 h-24 mx-auto rounded-full bg-red-100 flex items-center justify-center text-red-600 text-5xl">
+        🚫
+      </div>
 
-  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    {/* Left Content */}
-    <div className="lg:col-span-2">
-      <DashboardOverview payments={payments} />
+      <h1 className="mt-6 text-3xl font-bold text-slate-900">
+        Account Suspended
+      </h1>
+
+      <p className="mt-4 text-slate-600 leading-7">
+        Your account has been suspended by the administrator.
+        <br />
+        You currently cannot access appointments, payments,
+        reviews or other dashboard features.
+      </p>
+
+      <div className="mt-8 inline-flex items-center gap-2 rounded-xl bg-red-50 border border-red-200 px-5 py-3 text-red-700 font-semibold">
+        Please contact the administrator to reactivate your account.
+      </div>
     </div>
   </div>
-</div>
-  );
+) : (
+  <div className="space-y-6">
+    <DashboardHeader
+      user={user}
+      payments={payments}
+      reviews={reviews}
+    />
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="lg:col-span-2">
+        <DashboardOverview payments={payments} />
+      </div>
+    </div>
+  </div>
+);
 }

@@ -33,13 +33,6 @@ const UnauthorizedPage = () => {
             <FaArrowLeft />
             Back to Home
           </Link>
-
-          <Link
-            href="/signin"
-            className="px-6 py-3 rounded-xl border border-slate-300 font-semibold hover:bg-slate-100 transition"
-          >
-            Sign In
-          </Link>
         </div>
 
         {/* Footer */}

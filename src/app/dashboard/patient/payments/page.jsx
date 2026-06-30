@@ -51,12 +51,20 @@ console.log("Payments:", payments);
               <div className="flex flex-col sm:flex-row items-center justify-center md:justify-end gap-4">
                 <div className="text-center sm:text-right">
                   <p className="text-xs uppercase text-gray-400 font-semibold">
-                    Health Identity Verified
+                    Health Identity
                   </p>
             
-                  <p className="text-lg font-bold text-green-600">
-                    HIPAA Secured
-                  </p>
+                  <p
+  className={`font-bold ${
+    user.status === "Active"
+      ? "text-green-600"
+      : user.status === "Suspended"
+      ? "text-red-600"
+      : "text-amber-600"
+  }`}
+>
+  {user.status}
+</p>
                 </div>
             
                 <Image
