@@ -17,6 +17,7 @@ const SuspendUser = ({ user }) => {
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${user._id}/status`,
       {
         method: "PATCH",
+        cache : "no-store",
         headers: {
           "Content-Type": "application/json",
         },
