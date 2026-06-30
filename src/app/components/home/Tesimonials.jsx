@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 
@@ -8,14 +9,21 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const Testimonials = ({ reviews = [] }) => {
-    console.log("Reviews:", reviews);
-
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-slate-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Heading */}
-        <div className="text-center mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.7,
+            ease: "easeOut",
+          }}
+          className="text-center mb-14"
+        >
           <h2 className="text-4xl font-extrabold text-slate-900">
             Patient Success Stories
           </h2>
@@ -24,7 +32,7 @@ const Testimonials = ({ reviews = [] }) => {
             Read authentic feedback from patients who trusted our healthcare
             professionals for consultations and treatment.
           </p>
-        </div>
+        </motion.div>
 
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -49,15 +57,40 @@ const Testimonials = ({ reviews = [] }) => {
             },
           }}
         >
-          {reviews?.map((review) => (
+          {reviews?.map((review, index) => (
             <SwiperSlide key={review._id}>
-              <div className="bg-white border rounded-3xl p-6 shadow-sm h-full">
-
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  y: 40,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.3,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.08,
+                  ease: "easeOut",
+                }}
+                whileHover={{
+                  y: -8,
+                  scale: 1.02,
+                }}
+                className="bg-white border rounded-3xl p-6 shadow-sm hover:shadow-xl h-full"
+              >
                 {/* Rating */}
-                <div className="flex text-yellow-500 text-lg mb-4">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex text-yellow-500 text-lg mb-4"
+                >
                   {"⭐".repeat(review.rating)}
                   {"☆".repeat(5 - review.rating)}
-                </div>
+                </motion.div>
 
                 {/* Review */}
                 <p className="italic text-slate-500 leading-7 min-h-[120px]">
@@ -66,13 +99,23 @@ const Testimonials = ({ reviews = [] }) => {
 
                 {/* Footer */}
                 <div className="mt-6 pt-5 border-t flex items-center gap-3">
-                  <Image
-                    src={review.patientImage}
-                    alt={review.patientName}
-                    width={50}
-                    height={50}
-                    className="rounded-full object-cover w-12 h-12"
-                  />
+                  <motion.div
+                    whileHover={{
+                      scale: 1.1,
+                      rotate: 5,
+                    }}
+                    transition={{
+                      duration: 0.25,
+                    }}
+                  >
+                    <Image
+                      src={review.patientImage}
+                      alt={review.patientName}
+                      width={50}
+                      height={50}
+                      className="rounded-full object-cover w-12 h-12"
+                    />
+                  </motion.div>
 
                   <div>
                     <h4 className="font-bold text-slate-900">
@@ -88,8 +131,7 @@ const Testimonials = ({ reviews = [] }) => {
                     </p>
                   </div>
                 </div>
-
-              </div>
+              </motion.div>
             </SwiperSlide>
           ))}
         </Swiper>

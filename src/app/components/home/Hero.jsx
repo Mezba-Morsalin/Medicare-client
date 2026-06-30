@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import {
@@ -7,52 +9,96 @@ import {
 } from "react-icons/fi";
 import bannerImg from "../../../../public/assets/banner.png";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="bg-slate-50 py-20">
+    <section className="bg-slate-50 py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Left */}
-          <div>
-  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-50 border border-sky-100 text-sky-600 text-sm font-semibold">
-    <FiShield />
-    TRUSTED DIGITAL HEALTHCARE PLATFORM
-  </div>
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-sky-50 border border-sky-100 text-sky-600 text-sm font-semibold"
+            >
+              <FiShield />
+              TRUSTED DIGITAL HEALTHCARE PLATFORM
+            </motion.div>
 
-  <h1 className="mt-8 text-3xl leading-10 md:leading-18 md:text-4xl lg:text-6xl font-extrabold text-slate-900">
-    Modern Healthcare Connected Through <span className="text-sky-600"> Trusted Care </span> Built for Everyone.
-  </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7 }}
+              viewport={{ once: true }}
+              className="mt-8 text-3xl leading-10 md:leading-18 md:text-4xl lg:text-6xl font-extrabold text-slate-900"
+            >
+              Modern Healthcare Connected Through{" "}
+              <span className="text-sky-600">
+                Trusted Care
+              </span>{" "}
+              Built for Everyone.
+            </motion.h1>
 
-  <p className="mt-8 text-lg text-slate-500 leading-9 max-w-2xl">
-    Seamlessly connect with verified healthcare professionals,
-    schedule appointments, manage medical records, and access
-    quality care through a secure and centralized healthcare
-    management platform.
-  </p>
+            <motion.p
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.7 }}
+              viewport={{ once: true }}
+              className="mt-8 text-lg text-slate-500 leading-9 max-w-2xl"
+            >
+              Seamlessly connect with verified healthcare professionals,
+              schedule appointments, manage medical records, and access
+              quality care through a secure and centralized healthcare
+              management platform.
+            </motion.p>
 
-  <div className="mt-10 flex flex-wrap gap-4">
-    <Link href={'/find-doctor'}
-    >
-     <Button className="bg-sky-600 text-white rounded-xl py-2 px-8 flex items-center gap-2.5 hover:bg-sky-700 transition"> <FiCalendar />
-      Find a Doctor</Button>
-    </Link>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.7 }}
+              viewport={{ once: true }}
+              className="mt-10 flex flex-wrap gap-4"
+            >
+              <Link href="/find-doctor">
+                <Button className="bg-sky-600 text-white rounded-xl py-2 px-8 flex items-center gap-2.5 hover:bg-sky-700 transition">
+                  <FiCalendar />
+                  Find a Doctor
+                </Button>
+              </Link>
 
-    <Link href={'/about'}>
-    <Button
-
-      className="rounded-xl bg-transparent px-6 border border-sky-600 text-sky-600"
-    >
-      Learn More
-    </Button>
-    </Link>
-  </div>
-</div>
+              <Link href="/about">
+                <Button className="rounded-xl bg-transparent px-6 border border-sky-600 text-sky-600">
+                  Learn More
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
 
           {/* Right */}
-          <div className="relative">
-            <div className="overflow-hidden rounded-[32px] shadow-xl">
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <motion.div
+              whileHover={{
+                scale: 1.02,
+              }}
+              transition={{ duration: 0.4 }}
+              className="overflow-hidden rounded-[32px] shadow-xl"
+            >
               <Image
                 src={bannerImg}
                 alt="Healthcare"
@@ -60,10 +106,22 @@ export default function Hero() {
                 height={600}
                 className="w-full h-[520px] object-cover"
               />
-            </div>
+            </motion.div>
 
             {/* Floating Card */}
-            <div className="absolute left-6 bottom-6 bg-white rounded-3xl shadow-lg px-5 py-4 flex items-center gap-4">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.7 }}
+              viewport={{ once: true }}
+              animate={{
+                y: [0, -10, 0],
+              }}
+              style={{
+                animationDuration: "4s",
+              }}
+              className="absolute left-6 bottom-6 bg-white rounded-3xl shadow-lg px-5 py-4 flex items-center gap-4"
+            >
               <div className="h-14 w-14 rounded-2xl bg-sky-500 flex items-center justify-center">
                 <FiHeart className="text-white text-2xl" />
               </div>
@@ -77,8 +135,8 @@ export default function Hero() {
                   Emergency roster online
                 </p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import {
   FiHeart,
   FiActivity,
@@ -53,10 +54,19 @@ const specialties = [
 
 export default function Specialties() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-slate-50 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
         {/* Heading */}
-        <div className="text-center mb-14">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.7,
+            ease: "easeOut",
+          }}
+          className="text-center mb-14"
+        >
           <h2 className="text-4xl font-extrabold text-slate-900">
             Focus Medical Specializations
           </h2>
@@ -65,7 +75,7 @@ export default function Specialties() {
             Explore board-certified healthcare professionals across
             our most sought-after medical departments.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -73,15 +83,45 @@ export default function Specialties() {
             const Icon = item.icon;
 
             return (
-              <div
+              <motion.div
                 key={index}
-                className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                initial={{
+                  opacity: 0,
+                  y: 50,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.3,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: index * 0.12,
+                  ease: "easeOut",
+                }}
+                whileHover={{
+                  y: -10,
+                  scale: 1.03,
+                }}
+                className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm hover:shadow-xl"
               >
-                <div
+                <motion.div
+                  whileHover={{
+                    rotate: 10,
+                    scale: 1.15,
+                  }}
+                  transition={{
+                    duration: 0.25,
+                  }}
                   className={`h-12 w-12 rounded-xl ${item.iconBg} flex items-center justify-center`}
                 >
-                  <Icon className={`${item.iconColor} text-xl`} />
-                </div>
+                  <Icon
+                    className={`${item.iconColor} text-xl`}
+                  />
+                </motion.div>
 
                 <h3 className="mt-8 text-xl font-bold text-slate-900">
                   {item.title}
@@ -90,7 +130,7 @@ export default function Specialties() {
                 <p className="mt-3 text-sm leading-7 text-slate-500">
                   {item.description}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
         </div>

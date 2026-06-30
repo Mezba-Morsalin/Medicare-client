@@ -16,23 +16,62 @@ import {
   FiMail,
   FiAlertTriangle,
 } from "react-icons/fi";
+import { motion } from "framer-motion";
+import toast, { Toaster } from "react-hot-toast";
+import { useState } from "react";
 
 const Contact = () => {
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const [loading, setLoading] = useState(false);
+  const onSubmit = async (e) => {
+  e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
+  setLoading(true);
 
-    console.log(data);
-  };
+  const formData = new FormData(e.currentTarget);
+
+  const data = Object.fromEntries(formData);
+
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/contact`,
+      {
+        method: "POST",
+        cache : "no-store",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    const result = await res.json();
+
+    if (result.success) {
+      toast.success(result.message);
+
+      e.target.reset();
+    } else {
+      toast.error(result.message);
+    }
+  } catch (error) {
+    toast.error("Something went wrong.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <section className="bg-slate-50 py-20">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          <p className="uppercase tracking-widest text-sky-600 border border-sky-200 bg-sky-50 mx-auto p-3 w-70 rounded-full text-sm font-semibold">
+        <motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.7 }}
+  className="text-center max-w-4xl mx-auto mb-16"
+>
+  <p className="uppercase tracking-widest text-sky-600 border border-sky-200 bg-sky-50 mx-auto p-3 w-70 rounded-full text-sm font-semibold">
   Contact & Support Center
 </p>
 
@@ -45,7 +84,7 @@ const Contact = () => {
   payments, or healthcare services? Our support team is available to provide
   prompt assistance and guidance.
 </p>
-        </div>
+</motion.div>
 
         <div className="grid lg:grid-cols-12 gap-8">
           {/* Left Side */}
@@ -192,17 +231,20 @@ const Contact = () => {
                 </TextField>
 
                 <Button
-                  type="submit"
-                  className="bg-sky-600 hover:bg-sky-700 text-white px-8"
-                  size="lg"
-                >
-                  Submit Support Request
-                </Button>
+  type="submit"
+  isLoading={loading}
+  isDisabled={loading}
+  size="lg"
+  className="bg-sky-600 text-white hover:bg-sky-700 px-8"
+>
+  {loading ? "Sending..." : "Submit Support Request"}
+</Button>
               </Form>
             </div>
           </div>
         </div>
       </div>
+      <Toaster/>
     </section>
   );
 };
