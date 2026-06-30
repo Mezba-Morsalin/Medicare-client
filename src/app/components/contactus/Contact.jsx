@@ -19,10 +19,23 @@ import {
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 const Contact = () => {
+  const router = useRouter();
+const { data: session } = authClient.useSession();
   const [loading, setLoading] = useState(false);
   const onSubmit = async (e) => {
+     if (!session?.user) {
+    toast.error("Please sign in first.");
+
+    setTimeout(() => {
+      router.push("/signin");
+    }, 1500);
+
+    return;
+  }
   e.preventDefault();
 
   setLoading(true);
@@ -49,7 +62,6 @@ const Contact = () => {
     if (result.success) {
       toast.success(result.message);
 
-      e.target.reset();
     } else {
       toast.error(result.message);
     }

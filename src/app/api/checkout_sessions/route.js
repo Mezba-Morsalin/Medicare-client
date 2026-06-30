@@ -24,6 +24,18 @@ const doctorHospital = formData.get("doctorHospital");
 
     const user = sessionData?.user;
 
+if (!user) {
+  return NextResponse.json(
+    {
+      success: false,
+      message: "Please login first.",
+    },
+    {
+      status: 401,
+    }
+  );
+}
+
     const origin = (await headers()).get("origin");
 
     const session = await stripe.checkout.sessions.create({
