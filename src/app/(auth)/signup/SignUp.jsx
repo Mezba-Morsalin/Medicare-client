@@ -8,7 +8,9 @@ import {
   TextField,
   Select,
   ListBox,
+  FieldError,
 } from "@heroui/react";
+import Image from "next/image";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -27,7 +29,7 @@ import {
 } from "react-icons/fi";
 
 export default function SignUpPage() {
-
+  const [logo, setLogo] = useState(null);
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false)
@@ -40,12 +42,45 @@ setLoading(true);
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
+    let logoUrl = "";
+
+try {
+  if (logo) {
+    const imageData = new FormData();
+    imageData.append("image", logo);
+
+    const imageRes = await fetch(
+      `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+      {
+        method: "POST",
+        body: imageData,
+      }
+    );
+
+    const imageResult = await imageRes.json();
+
+    if (!imageResult.success) {
+      toast.error("Image upload failed");
+      setLoading(false);
+      return;
+    }
+
+    logoUrl = imageResult.data.display_url;
+  }
+} catch (err) {
+  toast.error("Image upload failed");
+  setLoading(false);
+  return;
+}
+
     console.log(user);
      const plan = user.role === "doctor" ? "doctor_free" : "patient_free"
+
+
     try {
       const {data, error } = await authClient.signUp.email({
         name: user.name,
-  image: user.image,
+  image: logoUrl,
   email: user.email,
   password: user.password,
 
@@ -309,24 +344,59 @@ setLoading(true);
     </ListBox>
   </Select.Popover>
 </Select>
+
+<div className="space-y-2 w-full">
+  <Label className="text-sm font-medium">
+    Upload Photo
+  </Label>
+
+  <div className="relative">
+    <FiImage className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" />
+
+    <input
+      type="file"
+      accept=".jpg,.jpeg,.png,.webp"
+      className="w-full rounded-xl border border-default-200 bg-default-100
+      pl-11 pr-4 py-4 text-sm
+      file:border-0 file:bg-transparent
+      file:text-sm file:font-medium
+      file:text-zinc-700
+      cursor-pointer"
+      onChange={(e) => {
+        const file = e.target.files?.[0];
+
+        if (!file) return;
+
+        if (file.size > 1024 * 1024) {
+          toast.error("Maximum image size is 1 MB");
+          e.target.value = "";
+          return;
+        }
+
+        setLogo(file);
+      }}
+    />
+  </div>
+
+  {logo && (
+    <div className="flex justify-center mt-3">
+      <Image
+        src={URL.createObjectURL(logo)}
+        alt="Preview"
+        className="h-24 w-24 rounded-full object-cover border-2 border-sky-500"
+        width={90}
+        height={90}
+      />
+    </div>
+  )}
+
+  <p className="text-xs text-slate-500">
+    Accepted formats: JPG, PNG, WEBP • Maximum size: 1 MB
+  </p>
+</div>
             </div>
 
             {/* Photo */}
-            <TextField
-              name="image"
-              className="w-full"
-            >
-              <Label>Photo URL (Optional)</Label>
-
-              <div className="relative w-full">
-                <FiImage className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
-
-                <Input
-                  className="w-full pl-10"
-                  placeholder="https://images.unsplash.com/..."
-                />
-              </div>
-            </TextField>
 
             {/* Password */}
             <TextField

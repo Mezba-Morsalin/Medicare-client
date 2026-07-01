@@ -23,12 +23,45 @@ const page = async () => {
       const data = await res.json();
       const doctor = data?.data?.[0];
       if (!doctor) {
-    return (
-      <div className="p-10 text-center">
-        Doctor profile not found
+  return (
+    <div className="min-h-[70vh] flex items-center justify-center px-4">
+      <div className="max-w-xl w-full bg-white border border-slate-200 rounded-3xl shadow-sm p-10 text-center">
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-sky-100">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-10 w-10 text-sky-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"
+            />
+          </svg>
+        </div>
+
+        <h2 className="mt-6 text-3xl font-bold text-slate-900">
+          Complete Your Doctor Profile
+        </h2>
+
+        <p className="mt-3 text-slate-600 leading-7">
+          Your doctor verification profile has not been submitted yet.
+          Complete your professional information to request verification
+          and start accepting appointments.
+        </p>
+
+        <Link
+          href='/dashboard/doctor/complete-profile'
+        >
+          <Button className="mt-5 rounded-xl bg-sky-600 px-8 py-3 font-semibold text-white hover:bg-sky-700 transition">Create Doctor Profile</Button>
+        </Link>
       </div>
-    );
-  }
+    </div>
+  );
+}
   if (doctor?.status === "Suspended") {
   return (
     <div className="min-h-[75vh] flex items-center justify-center">

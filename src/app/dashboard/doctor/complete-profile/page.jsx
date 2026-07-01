@@ -13,25 +13,61 @@ import {
   Checkbox,
   TimeField,
 } from "@heroui/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { FiImage } from "react-icons/fi";
 
 const DoctorProfileForm = () => {
+  const [logo, setLogo] = useState(null);
+const [loading, setLoading] = useState(false);
   const router = useRouter()
      const { data: session } = authClient.useSession();
       const user = session?.user ?? null;
 
    const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
+    let logoUrl = "";
+
+try {
+  if (logo) {
+    const imageData = new FormData();
+    imageData.append("image", logo);
+
+    const imageRes = await fetch(
+      `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY}`,
+      {
+        method: "POST",
+        body: imageData,
+      }
+    );
+
+    const imageResult = await imageRes.json();
+
+    if (!imageResult.success) {
+      toast.error("Image upload failed");
+      setLoading(false);
+      return;
+    }
+
+    logoUrl = imageResult.data.display_url;
+  }
+} catch (err) {
+  toast.error("Image upload failed");
+  setLoading(false);
+  return;
+}
 
     const doctorData = {
 doctorId: user?.id,
     email: user?.email,
 
     name: formData.get("name"),
-    image: formData.get("image"),
+    image: logoUrl,
     specialization: formData.get("specialization"),
 
     experience: Number(formData.get("experience")),
@@ -48,7 +84,7 @@ doctorId: user?.id,
 
     availableSlots: formData.getAll("availableSlots"),
 
-    status: doctor ? doctor.status : "Pending",
+    status: "Pending",
 
 
     }
@@ -81,6 +117,9 @@ doctorId: user?.id,
 
     toast.error(error.message || "Failed to submit verification request.");
   }
+  finally {
+  setLoading(false);
+}
 };
 
   return (
@@ -112,13 +151,55 @@ doctorId: user?.id,
               />
             </TextField>
 
-            <TextField>
-              <Label>Profile Image URL</Label>
-              <Input
-                name="image"
-                placeholder="https://example.com/image.png"
-              />
-            </TextField>
+            <div className="space-y-2 w-full">
+              <Label className="text-sm font-medium">
+                Upload Photo
+              </Label>
+            
+              <div className="relative">
+                <FiImage className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" />
+            
+                <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png,.webp"
+                  className="w-full rounded-xl border border-default-200 bg-default-100
+                  pl-11 pr-4 py-2 text-sm
+                  file:border-0 file:bg-transparent
+                  file:text-sm file:font-medium
+                  file:text-zinc-700
+                  cursor-pointer"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+            
+                    if (!file) return;
+            
+                    if (file.size > 1024 * 1024) {
+                      toast.error("Maximum image size is 1 MB");
+                      e.target.value = "";
+                      return;
+                    }
+            
+                    setLogo(file);
+                  }}
+                />
+              </div>
+            
+              {logo && (
+                <div className="flex justify-center mt-3">
+                  <Image
+                    src={URL.createObjectURL(logo)}
+                    alt="Preview"
+                    className="rounded-full object-cover border-2 border-sky-500"
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              )}
+            
+              <p className="text-xs text-slate-500">
+                Accepted formats: JPG, PNG, WEBP • Maximum size: 1 MB
+              </p>
+            </div>
           </div>
 
           {/* Specialization */}
@@ -237,7 +318,7 @@ doctorId: user?.id,
                   </Checkbox.Content>
                 </Checkbox>
 
-                <Label htmlFor="english" name="languages" value="Bengali">
+                <Label htmlFor="english" name="languages" value="English">
                   English
                 </Label>
               </div>
@@ -257,7 +338,7 @@ doctorId: user?.id,
               </div>
 
               <div className="flex items-center gap-2">
-                <Checkbox id="hindi">
+                <Checkbox id="hindi" name="languages" value="hindi">
                   <Checkbox.Content>
                     <Checkbox.Control>
                       <Checkbox.Indicator />
@@ -271,7 +352,7 @@ doctorId: user?.id,
               </div>
 
               <div className="flex items-center gap-2">
-                <Checkbox id="arabic">
+                <Checkbox id="arabic" name="languages" value="arabic">
                   <Checkbox.Content>
                     <Checkbox.Control>
                       <Checkbox.Indicator />
@@ -379,11 +460,12 @@ doctorId: user?.id,
 
           <div className="pt-4">
             <Button
-              type="submit"
-              className="bg-sky-600 text-white px-10"
-            >
-              Submit Verification Request
-            </Button>
+  type="submit"
+  isDisabled={loading}
+  className="bg-sky-600 text-white px-10"
+>
+  {loading ? "Submitting..." : "Submit Verification Request"}
+</Button>
           </div>
         </Form>
       </div>
