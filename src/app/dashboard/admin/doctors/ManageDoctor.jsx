@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, Chip, Table } from "@heroui/react";
 import { useRouter } from "next/navigation";
 
@@ -10,6 +11,7 @@ const ManageDoctor = ({ doctors }) => {
     const router = useRouter();
 
 const updateVerification = async (id, status) => {
+  const {data : tokenData} = await authClient.token()
   try {
     const res = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}/verify`,
@@ -18,6 +20,7 @@ const updateVerification = async (id, status) => {
     cache : "no-store",
     headers: {
       "Content-Type": "application/json",
+      authorization : `Bearer ${tokenData?.token}`
     },
     body: JSON.stringify({ status }),
   }
@@ -37,6 +40,7 @@ const updateVerification = async (id, status) => {
 };
 
 const updateSuspension = async (id, status) => {
+  const {data : tokenData} = await authClient.token()
   try {
     const res = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}/suspend`,
@@ -45,6 +49,7 @@ const updateSuspension = async (id, status) => {
     cache : "no-store",
     headers: {
       "Content-Type": "application/json",
+      authorization : `Bearer ${tokenData?.token}`
     },
     body: JSON.stringify({ status }),
   }

@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,12 +9,16 @@ const DeleteUser = ({ user }) => {
   const router = useRouter();
 
   const handleDelete = async () => {
+     const {data : tokenData} = await authClient.token()
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${user._id}`,
         {
           method: "DELETE",
           cache : "no-store",
+          headers : {
+            authorization : `Bearer ${tokenData?.token}`
+          }
         }
       );
 

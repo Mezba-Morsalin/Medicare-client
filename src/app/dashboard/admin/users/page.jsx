@@ -10,14 +10,28 @@ const page = async () => {
           });
         
           const user = session?.user;
-          const usersRes = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`,
-      {
-        cache: "no-store",
-      }
-    );
-    
-    const users = await usersRes.json();
+
+          const tokenData = await auth.api.getToken({
+  headers: await headers(),
+});
+
+console.log(tokenData);
+
+const usersRes = await fetch(
+  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`,
+  {
+    cache: "no-store",
+    headers: {
+      authorization: `Bearer ${tokenData.token}`,
+    },
+  }
+);
+
+console.log("STATUS:", usersRes.status);
+
+const users = await usersRes.json();
+
+console.log("USERS:", users);
     return (
         <div className='space-y-8'>
             <div className="rounded-3xl bg-sky-600 p-8 text-white flex flex-col lg:flex-row justify-between gap-6">

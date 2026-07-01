@@ -13,9 +13,19 @@ const page = async () => {
               });
             
               const user = session?.user;
+
+      const tokenData = await auth.api.getToken({
+        headers: await headers(),
+      });
+      
+      console.log(tokenData);
+
               const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/reviews`,
   {
     cache: "no-store",
+    headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 
@@ -26,6 +36,9 @@ const doctorsRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,
   {
     cache: "no-store",
+    headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 
@@ -35,7 +48,10 @@ const doctors = doctorsData.data;
 const paymentRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/payments`,
   {
-    cache: "no-store",
+    cache: "no-store", 
+    headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 

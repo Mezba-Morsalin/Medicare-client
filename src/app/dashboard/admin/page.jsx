@@ -13,10 +13,16 @@ const AdminDashboard = async () => {
       });
     
       const user = session?.user;
+      const tokenData = await auth.api.getToken({
+                      headers: await headers(),
+                    });
       const usersRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`,
   {
     cache: "no-store",
+    headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 
@@ -26,6 +32,9 @@ const doctorsRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,
   {
     cache: "no-store",
+    headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 
@@ -36,6 +45,9 @@ const paymentRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/payments`,
   {
     cache: "no-store",
+    headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 

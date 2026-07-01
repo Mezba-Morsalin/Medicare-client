@@ -8,12 +8,18 @@ const page = async () => {
     const session = await auth.api.getSession({
                 headers: await headers(),
               });
-            
               const user = session?.user;
+            
+              const tokenData = await auth.api.getToken({
+                      headers: await headers(),
+                    });
               const paymentRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/payments`,
   {
     cache: "no-store",
+    headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 
