@@ -3,7 +3,7 @@ import { Button } from '@heroui/react';
 import { headers } from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
-import { FaCalendarTimes } from 'react-icons/fa';
+import { FaCalendarTimes, FaHome } from 'react-icons/fa';
 import { FaPlus, FaStethoscope, FaUserInjured } from 'react-icons/fa6';
 import { GiMedicines } from 'react-icons/gi';
 import UpdatePrescription from './UpdatePrescription';
@@ -42,6 +42,52 @@ const prescriptionRes = await fetch(
 
 const prescriptionData = await prescriptionRes.json();
 const prescriptions = prescriptionData.data || [];
+
+if (doctor?.status === "Suspended") {
+  return (
+    <div className="min-h-[75vh] flex items-center justify-center">
+      <div className="max-w-2xl w-full bg-red-50 border border-red-200 rounded-3xl p-10 text-center">
+
+        <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-red-100 flex items-center justify-center">
+          <span className="text-5xl">🚫</span>
+        </div>
+
+        <h1 className="text-3xl font-bold text-red-700">
+          Your  Account is Suspended
+        </h1>
+
+        <p className="mt-4 text-slate-600 leading-7">
+          Your doctor account has been temporarily suspended by the administrator.
+          You cannot manage appointments, schedules, prescriptions, or access
+          other doctor features until your account is reactivated.
+        </p>
+
+        <div className="mt-8 bg-white rounded-2xl border border-red-200 p-5">
+          <h3 className="font-semibold text-slate-800">
+            Need Assistance?
+          </h3>
+
+          <p className="mt-2 text-slate-500">
+            Please contact the administrator if you believe this was a mistake
+            or require further information regarding your account status.
+          </p>
+          <p className="text-red-600">
+            admin.medicare@gmail.com
+          </p>
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <Link href="/">
+            <Button className="bg-sky-600 hover:bg-sky-700 transition duration-300 text-white px-8 rounded-xl flex items-center justify-center gap-2">
+              <FaHome/> Go to Home
+            </Button>
+          </Link>
+        </div>
+
+      </div>
+    </div>
+  );
+}
 
     return (
          <div className='space-y-8'>

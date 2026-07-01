@@ -1,11 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FaStar, FaMapMarkerAlt } from "react-icons/fa";
-import userPng from "../../../../public/assets/user.png"
+import { motion } from "framer-motion";
+import userPng from "../../../../public/assets/user.png";
 
 const AllDoctors = ({ doctor }) => {
   return (
-    <div className="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm hover:shadow-lg transition-all duration-300">
+    <motion.div
+      initial={{ opacity: 0, y: 35 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
+      whileHover={{
+        y: -8,
+        transition: { duration: 0.25 },
+      }}
+      className="bg-white border border-slate-200 rounded-3xl p-4 shadow-sm hover:shadow-xl"
+    >
       {/* Specialization */}
       <div className="flex justify-between items-center mb-3">
         <span className="bg-sky-500 text-white text-[10px] font-semibold px-3 py-1 rounded-full uppercase">
@@ -19,7 +32,11 @@ const AllDoctors = ({ doctor }) => {
       </div>
 
       {/* Image */}
-      <div className="flex justify-center">
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.25 }}
+        className="flex justify-center overflow-hidden rounded-xl"
+      >
         <Image
           src={doctor.image || userPng}
           alt={doctor.name}
@@ -27,7 +44,7 @@ const AllDoctors = ({ doctor }) => {
           height={250}
           className="rounded-xl object-cover border-4 border-slate-100"
         />
-      </div>
+      </motion.div>
 
       {/* Doctor Info */}
       <div className="mt-4">
@@ -75,13 +92,19 @@ const AllDoctors = ({ doctor }) => {
       </div>
 
       {/* Button */}
-      <Link
-        href={`/find-doctor/${doctor._id}`}
-        className="mt-5 flex items-center justify-center w-full border border-sky-300 text-sky-600 font-semibold rounded-xl py-3 hover:bg-sky-50 transition"
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.2 }}
       >
-        Meet the Specialist →
-      </Link>
-    </div>
+        <Link
+          href={`/find-doctor/${doctor._id}`}
+          className="mt-5 flex items-center justify-center w-full border border-sky-300 text-sky-600 font-semibold rounded-xl py-3 hover:bg-sky-50"
+        >
+          Meet the Specialist →
+        </Link>
+      </motion.div>
+    </motion.div>
   );
 };
 

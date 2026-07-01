@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 
+
 export default async function DoctorDashboard() {
   const session = await auth.api.getSession({
   headers: await headers(),
@@ -48,7 +49,7 @@ if (!doctor) {
   );
 }
 
-if (user?.status === "Suspended") {
+if (doctor?.status === "Suspended") {
   return (
     <div className="min-h-[75vh] flex items-center justify-center">
       <div className="max-w-2xl w-full bg-red-50 border border-red-200 rounded-3xl p-10 text-center">

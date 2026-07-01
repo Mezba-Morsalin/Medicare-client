@@ -2,6 +2,10 @@ import AllDoctors from '@/app/components/find-doctors/AllDoctors';
 import DoctorFilters from '@/app/components/find-doctors/DoctorFilters';
 import React from 'react';
 
+export const metadata = {
+    title : "MediCare Connect - Find-Doctor",
+    description : "doctor"
+}
 const DoctorPage = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors`, {
         cache : "no-store"

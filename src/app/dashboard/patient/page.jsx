@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 
+
 export default async function PatientDashboard() {
     const session = await auth.api.getSession({
              headers: await headers(),
@@ -48,8 +49,11 @@ const reviews = reviewData.data;
         reviews or other dashboard features.
       </p>
 
-      <div className="mt-8 inline-flex items-center gap-2 rounded-xl bg-red-50 border border-red-200 px-5 py-3 text-red-700 font-semibold">
-        Please contact the administrator to reactivate your account.
+      <div className="mt-8 flex flex-col items-center gap-2 rounded-xl bg-red-50 border border-red-200 px-5 py-3 text-red-600 font-semibold space-y-2">
+        <p>Please contact the administrator to reactivate your account.</p>
+         <p className="text-red-600">
+            admin.medicare@gmail.com
+          </p>
       </div>
     </div>
   </div>

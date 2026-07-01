@@ -4,41 +4,12 @@ import { Button } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa6";
-import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
 
 const DoctorVerificationQueue = ({ doctors }) => {
-  const router = useRouter();
 
   const pendingDoctors = doctors.filter(
     (doctor) => doctor.status === "Pending"
   );
-
-  const updateStatus = async (id, status) => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}`,
-        {
-          method: "PATCH",
-          cache : "no-store",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ status }),
-        }
-      );
-
-      const data = await res.json();
-
-      if (data.success) {
-        toast.success(`Doctor ${status} Successfully`);
-        router.refresh(); // reload server component data
-      } else {
-        toast.error(data.message);
-      }
-    } catch (err) {
-      toast.error("Something went wrong");
-    }
-  };
 
   return (
     <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm">
@@ -85,39 +56,6 @@ const DoctorVerificationQueue = ({ doctors }) => {
                 </p>
               </div>
             </div>
-
-            <div className="flex items-center gap-3">
-  {doctor.status === "Pending" && (
-    <>
-      <Button
-        onPress={() => updateStatus(doctor._id, "Verified")}
-        className="bg-emerald-600 text-white rounded-xl"
-      >
-        Get Verify
-      </Button>
-
-      <Button
-        onPress={() => updateStatus(doctor._id, "Rejected")}
-        variant="danger"
-        className="rounded-xl"
-      >
-        Suspend
-      </Button>
-    </>
-  )}
-
-  {doctor.status === "Verified" && (
-    <span className="px-4 py-2 rounded-xl bg-green-100 text-green-700 font-semibold">
-      Verified
-    </span>
-  )}
-
-  {doctor.status === "Rejected" && (
-    <span className="px-4 py-2 rounded-xl bg-red-100 text-red-700 font-semibold">
-      Rejected
-    </span>
-  )}
-</div>
           </div>
         ))}
 
@@ -127,7 +65,6 @@ const DoctorVerificationQueue = ({ doctors }) => {
           </div>
         )}
       </div>
-      <Toaster/>
     </div>
   );
 };

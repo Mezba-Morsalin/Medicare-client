@@ -43,18 +43,21 @@ export default function DashboardSidebar({
     authClient.useSession();
 
   const user = session?.user ?? null;
+             console.log("user", user);
 
   useEffect(() => {
+  if (isPending) return;
+
   if (!user) return;
 
-  // Suspended user can only access dashboard home
   if (
+    user.role !== "admin" &&
     user.status === "Suspended" &&
     pathname !== `/dashboard/${user.role}`
   ) {
     router.replace("/unauthorized");
   }
-}, [user, pathname, router]);
+}, [user, isPending, pathname, router]);
 
   const avatarSrc =
     user?.image?.trim()
@@ -156,13 +159,11 @@ const navLinkMap = {
   admin: adminLinks,
 };
 
-const allNavItems =
-  navLinkMap[user?.role] || [];
-
 const navItems =
+  user?.role !== "admin" &&
   user?.status === "Suspended"
-    ? [allNavItems[0]]
-    : allNavItems;
+    ? [navLinkMap[user?.role]?.[0]].filter(Boolean)
+    : navLinkMap[user?.role] || [];
 
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -254,7 +255,8 @@ const navItems =
     );
   })}
 
-  {user?.status === "Suspended" && (
+  {user?.role !== "admin" &&
+  user?.status === "Suspended" && (
     <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4">
       <h3 className="font-bold text-red-700">
         Account Suspended
@@ -268,7 +270,7 @@ const navItems =
         Please contact support.
       </p>
     </div>
-  )}
+)}
 </div>
 
           <div className="p-4 border-t">

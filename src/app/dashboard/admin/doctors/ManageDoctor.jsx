@@ -9,29 +9,56 @@ import toast, { Toaster } from "react-hot-toast";
 const ManageDoctor = ({ doctors }) => {
     const router = useRouter();
 
-const updateDoctorStatus = async (id, status) => {
+const updateVerification = async (id, status) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}`,
-      {
-        method: "PATCH",
-        cache : "no-store",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status }),
-      }
-    );
+  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}/verify`,
+  {
+    method: "PATCH",
+    cache : "no-store",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  }
+);
 
     const data = await res.json();
 
     if (data.success) {
-      toast.success(`Doctor ${status} Successfully`);
+      toast.success(data.message);
       router.refresh();
     } else {
       toast.error(data.message);
     }
-  } catch (error) {
+  } catch (err) {
+    toast.error("Something went wrong");
+  }
+};
+
+const updateSuspension = async (id, status) => {
+  try {
+    const res = await fetch(
+  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors/${id}/suspend`,
+  {
+    method: "PATCH",
+    cache : "no-store",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ status }),
+  }
+);
+
+    const data = await res.json();
+
+    if (data.success) {
+      toast.success(data.message);
+      router.refresh();
+    } else {
+      toast.error(data.message);
+    }
+  } catch (err) {
     toast.error("Something went wrong");
   }
 };
@@ -108,10 +135,11 @@ const updateDoctorStatus = async (id, status) => {
                   <Table.Cell>
   <div className="flex justify-center gap-2">
 
-    {doctor.status !== "Verified" && (
+    {/* Verify */}
+    {doctor.status === "Pending" && (
       <Button
         onPress={() =>
-          updateDoctorStatus(doctor._id, "Verified")
+          updateVerification(doctor._id, "Verified")
         }
         className="bg-emerald-600 text-white rounded-xl py-1 px-3"
       >
@@ -119,10 +147,11 @@ const updateDoctorStatus = async (id, status) => {
       </Button>
     )}
 
+    {/* Unverify */}
     {doctor.status === "Verified" && (
       <Button
         onPress={() =>
-          updateDoctorStatus(doctor._id, "Pending")
+          updateVerification(doctor._id, "Pending")
         }
         className="bg-amber-500 text-white rounded-xl py-1 px-3"
       >
@@ -130,25 +159,29 @@ const updateDoctorStatus = async (id, status) => {
       </Button>
     )}
 
-    <Button
-      onPress={() =>
-        updateDoctorStatus(
-          doctor._id,
-          doctor.status === "Suspended"
-            ? "Verified"
-            : "Suspended"
-        )
-      }
-      className={`rounded-xl py-1 px-3 text-white ${
-        doctor.status === "Suspended"
-          ? "bg-sky-600"
-          : "bg-red-600"
-      }`}
-    >
-      {doctor.status === "Suspended"
-        ? "Activate"
-        : "Suspend"}
-    </Button>
+    {/* Suspend */}
+    {doctor.status === "Verified" && (
+      <Button
+        onPress={() =>
+          updateSuspension(doctor._id, "Suspended")
+        }
+        className="bg-red-600 text-white rounded-xl py-1 px-3"
+      >
+        Suspend
+      </Button>
+    )}
+
+    {/* Activate */}
+    {doctor.status === "Suspended" && (
+      <Button
+  onPress={() =>
+    updateSuspension(doctor._id, "Verified")
+  }
+  className="bg-sky-600 text-white rounded-xl py-1 px-3"
+>
+  Activate
+</Button>
+    )}
 
   </div>
 </Table.Cell>
