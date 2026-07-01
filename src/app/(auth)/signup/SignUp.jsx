@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import { FcGoogle } from "react-icons/fc";
@@ -81,6 +82,15 @@ setLoading(true);
     setLoading(false);
   }
   };
+  const handleGoogleLogin = async () => {
+   const user = await authClient.signIn.social({
+    provider: "google",
+    callbackURL : "/"
+  });
+  if(user) {
+    toast.success("Sign Up Successfully With Your Google Account")
+  }
+}
 
   return (
     <div className="min-h-screen bg-slate-50 py-16 px-4">
@@ -383,8 +393,8 @@ setLoading(true);
             <div className="flex-1 border-t border-zinc-300"></div>
           </div>
 
-          <Button
-            className="mt-6 w-full bg-white border border-zinc-300 text-zinc-700 rounded-xl"
+          <Button onClick={()=> handleGoogleLogin()}
+            className="mt-6 w-full bg-white border border-zinc-300 text-zinc-700 rounded-xl hover:bg-gray-300 transition duration-300"
           >
             <FcGoogle size={22} />
             Sign Up With Google
@@ -394,6 +404,7 @@ setLoading(true);
                   </div>
         </div>
       </div>
+      <Toaster/>
     </div>
   );
 }

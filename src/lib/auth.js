@@ -16,36 +16,49 @@ export const auth = betterAuth({
     emailAndPassword: { 
     enabled: true, 
   }, 
+  socialProviders: {
+        google: { 
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+        }, 
+    },
    user: {
-    additionalFields: {
-      role: {
-        type: "string",
-        default: "patient",
-      },
-      status: {
+  additionalFields: {
+    role: {
       type: "string",
-      default: "Active",
+      required: false,
+      defaultValue: "patient",
+      input: false,
     },
 
-      plan: {
-        type: "string",
-        default: "patient_free",
-      },
+    status: {
+      type: "string",
+      required: false,
+      defaultValue: "Active",
+      input: false,
+    },
 
-      specialization: {
-        type: "string",
-        required: false,
-      },
+    plan: {
+      type: "string",
+      required: false,
+      defaultValue: "patient_free",
+      input: false,
+    },
 
-      gender: {
-        type: "string",
-        required: false,
-      },
+    specialization: {
+      type: "string",
+      required: false,
+    },
 
-      phone: {
-        type: "string",
-        required: false,
-      },
+    gender: {
+      type: "string",
+      required: false,
+    },
+
+    phone: {
+      type: "string",
+      required: false,
     },
   },
+},
 });
