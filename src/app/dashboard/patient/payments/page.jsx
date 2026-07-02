@@ -14,9 +14,16 @@ const page = async () => {
                });
              
                const user = session?.user;
+
+               const tokenData = await auth.api.getToken({
+                       headers: await headers(),
+                     });
                const patientRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${user.id}`,
   {
     cache: "no-store",
+     headers : {
+                    authorization: `Bearer ${tokenData.token}`,
+          }
   }
 );
 
@@ -76,6 +83,7 @@ console.log("Payments:", payments);
                 />
               </div>
             </div>
+            
             {payments.length === 0 ? <div className="bg-white border border-slate-200 rounded-3xl p-12 flex flex-col items-center justify-center text-center">
       <div className="h-20 w-20 rounded-full bg-green-50 flex items-center justify-center">
         <FaMoneyCheckAlt className="text-4xl text-green-600" />

@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -10,12 +11,16 @@ const DeleteReview = ({ review }) => {
   const router = useRouter();
 
   const handleDelete = async () => {
+    const { data: tokenData } = await authClient.token();
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews/${review._id}`,
         {
           method: "DELETE",
-          cache : "no-store"
+          cache : "no-store",
+          headers : {
+            authorization : `Bearer ${tokenData?.token}`
+          }
         }
       );
 

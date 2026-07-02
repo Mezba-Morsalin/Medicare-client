@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, Form, Label, ListBox, Select } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -13,6 +14,8 @@ const ReviewForm = ({ doctors, user }) => {
   e.preventDefault();
 
   const formData = new FormData(e.currentTarget);
+
+  const { data: tokenData } = await authClient.token();
 
   const doctorId = formData.get("doctorId");
 
@@ -41,6 +44,7 @@ const ReviewForm = ({ doctors, user }) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
+          authorization : `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(review),
       }

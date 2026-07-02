@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -9,12 +10,16 @@ const CancelAppointment = ({ payment, isDisabled }) => {
   const router = useRouter();
 
   const handleCancel = async () => {
+    const {data : tokenData} = await authClient.token()
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments/${payment._id}`,
         {
           method: "DELETE",
-          cache : "no-store"
+          cache : "no-store",
+          headers : {
+            authorization : `Bearer ${tokenData?.token}`
+          }
         }
       );
 

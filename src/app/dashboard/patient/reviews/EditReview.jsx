@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Form,
@@ -22,9 +23,11 @@ const EditReview = ({ doctors, review }) => {
   const [rating, setRating] = useState(review.rating);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
+     e.stopPropagation();
+    const { data: tokenData } = await authClient.token();
 
-  const formData = new FormData(e.currentTarget);
+  const formData = new FormData(e.target);
 
   const updatedReview = {
     doctorId: review.doctorId,
@@ -43,6 +46,7 @@ const EditReview = ({ doctors, review }) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
+          authorization : `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(updatedReview),
       }

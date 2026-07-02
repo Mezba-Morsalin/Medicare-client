@@ -383,9 +383,9 @@ try {
       <Image
         src={URL.createObjectURL(logo)}
         alt="Preview"
-        className="h-24 w-24 rounded-full object-cover border-2 border-sky-500"
-        width={90}
-        height={90}
+        className=" rounded-full object-cover border-2 border-sky-500"
+        width={40}
+        height={40}
       />
     </div>
   )}

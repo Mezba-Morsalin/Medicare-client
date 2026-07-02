@@ -12,9 +12,16 @@ export default async function PatientDashboard() {
          
            const user = session?.user;
 
+           const tokenData = await auth.api.getToken({
+                   headers: await headers(),
+                 });
+
   const paymentRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${user.id}`,
   {
     cache: "no-store",
+    headers : {
+                    authorization: `Bearer ${tokenData.token}`,
+          }
   }
 );
 
@@ -23,6 +30,9 @@ const payments = await paymentRes.json();
 const reviewRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews?patientId=${user.id}`,
   {
     cache: "no-store",
+    headers : {
+                    authorization: `Bearer ${tokenData.token}`,
+          }
   }
 );
 

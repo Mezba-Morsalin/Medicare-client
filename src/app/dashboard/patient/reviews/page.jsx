@@ -15,8 +15,16 @@ const page = async () => {
                    });
                  
                    const user = session?.user;
+
+                   const tokenData = await auth.api.getToken({
+        headers: await headers(),
+      });
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,{
-        cache : "no-store"
+        cache : "no-store",
+         headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
     });
     const data = await res.json()
     const doctors = data.data
@@ -25,13 +33,15 @@ const page = async () => {
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews?patientId=${user.id}`,
   {
     cache: "no-store",
+     headers : {
+                authorization: `Bearer ${tokenData.token}`,
+      }
   }
 );
 
 const reviewData = await reviewRes.json();
 
 const reviews = reviewData.data;
-console.log("reviews",reviews)
     return (
         <div className='space-y-8'>
             <div className="bg-white border rounded-3xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
