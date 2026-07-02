@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, Form, Label, Modal } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,8 +9,10 @@ const UpdatePrescription = ({ prescription }) => {
     const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
+    e.stopPropagation();
+    
+    const { data: tokenData } = await authClient.token();
+    const formData = new FormData(e.target);
 
     const updatedPrescription = {
       patientName: formData.get("patientName"),
@@ -37,6 +40,7 @@ const UpdatePrescription = ({ prescription }) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
+          authorization : `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(updatedPrescription),
       }

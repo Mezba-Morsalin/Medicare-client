@@ -20,8 +20,12 @@ const PrescriptionForm = () => {
     const doctor = session?.user ?? null;
   const handleSubmit = async (e) => {
     e.preventDefault();
+  e.stopPropagation();
 
-    const formData = new FormData(e.currentTarget);
+
+  const { data: tokenData } = await authClient.token();
+
+    const formData = new FormData(e.target);
 
     const prescription = {
       doctorId : doctor?.id,
@@ -50,6 +54,7 @@ const PrescriptionForm = () => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
+          authorization : `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(prescription),
       }
@@ -63,9 +68,8 @@ const PrescriptionForm = () => {
       e.target.reset();
 
       setTimeout(() => {
-        router.push("/dashboard/doctor/prescriptions");
-        router.refresh();
-      }, 1000);
+    router.push("/dashboard/doctor/prescriptions");
+  }, 1000);
     } else {
       toast.error(data.message);
     }

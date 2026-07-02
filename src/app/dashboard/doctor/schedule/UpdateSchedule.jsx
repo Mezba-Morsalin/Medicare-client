@@ -1,14 +1,19 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, Form, Modal, Surface } from "@heroui/react";
-import { div } from "motion/react-client";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 const UpdateSchedule = ({appointment, availableSlots}) => {
     const router = useRouter()
     const handleReschedule = async (e) => {
-  e.preventDefault();
+       e.preventDefault();
+  e.stopPropagation();
+
+  console.log("submit");
+
+  const { data: tokenData } = await authClient.token();
 
   const form = e.target;
 
@@ -23,6 +28,7 @@ const UpdateSchedule = ({appointment, availableSlots}) => {
       cache : "no-store",
       headers: {
         "Content-Type": "application/json",
+        authorization : `Bearer ${tokenData?.token}`
       },
       body: JSON.stringify({
         appointmentDate,
@@ -50,7 +56,7 @@ const UpdateSchedule = ({appointment, availableSlots}) => {
   return (
     <div>
         <Modal>
-      <Button  isdisabled={appointment.appointmentStatus === "Rejected"}
+      <Button  isDisabled={appointment.appointmentStatus === "Rejected"}
   className={`font-semibold bg-sky-600 rounded-xl ${
     appointment.appointmentStatus === "Rejected"
       ? "opacity-50 cursor-not-allowed"
@@ -64,7 +70,7 @@ const UpdateSchedule = ({appointment, availableSlots}) => {
             <Modal.CloseTrigger />
             <Modal.Body className="p-6">
               <Surface variant="default">
-                <Form
+                <form
       onSubmit={handleReschedule}
       className="space-y-6 bg-white rounded-3xl border border-gray-200 p-6 shadow-sm"
     >
@@ -126,7 +132,7 @@ const UpdateSchedule = ({appointment, availableSlots}) => {
     >
        Confirm Reschedule
       </Button>
-    </Form>
+    </form>
               </Surface>
             </Modal.Body>
             <Modal.Footer>

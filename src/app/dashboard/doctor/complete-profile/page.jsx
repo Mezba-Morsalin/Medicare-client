@@ -27,6 +27,7 @@ const [loading, setLoading] = useState(false);
       const user = session?.user ?? null;
 
    const handleSubmit = async (e) => {
+    const {data : tokenData} = await authClient.token()
     setLoading(true);
     e.preventDefault();
 
@@ -96,6 +97,7 @@ doctorId: user?.id,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization : `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify(doctorData),
       }

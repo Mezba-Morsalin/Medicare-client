@@ -12,11 +12,18 @@ const page = async () => {
              });
            
              const user = session?.user;
+
+             const tokenData = await auth.api.getToken({
+                       headers: await headers(),
+                     });
              
            const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user?.id}`,
         {
           cache: "no-store",
+           headers : {
+                                authorization: `Bearer ${tokenData.token}`,
+                      }
         }
       );
       

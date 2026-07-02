@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Table, Avatar, Chip } from "@heroui/react";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -7,6 +8,7 @@ import { useRouter } from "next/navigation";
 export default function DoctorAppointmentsTable({ appointments }) {
     const router = useRouter()
    const updateStatus = async (id, status) => {
+    const {data : tokenData} = await authClient.token()
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/my/payments/${id}`,
@@ -15,6 +17,7 @@ export default function DoctorAppointmentsTable({ appointments }) {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
+          authorization : `Bearer ${tokenData?.token}`
         },
         body: JSON.stringify({
           appointmentStatus: status,

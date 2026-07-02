@@ -16,10 +16,18 @@ export default async function DoctorDashboard() {
 
 const user = session?.user;
 
+const tokenData = await auth.api.getToken({
+          headers: await headers(),
+        });
+        console.log(tokenData)
+
 const doctorRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user.id}`,
   {
     cache: "no-store",
+    headers : {
+                    authorization: `Bearer ${tokenData.token}`,
+          }
   }
 );
 
@@ -99,6 +107,9 @@ const paymentRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/my/payments?doctorId=${doctor._id}`,
   {
     cache: "no-store",
+    headers : {
+                    authorization: `Bearer ${tokenData.token}`,
+          }
   }
 );
 
@@ -108,6 +119,9 @@ const reviewRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews?doctorId=${doctor._id}`,
   {
     cache: "no-store",
+    headers : {
+                    authorization: `Bearer ${tokenData.token}`,
+          }
   }
 );
 
