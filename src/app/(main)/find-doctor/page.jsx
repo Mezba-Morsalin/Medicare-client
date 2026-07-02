@@ -1,6 +1,5 @@
 import FindDoctorClient from "./FindDoctorClient";
 
-
 export const metadata = {
   title: "MediCare Connect - Find Doctor",
   description: "doctor",
@@ -8,14 +7,13 @@ export const metadata = {
 
 const DoctorPage = async () => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctors?page=1&limit=6`,
     {
       cache: "no-store",
     }
   );
 
   const data = await res.json();
-  const doctors = data.data;
 
   return (
     <div className="max-w-7xl mx-auto px-5 lg:px-0 py-10">
@@ -35,7 +33,10 @@ const DoctorPage = async () => {
         </p>
       </div>
 
-      <FindDoctorClient doctors={doctors} />
+      <FindDoctorClient
+        doctors={data.data}
+        pagination={data.pagination}
+      />
     </div>
   );
 };
