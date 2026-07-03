@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import React from 'react';
 import { BsActivity } from 'react-icons/bs';
 import UserDirectory from './UserDirectory';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -11,18 +12,15 @@ const page = async () => {
         
           const user = session?.user;
 
-          const tokenData = await auth.api.getToken({
-  headers: await headers(),
-});
+          const token = await getUserToken()
 
-console.log(tokenData);
 
 const usersRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`,
   {
     cache: "no-store",
     headers: {
-      authorization: `Bearer ${tokenData.token}`,
+      authorization: `Bearer ${token}`,
     },
   }
 );
@@ -56,7 +54,7 @@ console.log("USERS:", users);
                     </div>
                   </div>
                 </div>
-                <UserDirectory users = {users}/>
+                <UserDirectory users = {users} token = {token}/>
         </div>
     );
 };

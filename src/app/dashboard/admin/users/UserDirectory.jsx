@@ -4,7 +4,7 @@ import React from 'react';
 import DeleteUser from './DeleteUser';
 import SuspendUser from './SuspendUser';
 
-const UserDirectory = ({users}) => {
+const UserDirectory = ({users, token}) => {
     return (
         <div className='bg-white shadow p-6 rounded-2xl'>
           <div className='space-y-2 mb-7'>
@@ -72,9 +72,9 @@ const UserDirectory = ({users}) => {
 <Table.Cell>
   {user.role !== "admin" && (
     <div className="flex justify-center gap-3">
-      <SuspendUser user={user}/>
+      <SuspendUser user={user} token = {token}/>
 
-      <DeleteUser user={user}/>
+      <DeleteUser user={user} token = {token}/>
     </div>
   )}
 </Table.Cell>

@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import React from 'react';
 import { BsActivity } from 'react-icons/bs';
 import ManageDoctor from './ManageDoctor';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -11,15 +12,13 @@ const page = async () => {
         
           const user = session?.user;
 
-          const tokenData = await auth.api.getToken({
-                                headers: await headers(),
-                              });
+          const token = await getUserToken()
 
           const doctorsRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,
   {
     cache: "no-store",
     headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
   }
 );
@@ -50,7 +49,7 @@ const doctors = doctorsData.data;
                     </div>
                   </div>
                 </div>
-                <ManageDoctor doctors = {doctors}/>
+                <ManageDoctor doctors = {doctors} token = {token}/>
         </div>
     );
 };

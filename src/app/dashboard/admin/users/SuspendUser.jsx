@@ -5,11 +5,10 @@ import { Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
-const SuspendUser = ({ user }) => {
+const SuspendUser = ({ user, token }) => {
   const router = useRouter();
 
   const toggleSuspend = async (user) => {
-    const {data : tokenData} = await authClient.token()
     const status =
       user.status === "Suspended"
         ? "Active"
@@ -22,7 +21,7 @@ const SuspendUser = ({ user }) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
-          authorization : `Bearer ${tokenData?.token}`
+          authorization : `Bearer ${token}`
         },
         body: JSON.stringify({ status }),
       }

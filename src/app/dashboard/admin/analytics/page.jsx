@@ -6,6 +6,7 @@ import DoctorPerformanceChart from './DoctorPerformanceChart';
 import RevenueOverviewChart from './RevenueOverviewChart';
 import AppointmentTrendChart from './AppointmentTrendChart';
 import DoctorVerificationChart from './DoctorVerificationChart';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
         const session = await auth.api.getSession({
@@ -14,17 +15,14 @@ const page = async () => {
             
               const user = session?.user;
 
-      const tokenData = await auth.api.getToken({
-        headers: await headers(),
-      });
-      
-      console.log(tokenData);
+      const token = await getUserToken()
+
 
               const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/reviews`,
   {
     cache: "no-store",
     headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );
@@ -37,7 +35,7 @@ const doctorsRes = await fetch(
   {
     cache: "no-store",
     headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );
@@ -50,7 +48,7 @@ const paymentRes = await fetch(
   {
     cache: "no-store", 
     headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );

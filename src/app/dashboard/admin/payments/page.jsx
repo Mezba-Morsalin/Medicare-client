@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import React from 'react';
 import { BsActivity } from 'react-icons/bs';
 import PaymentTable from './PaymentTable';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -10,15 +11,13 @@ const page = async () => {
               });
               const user = session?.user;
             
-              const tokenData = await auth.api.getToken({
-                      headers: await headers(),
-                    });
+              const token = await getUserToken()
               const paymentRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/payments`,
   {
     cache: "no-store",
     headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );

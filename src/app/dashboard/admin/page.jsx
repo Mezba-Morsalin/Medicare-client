@@ -6,6 +6,7 @@ import { HiOutlineClipboardDocumentList } from 'react-icons/hi2';
 import AdminStatCard from './AdminStatCard';
 import DoctorVerificationQueue from './DoctorVerificationQueue';
 import RecentSystemActivity from './RecentSystemActivity';
+import { getUserToken } from '@/lib/session';
 
 const AdminDashboard = async () => {
     const session = await auth.api.getSession({
@@ -13,46 +14,52 @@ const AdminDashboard = async () => {
       });
     
       const user = session?.user;
-      const tokenData = await auth.api.getToken({
-                      headers: await headers(),
-                    });
+      const token = await getUserToken()
+
+                    console.log(token);
       const usersRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users`,
   {
     cache: "no-store",
     headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );
 
 const users = await usersRes.json();
+// const users = usersData.data || [];
+
+
 
 const doctorsRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,
   {
     cache: "no-store",
     headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );
 
 const doctorsData = await doctorsRes.json();
-const doctors = doctorsData.data;
+const doctors = doctorsData.data || [];
+
+
 
 const paymentRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/payments`,
   {
     cache: "no-store",
     headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );
 
 const paymentData = await paymentRes.json();
-const payments = paymentData.data;
+
+const payments = paymentData?.data || [];
 
 const totalPayments = payments.length;
 
@@ -60,6 +67,9 @@ const totalRevenue = payments.reduce(
   (sum, payment) => sum + Number(payment.amount || 0),
   0
 );
+console.log("user",users)
+console.log("doctor",doctors)
+console.log("payment",payments)
     return (
         <div className='space-y-8'>
             <div className="rounded-3xl bg-sky-600 p-8 text-white flex flex-col lg:flex-row justify-between gap-6">
