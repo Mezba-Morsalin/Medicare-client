@@ -11,25 +11,43 @@ import DeleteReview from './DeleteReview';
 import { getUserToken } from '@/lib/session';
 
 const page = async () => {
-    const session = await auth.api.getSession({
-                     headers: await headers(),
-                   });
-                 
-                   const user = session?.user;
+     const session = await auth.api.getSession({
+       headers: await headers(),
+     });
+     
+     const token = await getUserToken();
+     
+     const userId = session?.user?.id;
+     
+     if (!userId || !token) {
+       return <div>Unauthorized</div>;
+     }
+     
+     const res = await fetch(
+       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${userId}`,
+       {
+         cache: "no-store",
+         headers: {
+           authorization: `Bearer ${token}`,
+         },
+       }
+     );
+    
+    const result = await res.json();
+    
+    const user = result.data;
 
-                   const token = await getUserToken()
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,{
+    const doctorRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,{
         cache : "no-store",
          headers : {
                 authorization: `Bearer ${token}`,
       }
     });
-    const data = await res.json()
+    const data = await doctorRes.json()
     const doctors = data.data
 
     const reviewRes = await fetch(
-  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews?patientId=${user.id}`,
+  `${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews?patientId=${userId}`,
   {
     cache: "no-store",
      headers : {
@@ -84,9 +102,9 @@ const reviews = reviewData.data;
                             <Image
                               src={user?.image}
                               alt={user?.name}
-                              width={70}
-                              height={70}
-                              className="rounded-2xl border object-cover"
+                              width={100}
+                              height={100}
+                              className="rounded-2xl border object-cover w-20 h-20 sm:w-24 sm:h-24"
                             />
                           </div>
                         </div>

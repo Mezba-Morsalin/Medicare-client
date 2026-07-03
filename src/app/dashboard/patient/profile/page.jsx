@@ -2,13 +2,35 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 import React from 'react';
+import UpdateProfileForm from './UpdateProfileForm';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
     const session = await auth.api.getSession({
-                         headers: await headers(),
-                       });
-                     
-                       const user = session?.user;
+       headers: await headers(),
+     });
+     
+     const token = await getUserToken();
+     
+     const userId = session?.user?.id;
+     
+     if (!userId || !token) {
+       return <div>Unauthorized</div>;
+     }
+     
+     const res = await fetch(
+       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${userId}`,
+       {
+         cache: "no-store",
+         headers: {
+           authorization: `Bearer ${token}`,
+         },
+       }
+     );
+
+const result = await res.json();
+
+const user = result.data;
     return (
         <div className='space-y-8'>
             <div className="bg-white border rounded-3xl p-5 sm:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
@@ -38,9 +60,9 @@ const page = async () => {
                                     
                                           <p
               className={`font-bold ${
-                user.status === "Active"
+                user?.status === "Active"
                   ? "text-green-600"
-                  : user.status === "Suspended"
+                  : user?.status === "Suspended"
                   ? "text-red-600"
                   : "text-amber-600"
               }`}
@@ -58,6 +80,7 @@ const page = async () => {
                                         />
                                       </div>
                                     </div>
+                                    <UpdateProfileForm user={user} token = {token}/>
         </div>
     );
 };

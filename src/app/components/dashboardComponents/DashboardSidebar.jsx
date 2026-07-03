@@ -59,10 +59,10 @@ export default function DashboardSidebar({
   }
 }, [user, isPending, pathname, router]);
 
-  const avatarSrc =
-    user?.image?.trim()
-      ? user.image
-      : "/images/default-user.png";
+  // const avatarSrc =
+  //   user?.image?.trim()
+  //     ? user.image
+  //     : "/images/default-user.png";
 
   const doctorMenu = [
     {
@@ -201,21 +201,16 @@ const navItems =
               />
             ) : (
               <div>
-                <Image
-                  src={avatarSrc}
-                  alt={user?.name || "User"}
-                  width={100}
-                  height={100}
-                  className="rounded-full"
-                />
-
                 <h3 className="font-bold mt-2">
                   {user?.name}
                 </h3>
 
                 <p className="text-xs text-gray-500">
-                  {user?.specialization}
-                </p>
+  {user?.specialization ||
+    (user?.role
+      ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
+      : "")}
+</p>
               </div>
             )}
 

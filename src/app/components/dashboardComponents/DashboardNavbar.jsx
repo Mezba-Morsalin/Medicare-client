@@ -21,8 +21,6 @@ export default function DashboardNavbar({ onMenuClick }) {
 
   const user = session?.user ?? null;
 
-  const avatarSrc =
-    user?.image?.trim() || "/images/default-user.png";
 
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -72,13 +70,6 @@ export default function DashboardNavbar({ onMenuClick }) {
     onClick={() => setShowMenu(!showMenu)}
     className="flex cursor-pointer items-center gap-3 rounded-full border border-slate-200 px-2 py-1.5 hover:bg-slate-50 transition-all duration-300"
   >
-    <Image
-      src={avatarSrc}
-      alt={user?.name || "User"}
-      width={40}
-      height={40}
-      className="h-10 w-10 rounded-full object-cover"
-    />
 
     <div className="hidden md:block text-left">
       <h4 className="text-sm font-semibold text-slate-800">
@@ -101,14 +92,6 @@ export default function DashboardNavbar({ onMenuClick }) {
   {showMenu && (
     <div className="absolute right-0 top-14 w-64 rounded-2xl border border-slate-200 bg-white p-4 shadow-xl z-50">
       <div className="mb-4 flex items-center gap-3 border-b pb-4">
-        <Image
-          src={avatarSrc}
-          alt={user?.name || "User"}
-          width={50}
-          height={50}
-          className="h-12 w-12 rounded-full object-cover"
-        />
-
         <div>
           <h3 className="font-semibold text-slate-800">
             {user?.name}

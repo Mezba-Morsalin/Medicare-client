@@ -24,8 +24,6 @@ const Navbar = () => {
 
   const dropdownRef = useRef(null);
 
-  const avatarSrc =
-    user?.image?.trim() ? user.image : "/images/default-user.png";
 
   const handleSignOut = async () => {
     await authClient.signOut();
@@ -139,13 +137,6 @@ if (user) {
                     onClick={() => setShowMenu(!showMenu)}
                     className="flex items-center gap-3 border border-slate-200 hover:bg-slate-50 p-1.5 pr-4 rounded-full cursor-pointer transition"
                   >
-                    <Image
-                      src={avatarSrc}
-                      alt="User"
-                      width={38}
-                      height={38}
-                      className="rounded-full border-2 border-sky-500 object-cover"
-                    />
 
                     <div className="hidden lg:flex flex-col text-left">
                       <span className="text-slate-800 text-sm font-semibold leading-tight">
@@ -254,13 +245,6 @@ if (user) {
                 ) : user ? (
                   <div className="space-y-4">
   <div className="flex items-center gap-3">
-    <Image
-      src={avatarSrc}
-      alt="User"
-      width={46}
-      height={46}
-      className="rounded-full border-2 border-sky-500 object-cover"
-    />
 
     <div>
       <h4 className="text-slate-800 font-semibold">

@@ -7,15 +7,33 @@ import { headers } from "next/headers";
 
 
 export default async function PatientDashboard() {
-    const session = await auth.api.getSession({
-             headers: await headers(),
-           });
-         
-           const user = session?.user;
+     const session = await auth.api.getSession({
+       headers: await headers(),
+     });
+     
+     const token = await getUserToken();
+     
+     const userId = session?.user?.id;
+     
+     if (!userId || !token) {
+       return <div>Unauthorized</div>;
+     }
+     
+     const res = await fetch(
+       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${userId}`,
+       {
+         cache: "no-store",
+         headers: {
+           authorization: `Bearer ${token}`,
+         },
+       }
+     );
+    
+    const result = await res.json();
+    
+    const user = result.data;
 
-           const token = await getUserToken()
-
-  const paymentRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${user.id}`,
+  const paymentRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${userId}`,
   {
     cache: "no-store",
     headers : {
@@ -26,7 +44,7 @@ export default async function PatientDashboard() {
 
 const payments = await paymentRes.json();
 
-const reviewRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews?patientId=${user.id}`,
+const reviewRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews?patientId=${userId}`,
   {
     cache: "no-store",
     headers : {
