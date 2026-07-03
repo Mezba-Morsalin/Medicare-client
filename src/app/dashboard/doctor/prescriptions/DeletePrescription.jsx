@@ -5,7 +5,7 @@ import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
-const DeletePrescription = ({ prescription }) => {
+const DeletePrescription = ({ prescription, token }) => {
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -17,7 +17,7 @@ const DeletePrescription = ({ prescription }) => {
           method: "DELETE",
           cache : "no-store",
           headers : {
-            authorization : `Bearer ${tokenData?.token}`
+            authorization : `Bearer ${token}`
           }
         }
       );

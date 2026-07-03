@@ -8,6 +8,7 @@ import { FaPlus, FaStethoscope, FaUserInjured } from 'react-icons/fa6';
 import { GiMedicines } from 'react-icons/gi';
 import UpdatePrescription from './UpdatePrescription';
 import DeletePrescription from './DeletePrescription';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -16,17 +17,14 @@ const page = async () => {
          
            const user = session?.user;
 
-           const tokenData = await auth.api.getToken({
-          headers: await headers(),
-        });
-        console.log(tokenData)
+           const token = await getUserToken()
            
          const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user?.id}`,
       {
         cache: "no-store",
          headers : {
-                      authorization: `Bearer ${tokenData.token}`,
+                      authorization: `Bearer ${token}`,
             }
       }
     );
@@ -80,7 +78,7 @@ const prescriptionRes = await fetch(
   {
     cache: "no-store",
     headers : {
-                      authorization: `Bearer ${tokenData.token}`,
+                      authorization: `Bearer ${token}`,
             }
   }
 );
@@ -296,12 +294,14 @@ if (doctor?.status === "Suspended") {
 
         <div className="mt-6 flex justify-end gap-3">
 
-          <UpdatePrescription prescription ={prescription}/>
+          <UpdatePrescription prescription ={prescription} token = {token}/>
 
-          <DeletePrescription prescription ={prescription}/>
+          <DeletePrescription prescription ={prescription} token = {token}/>
         </div>
       </div>
-      <div className="flex justify-center mt-8">
+      </div>
+    ))}
+    <div className="flex justify-center mt-8">
         <Link href="/dashboard/doctor/prescriptions/create-prescription">
           <Button className="bg-sky-600 text-white rounded-xl">
             <FaPlus />
@@ -309,8 +309,6 @@ if (doctor?.status === "Suspended") {
           </Button>
         </Link>
       </div>
-      </div>
-    ))}
   </div>
 )}
          </div>

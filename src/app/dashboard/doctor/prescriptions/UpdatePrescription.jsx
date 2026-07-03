@@ -5,13 +5,12 @@ import { Button, Form, Label, Modal } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
-const UpdatePrescription = ({ prescription }) => {
+const UpdatePrescription = ({ prescription, token }) => {
     const router = useRouter()
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    const { data: tokenData } = await authClient.token();
     const formData = new FormData(e.target);
 
     const updatedPrescription = {
@@ -40,7 +39,7 @@ const UpdatePrescription = ({ prescription }) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
-          authorization : `Bearer ${tokenData?.token}`
+          authorization : `Bearer ${token}`
         },
         body: JSON.stringify(updatedPrescription),
       }

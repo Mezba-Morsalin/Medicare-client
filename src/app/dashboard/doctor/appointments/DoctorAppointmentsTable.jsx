@@ -1,14 +1,12 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
 import { Table, Avatar, Chip } from "@heroui/react";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
 
-export default function DoctorAppointmentsTable({ appointments }) {
+export default function DoctorAppointmentsTable({ appointments, token }) {
     const router = useRouter()
    const updateStatus = async (id, status) => {
-    const {data : tokenData} = await authClient.token()
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/my/payments/${id}`,
@@ -17,7 +15,7 @@ export default function DoctorAppointmentsTable({ appointments }) {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
-          authorization : `Bearer ${tokenData?.token}`
+          authorization : `Bearer ${token}`
         },
         body: JSON.stringify({
           appointmentStatus: status,
@@ -134,7 +132,7 @@ export default function DoctorAppointmentsTable({ appointments }) {
         onClick={() =>
           updateStatus(appointment._id, "Approved")
         }
-        className="rounded-lg bg-green-600 px-3 py-1 text-xs font-semibold text-white hover:bg-green-700"
+        className="cursor-pointer rounded-lg bg-green-600 px-3 py-1 text-xs font-semibold text-white hover:bg-green-700"
       >
         Accept
       </button>
@@ -143,7 +141,7 @@ export default function DoctorAppointmentsTable({ appointments }) {
         onClick={() =>
           updateStatus(appointment._id, "Rejected")
         }
-        className="rounded-lg bg-red-600 px-3 py-1 text-xs font-semibold text-white hover:bg-red-700"
+        className="cursor-pointer rounded-lg bg-red-600 px-3 py-1 text-xs font-semibold text-white hover:bg-red-700"
       >
         Reject
       </button>

@@ -7,6 +7,7 @@ import { auth } from "@/lib/auth";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import Image from "next/image";
+import { getUserToken } from "../../../lib/session";
 
 
 export default async function DoctorDashboard() {
@@ -16,17 +17,14 @@ export default async function DoctorDashboard() {
 
 const user = session?.user;
 
-const tokenData = await auth.api.getToken({
-          headers: await headers(),
-        });
-        console.log(tokenData)
+const token = await getUserToken()
 
 const doctorRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user.id}`,
   {
     cache: "no-store",
     headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
   }
 );
@@ -108,7 +106,7 @@ const paymentRes = await fetch(
   {
     cache: "no-store",
     headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
   }
 );
@@ -120,7 +118,7 @@ const reviewRes = await fetch(
   {
     cache: "no-store",
     headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
   }
 );

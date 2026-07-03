@@ -8,6 +8,7 @@ import { RiCalendarScheduleLine } from 'react-icons/ri';
 import UpdateSchedule from './UpdateSchedule';
 import RemoveSchedule from './RemoveSchedule';
 import { FaHome } from 'react-icons/fa';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -15,17 +16,14 @@ const page = async () => {
            });
          
            const user = session?.user;
-           const tokenData = await auth.api.getToken({
-          headers: await headers(),
-        });
-        console.log(tokenData)
+           const token = await getUserToken()
            
          const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/doctor?doctorId=${user?.id}`,
       {
         cache: "no-store",
          headers : {
-                        authorization: `Bearer ${tokenData.token}`,
+                        authorization: `Bearer ${token}`,
               }
       }
     );
@@ -79,7 +77,7 @@ const page = async () => {
     {
       cache: "no-store",
       headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
     }
   );
@@ -272,9 +270,9 @@ const page = async () => {
 
         {/* Action Buttons */}
         <div className="mt-6 flex flex-wrap gap-3 justify-end">
-          <UpdateSchedule appointment ={appointment} availableSlots={doctor.availableSlots}/>
+          <UpdateSchedule appointment ={appointment} availableSlots={doctor.availableSlots} token = {token}/>
 
-          <RemoveSchedule appointment={appointment}/>
+          <RemoveSchedule appointment={appointment} token={token}/>
         </div>
       </div>
     ))}
