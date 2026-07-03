@@ -8,6 +8,7 @@ import React from 'react';
 import { FaCalendarCheck } from 'react-icons/fa6';
 import RescheduleAppointmentForm from './Reschedule';
 import CancelAppointment from './CancelAppointment';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
      const session = await auth.api.getSession({
@@ -16,15 +17,13 @@ const page = async () => {
                  
                    const user = session?.user;
 
-                   const tokenData = await auth.api.getToken({
-        headers: await headers(),
-      });
+                   const token = await getUserToken()
     const patientRes = await fetch(
   `${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${user.id}`,
   {
     cache: "no-store",
     headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
   }
 );
@@ -232,7 +231,8 @@ const doctors = data.data;
       {/* Buttons */}
       {/* Buttons */}
 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
-  <RescheduleAppointmentForm
+  <RescheduleAppointmentForm 
+    token = {token}
     payment={payment}
     availableSlots={doctorInfo?.availableSlots || []}
     isDisabled={isDisabled}
@@ -241,6 +241,7 @@ const doctors = data.data;
   <CancelAppointment
     payment={payment}
     isDisabled={isDisabled}
+    token = {token}
   />
 </div>
     </div>

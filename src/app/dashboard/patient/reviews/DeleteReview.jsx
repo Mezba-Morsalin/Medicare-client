@@ -7,7 +7,7 @@ import React from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaDeleteLeft } from "react-icons/fa6";
 
-const DeleteReview = ({ review }) => {
+const DeleteReview = ({ review, token}) => {
   const router = useRouter();
 
   const handleDelete = async () => {
@@ -19,7 +19,7 @@ const DeleteReview = ({ review }) => {
           method: "DELETE",
           cache : "no-store",
           headers : {
-            authorization : `Bearer ${tokenData?.token}`
+            authorization : `Bearer ${token}`
           }
         }
       );

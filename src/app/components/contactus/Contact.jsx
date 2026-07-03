@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 
 const Contact = () => {
   const router = useRouter();
-const { data: session } = authClient.useSession();
+
   const [loading, setLoading] = useState(false);
   const onSubmit = async (e) => {
      if (!session?.user) {

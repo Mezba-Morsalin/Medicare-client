@@ -1,6 +1,5 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
 import {
   Button,
   Form,
@@ -17,7 +16,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 
-const EditReview = ({ doctors, review }) => {
+const EditReview = ({ doctors, review, token }) => {
   const router = useRouter();
 
   const [rating, setRating] = useState(review.rating);
@@ -25,7 +24,6 @@ const EditReview = ({ doctors, review }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
      e.stopPropagation();
-    const { data: tokenData } = await authClient.token();
 
   const formData = new FormData(e.target);
 
@@ -46,7 +44,7 @@ const EditReview = ({ doctors, review }) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
-          authorization : `Bearer ${tokenData?.token}`
+          authorization : `Bearer ${token}`
         },
         body: JSON.stringify(updatedReview),
       }

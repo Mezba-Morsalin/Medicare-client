@@ -1,6 +1,7 @@
 import DashboardHeader from "@/app/components/dashboardComponents/PatientDashboard/DashboardHeader";
 import DashboardOverview from "@/app/components/dashboardComponents/PatientDashboard/DashboardOverview";
 import { auth } from "@/lib/auth";
+import { getUserToken } from "@/lib/session";
 import { headers } from "next/headers";
 
 
@@ -12,15 +13,13 @@ export default async function PatientDashboard() {
          
            const user = session?.user;
 
-           const tokenData = await auth.api.getToken({
-                   headers: await headers(),
-                 });
+           const token = await getUserToken()
 
   const paymentRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payments?patientId=${user.id}`,
   {
     cache: "no-store",
     headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
   }
 );
@@ -31,7 +30,7 @@ const reviewRes = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/reviews
   {
     cache: "no-store",
     headers : {
-                    authorization: `Bearer ${tokenData.token}`,
+                    authorization: `Bearer ${token}`,
           }
   }
 );
@@ -77,7 +76,7 @@ const reviews = reviewData.data;
 
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div className="lg:col-span-2">
-        <DashboardOverview payments={payments} />
+        <DashboardOverview payments={payments}/>
       </div>
     </div>
   </div>

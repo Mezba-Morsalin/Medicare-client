@@ -37,7 +37,7 @@ const DashboardOverview = ({ payments = [] }) => {
     <div className="space-y-6">
       {/* Upcoming Appointments */}
       <div className="bg-white border rounded-3xl p-6">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col md:flex-row gap-5 items-center justify-between mb-6">
           <h2 className="font-bold uppercase tracking-wide">
             Upcoming Consultation Schedule
           </h2>
@@ -74,7 +74,7 @@ const DashboardOverview = ({ payments = [] }) => {
                     </h3>
 
                     <p className="text-gray-500 mt-1">
-                      Date:{" "}
+                     Appointment Date:{" "}
                       {new Date(
                         appointment.appointmentDate
                       ).toLocaleDateString()}{" "}

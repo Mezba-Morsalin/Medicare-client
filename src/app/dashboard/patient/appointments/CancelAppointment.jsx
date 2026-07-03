@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 
-const CancelAppointment = ({ payment, isDisabled }) => {
+const CancelAppointment = ({ payment, isDisabled,token }) => {
   const router = useRouter();
 
   const handleCancel = async () => {
@@ -18,7 +18,7 @@ const CancelAppointment = ({ payment, isDisabled }) => {
           method: "DELETE",
           cache : "no-store",
           headers : {
-            authorization : `Bearer ${tokenData?.token}`
+            authorization : `Bearer ${token}`
           }
         }
       );

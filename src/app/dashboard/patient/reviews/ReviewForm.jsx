@@ -1,13 +1,12 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
 import { Button, Form, Label, ListBox, Select } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 
-const ReviewForm = ({ doctors, user }) => {
+const ReviewForm = ({ doctors, user, token }) => {
   const router = useRouter()
     const [rating, setRating] = useState(0);
     const handleSubmit = async (e) => {
@@ -15,7 +14,6 @@ const ReviewForm = ({ doctors, user }) => {
 
   const formData = new FormData(e.currentTarget);
 
-  const { data: tokenData } = await authClient.token();
 
   const doctorId = formData.get("doctorId");
 
@@ -44,7 +42,7 @@ const ReviewForm = ({ doctors, user }) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
-          authorization : `Bearer ${tokenData?.token}`
+          authorization : `Bearer ${token}`
         },
         body: JSON.stringify(review),
       }

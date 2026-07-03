@@ -8,6 +8,7 @@ import { FaArrowLeft, FaRegStar } from 'react-icons/fa6';
 import ReviewForm from './ReviewForm';
 import EditReview from './EditReview';
 import DeleteReview from './DeleteReview';
+import { getUserToken } from '@/lib/session';
 
 const page = async () => {
     const session = await auth.api.getSession({
@@ -16,14 +17,12 @@ const page = async () => {
                  
                    const user = session?.user;
 
-                   const tokenData = await auth.api.getToken({
-        headers: await headers(),
-      });
+                   const token = await getUserToken()
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/all/doctors`,{
         cache : "no-store",
          headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
     });
     const data = await res.json()
@@ -34,7 +33,7 @@ const page = async () => {
   {
     cache: "no-store",
      headers : {
-                authorization: `Bearer ${tokenData.token}`,
+                authorization: `Bearer ${token}`,
       }
   }
 );
@@ -172,9 +171,9 @@ const reviews = reviewData.data;
 
               {/* Buttons */}
               <div className="flex justify-end gap-3 mt-5">
-                <EditReview doctors = {doctors} review = {review}/>
+                <EditReview doctors = {doctors} review = {review} token = {token}/>
 
-                <DeleteReview doctors = {doctors} review = {review}/>
+                <DeleteReview doctors = {doctors} review = {review} token = {token}/>
               </div>
             </div>
           ))}
@@ -185,7 +184,7 @@ const reviews = reviewData.data;
 
   {/* Right Side - Always Visible */}
   <div className="lg:col-span-1">
-    <ReviewForm doctors={doctors} user={user} />
+    <ReviewForm doctors={doctors} user={user} token = {token}/>
   </div>
 </div>
         </div>

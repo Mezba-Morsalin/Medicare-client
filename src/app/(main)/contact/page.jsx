@@ -5,10 +5,11 @@ export const metadata = {
     title : "MediCare Connect - Contact us",
     description : "Contact"
 }
-const ContactPage = () => {
+const ContactPage =  () => {
+
     return (
         <div>
-            <Contact/>
+            <Contact token = {token}/>
         </div>
     );
 };
