@@ -19,10 +19,10 @@ import {
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { useState } from "react";
-import { authClient } from "@/lib/auth-client";
+
 import { useRouter } from "next/navigation";
 
-const Contact = () => {
+const Contact = ({token}) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -52,6 +52,7 @@ const Contact = () => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
+           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       }
