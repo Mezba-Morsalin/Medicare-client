@@ -8,13 +8,9 @@ export const metadata = {
 }
 const ContactPage =  async () => {
 
-    const session = await auth.api.getSession({
-    headers: await headers(),
-  });
-
     return (
         <div>
-            <Contact session = {session}/>
+            <Contact/>
         </div>
     );
 };
