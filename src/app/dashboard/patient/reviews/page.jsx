@@ -202,7 +202,7 @@ const reviews = reviewData.data;
 
   {/* Right Side - Always Visible */}
   <div className="lg:col-span-1">
-    <ReviewForm doctors={doctors} user={user} token = {token}/>
+    <ReviewForm doctors={doctors} userId={userId} user={user} token = {token}/>
   </div>
 </div>
         </div>

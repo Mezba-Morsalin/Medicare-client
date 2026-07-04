@@ -6,7 +6,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaStar } from "react-icons/fa";
 
-const ReviewForm = ({ doctors, user, token }) => {
+const ReviewForm = ({ doctors, user, token,userId }) => {
   const router = useRouter()
     const [rating, setRating] = useState(0);
     const handleSubmit = async (e) => {
@@ -20,7 +20,7 @@ const ReviewForm = ({ doctors, user, token }) => {
   const doctor = doctors.find((d) => d._id === doctorId);
 
   const review = {
-    patientId: user.id,
+    patientId: userId,
     patientName: user.name,
     patientImage: user.image,
 
@@ -33,6 +33,8 @@ const ReviewForm = ({ doctors, user, token }) => {
 
     comment: formData.get("review"),
   };
+
+  console.log("review", review)
 
   try {
     const res = await fetch(
