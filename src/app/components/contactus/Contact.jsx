@@ -23,11 +23,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const Contact = ({token}) => {
+    const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  const [loading, setLoading] = useState(false);
-  const onSubmit = async (e) => {
-     if (!session?.user) {
+  if (!session?.user) {
     toast.error("Please sign in first.");
 
     setTimeout(() => {
@@ -36,6 +34,8 @@ const Contact = ({token}) => {
 
     return;
   }
+  const onSubmit = async (e) => {
+  
   e.preventDefault();
   e.stopPropagation();
 

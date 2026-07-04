@@ -6,7 +6,7 @@ A full-stack healthcare appointment management platform where patients can easil
 
 ## 🌐 Live Website
 
-🔗 Live Site: https://your-live-site.vercel.app
+🔗 Live Site: https://medicare-connect-swart.vercel.app
 
 ---
 
