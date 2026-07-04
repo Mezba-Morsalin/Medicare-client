@@ -151,96 +151,175 @@ const totalPatients = new Set(
 
   return (
     <div className="space-y-6">
-      <div className="rounded-3xl bg-sky-600 text-white p-8 flex justify-between items-start">
-      <div>
-        <div className="flex items-center gap-2 text-xs uppercase font-semibold opacity-90">
+
+  {/* Hero Section */}
+  <div className="bg-linear-to-r from-sky-600 to-cyan-500 rounded-3xl p-6 md:p-8 text-white shadow-lg">
+
+    <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+
+      {/* Left Content */}
+      <div className="flex-1 text-center lg:text-left">
+
+        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider">
           <FaStethoscope />
           Licensed Clinical Practitioner
         </div>
 
-        <div>
-          <h1 className="text-4xl font-bold mt-3">
+        <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold mt-5">
           Greetings, {user?.name}
         </h1>
-        <p>{doctor && (
-  <span
-    className={`inline-block mt-3 px-3 py-1 rounded-full text-xs font-semibold ${
-      doctor.status === "Verified"
-        ? "bg-green-100 text-green-600"
-        : doctor.status === "Rejected"
-        ? "bg-red-100 text-red-600"
-        : "bg-amber-100 text-amber-600"
-    }`}
-  >
-    {doctor.status}
-  </span>
-)}</p>
-        </div>
 
-        <p className="mt-4 text-white/90 max-w-2xl leading-relaxed">
-  Streamline patient care, oversee appointment management,
-  coordinate treatment plans, and enhance clinical outcomes
-  with your comprehensive physician workspace.
-</p>
-      </div>
-
-      <div className="hidden md:block bg-sky-600 rounded-2xl px-5 py-4">
-       <p className="text-xs font-semibold uppercase">
-  Medical Specialty
-</p>
-
-        <p className="font-bold mt-1">
-          {user?.specialization || "patient"}
-        </p>
-      </div>
-    </div>
-
-      <DashboardStats  totalRevenue={totalRevenue}
-  totalAppointments={totalAppointments}
-  totalPatients={totalPatients}
-  averageRating={averageRating}/>
-
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <DashboardChart payments={payments}/>
-        <div className="bg-white border rounded-3xl p-6">
-  <h2 className="font-bold uppercase text-sm mb-6 flex items-center gap-2">
-    <FaStar className="text-yellow-500" />
-    Recent Patient Feedback Testimonials
-  </h2>
-
-  <div className="space-y-4">
-    {reviews.length > 0 ? (
-      reviews.slice(0, 3).map((review) => (
-        <div
-          key={review._id}
-          className="border rounded-2xl p-4"
-        >
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Image className="rounded-full" src={review.patientImage} alt={review.patientName} width={40} height={40}></Image>
-              <h3 className="font-semibold">
-              {review.patientName}
-            </h3>
-            </div>
-
-            <span className="text-yellow-500 font-medium">
-              ⭐ {review.rating}
+        {doctor && (
+          <div className="mt-4">
+            <span
+              className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${
+                doctor.status === "Verified"
+                  ? "bg-green-100 text-green-700"
+                  : doctor.status === "Rejected"
+                  ? "bg-red-100 text-red-700"
+                  : "bg-amber-100 text-amber-700"
+              }`}
+            >
+              {doctor.status}
             </span>
           </div>
+        )}
 
-          <p className="text-sm text-gray-500 mt-2 italic">
-            {review.comment}
+        <p className="mt-5 max-w-2xl text-white/90 leading-relaxed">
+          Streamline patient care, oversee appointment management,
+          coordinate treatment plans, and enhance clinical outcomes
+          with your comprehensive physician workspace.
+        </p>
+
+        {/* Mobile Specialty */}
+        <div className="lg:hidden mt-6 bg-white/10 backdrop-blur-sm rounded-2xl p-4">
+          <p className="text-xs uppercase font-semibold text-white/70">
+            Medical Specialty
+          </p>
+
+          <p className="font-bold mt-1 text-lg">
+            {user?.specialization || "General Physician"}
           </p>
         </div>
-      ))
-    ) : (
-      <div className="border rounded-2xl p-6 text-center text-gray-500">
-        No reviews available.
       </div>
-    )}
+
+      {/* Right Side */}
+      <div className="flex flex-col items-center">
+
+        <div className="relative">
+          <Image
+            src={doctor?.image}
+            alt="doctor-image"
+            width={180}
+            height={180}
+            className="rounded-3xl object-cover border-4 border-white shadow-xl"
+          />
+        </div>
+
+        <div className="hidden lg:block mt-5 bg-white/10 backdrop-blur-sm rounded-2xl px-6 py-4 text-center min-w-[220px]">
+          <p className="text-xs uppercase font-semibold text-white/70">
+            Medical Specialty
+          </p>
+
+          <p className="font-bold mt-2 text-lg">
+            {user?.specialization || "General Physician"}
+          </p>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
+
+  {/* Stats */}
+  <DashboardStats
+    totalRevenue={totalRevenue}
+    totalAppointments={totalAppointments}
+    totalPatients={totalPatients}
+    averageRating={averageRating}
+  />
+
+  {/* Charts + Reviews */}
+  <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+    <DashboardChart payments={payments} />
+
+    <div className="bg-white border rounded-3xl p-6 shadow-sm">
+
+      <div className="flex items-center gap-3 mb-6">
+        <div className="h-10 w-10 rounded-xl bg-yellow-100 flex items-center justify-center">
+          <FaStar className="text-yellow-500" />
+        </div>
+
+        <div>
+          <h2 className="font-bold">
+            Recent Patient Reviews
+          </h2>
+
+          <p className="text-sm text-gray-500">
+            Latest feedback from your patients
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+
+        {reviews.length > 0 ? (
+          reviews.slice(0, 3).map((review) => (
+            <div
+              key={review._id}
+              className="border rounded-2xl p-4 hover:shadow-md transition"
+            >
+              <div className="flex items-start justify-between gap-4">
+
+                <div className="flex items-center gap-3">
+                  <Image
+                    src={review.patientImage}
+                    alt={review.patientName}
+                    width={50}
+                    height={50}
+                    className="rounded-full object-cover"
+                  />
+
+                  <div>
+                    <h3 className="font-semibold">
+                      {review.patientName}
+                    </h3>
+
+                    <p className="text-xs text-gray-400">
+                      Patient Feedback
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-yellow-50 text-yellow-600 px-3 py-1 rounded-full text-sm font-semibold">
+                  ⭐ {review.rating}
+                </div>
+
+              </div>
+
+              <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+                {review.comment}
+              </p>
+            </div>
+          ))
+        ) : (
+          <div className="border border-dashed rounded-2xl p-8 text-center">
+            <FaStar className="mx-auto text-4xl text-gray-300 mb-3" />
+
+            <h3 className="font-semibold text-gray-600">
+              No Reviews Yet
+            </h3>
+
+            <p className="text-sm text-gray-500 mt-2">
+              Patient reviews will appear here once submitted.
+            </p>
+          </div>
+        )}
+
       </div>
     </div>
+
+  </div>
+</div>
   );
 }

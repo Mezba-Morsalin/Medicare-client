@@ -238,8 +238,7 @@ export default function UpdateProfileForm({ user, token }) {
           <div className="flex justify-end">
             <Button
               type="submit"
-              color="primary"
-              className="px-10"
+              className="px-10 bg-sky-600"
               isLoading={loading}
             >
               Update Profile
