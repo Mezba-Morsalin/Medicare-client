@@ -56,8 +56,8 @@ A full-stack healthcare appointment management platform where patients can easil
 
 ### Frontend
 
-- Next.js 15
-- React 19
+- Next.js
+- React
 - Tailwind CSS
 - HeroUI
 - React Icons
@@ -71,21 +71,12 @@ A full-stack healthcare appointment management platform where patients can easil
 - Express.js
 - MongoDB
 - JWT Authentication
+- Stripe
 
 ### Database
 
 - MongoDB Atlas
 
-### Image Hosting
-
-- ImgBB API
-
-### Deployment
-
-- Vercel (Client)
-- Vercel / Render (Server)
-
----
 
 ## 📂 Project Structure
 
@@ -156,33 +147,6 @@ Roles:
 
 ---
 
-## ⚙️ Environment Variables
-
-### Client (.env.local)
-
-```env
-NEXT_PUBLIC_SERVER_URL=
-
-NEXT_PUBLIC_IMGBB_API_KEY=
-
-NEXT_PUBLIC_BETTER_AUTH_URL=
-```
-
-### Server (.env)
-
-```env
-PORT=
-
-DB_USER=
-
-DB_PASS=
-
-JWT_SECRET=
-
-BETTER_AUTH_SECRET=
-```
-
----
 
 ## 💻 Installation
 
