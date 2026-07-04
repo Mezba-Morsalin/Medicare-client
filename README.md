@@ -1,36 +1,268 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏥 MediCare Connect
 
-## Getting Started
+A full-stack healthcare appointment management platform where patients can easily find verified doctors, book appointments, receive prescriptions, make payments, and manage their healthcare journey online.
 
-First, run the development server:
+---
+
+## 🌐 Live Website
+
+🔗 Live Site: https://your-live-site.vercel.app
+
+---
+
+## 🚀 Features
+
+### 👨‍⚕️ Patient Features
+
+- User Authentication
+- Search Doctors
+- View Doctor Profiles
+- Book Appointments
+- Payment Integration
+- View Payment History
+- View Prescriptions
+- Leave Doctor Reviews
+- Update Profile
+
+---
+
+### 🩺 Doctor Features
+
+- Doctor Registration
+- Doctor Verification Status
+- Dashboard Overview
+- Manage Schedule
+- View Appointments
+- Create Prescriptions
+- View Patient Reviews
+- Update Professional Profile
+
+---
+
+### 👨‍💼 Admin Features
+
+- Dashboard Overview
+- Manage Users
+- Suspend Users
+- Delete Users
+- Verify Doctors
+- Reject Doctor Verification
+- Manage Payments
+- Analytics Dashboard
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+
+- Next.js 15
+- React 19
+- Tailwind CSS
+- HeroUI
+- React Icons
+- React Hot Toast
+- Better Auth
+- React Spinners
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- JWT Authentication
+
+### Database
+
+- MongoDB Atlas
+
+### Image Hosting
+
+- ImgBB API
+
+### Deployment
+
+- Vercel (Client)
+- Vercel / Render (Server)
+
+---
+
+## 📂 Project Structure
+
+```
+medicare-client/
+│
+├── app/
+├── components/
+├── lib/
+├── public/
+├── hooks/
+└── ...
+
+medicare-server/
+│
+├── routes/
+├── middleware/
+├── index.js
+└── ...
+```
+
+---
+
+## 🔐 Authentication
+
+- Better Auth
+- JWT Token
+- Role Based Authorization
+
+Roles:
+
+- Patient
+- Doctor
+- Admin
+
+---
+
+## 📋 Main Modules
+
+### Authentication
+
+- Login
+- Registration
+- Google Login
+- Logout
+
+### Patient
+
+- Appointment Booking
+- Payment
+- Reviews
+- Prescription
+- Profile Management
+
+### Doctor
+
+- Schedule Management
+- Appointment Management
+- Prescription Creation
+- Profile Update
+
+### Admin
+
+- User Management
+- Doctor Verification
+- Payment Monitoring
+- Analytics
+
+---
+
+## ⚙️ Environment Variables
+
+### Client (.env.local)
+
+```env
+NEXT_PUBLIC_SERVER_URL=
+
+NEXT_PUBLIC_IMGBB_API_KEY=
+
+NEXT_PUBLIC_BETTER_AUTH_URL=
+```
+
+### Server (.env)
+
+```env
+PORT=
+
+DB_USER=
+
+DB_PASS=
+
+JWT_SECRET=
+
+BETTER_AUTH_SECRET=
+```
+
+---
+
+## 💻 Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Mezba-Morsalin/Medicare-client
+
+git clone https://github.com/Mezba-Morsalin/Medicare-server
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Development Server
+
+Client
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Server
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📸 Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+You can add screenshots here.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Home Page
+- Dashboard
+- Appointment
+- Doctor Profile
+- Admin Dashboard
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📦 Packages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Frontend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- next
+- react
+- tailwindcss
+- heroui
+- react-hot-toast
+- react-icons
+- better-auth
+- react-spinners
+
+### Backend
+
+- express
+- mongodb
+- cors
+- dotenv
+- jsonwebtoken
+
+---
+
+## 👨‍💻 Author
+
+**Mezba Morsalin**
+
+GitHub:
+https://github.com/Mezba-Morsalin
+
+LinkedIn:
+https://www.linkedin.com/in/mezba-morsalin
+
+---
+
+## 📄 License
+
+This project is developed for educational purposes.
