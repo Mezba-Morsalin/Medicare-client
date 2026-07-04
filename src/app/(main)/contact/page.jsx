@@ -1,5 +1,5 @@
 import Contact from '@/app/components/contactus/Contact';
-import { getUserToken } from '@/lib/session';
+import { auth } from '@/lib/auth';
 import React from 'react';
 
 export const metadata = {
@@ -8,11 +8,13 @@ export const metadata = {
 }
 const ContactPage =  async () => {
 
-    const token = await getUserToken();
+    const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
     return (
         <div>
-            <Contact token = {token}/>
+            <Contact session = {session}/>
         </div>
     );
 };

@@ -22,7 +22,7 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-const Contact = ({token}) => {
+const Contact = ({session}) => {
     const [loading, setLoading] = useState(false);
   const router = useRouter();
   if (!session?.user) {
@@ -53,7 +53,6 @@ const Contact = ({token}) => {
         cache : "no-store",
         headers: {
           "Content-Type": "application/json",
-           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       }
