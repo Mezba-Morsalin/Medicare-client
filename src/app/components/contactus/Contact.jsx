@@ -35,7 +35,6 @@ const Contact = ({session}) => {
     return;
   }
   const onSubmit = async (e) => {
-  
   e.preventDefault();
   e.stopPropagation();
 
