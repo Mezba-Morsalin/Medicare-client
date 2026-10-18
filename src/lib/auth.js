@@ -27,29 +27,30 @@ export const auth = betterAuth({
   additionalFields: {
     role: {
       type: "string",
-      default: "patient",
+      required: false,
+      defaultValue: "patient",
+      input: false,
     },
-
     status: {
       type: "string",
-      default: "Active",
+      required: false,
+      defaultValue: "Active",
+      input: false,
     },
-
     plan: {
       type: "string",
-      default: "patient_free",
+      required: false,
+      defaultValue: "patient_free",
+      input: false,
     },
-
     specialization: {
       type: "string",
       required: false,
     },
-
     gender: {
       type: "string",
       required: false,
     },
-
     phone: {
       type: "string",
       required: false,

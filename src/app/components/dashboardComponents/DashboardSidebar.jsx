@@ -200,18 +200,25 @@ const navItems =
                 size={25}
               />
             ) : (
-              <div>
-                <h3 className="font-bold mt-2">
-                  {user?.name}
-                </h3>
+              <div className="flex items-center gap-3">
+  <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-gray-200">
+    <Image src={user?.image || "/default-avatar.png"} alt={user?.name || "User"} fill sizes="44px" className="object-cover"
+    />
+  </div>
 
-                <p className="text-xs text-gray-500">
-  {user?.specialization ||
-    (user?.role
-      ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
-      : "")}
-</p>
-              </div>
+  <div>
+    <h3 className="font-bold mt-2">
+      {user?.name}
+    </h3>
+
+    <p className="text-xs text-gray-500">
+      {user?.role ||
+        (user?.role
+          ? user.role.charAt(0).toUpperCase() + user.role.slice(1)
+          : "")}
+    </p>
+  </div>
+</div>
             )}
 
             <button

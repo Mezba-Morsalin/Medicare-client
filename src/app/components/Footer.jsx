@@ -137,7 +137,7 @@ const Footer = () => {
                 <p>
                   Hospital Tech Plaza,
                   <br />
-                  Silicon District, CA
+                  Sector 04, Uttara, Dhaka -1230
                 </p>
               </motion.div>
 
@@ -147,7 +147,7 @@ const Footer = () => {
               >
                 <FiPhone className="text-sky-500 mt-1" />
 
-                <p>+1 (800) 555-CARE (2273)</p>
+                <p>+8801451236789</p>
               </motion.div>
 
               <motion.div

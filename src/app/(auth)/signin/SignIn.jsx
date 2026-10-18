@@ -57,14 +57,20 @@ setLoading(true);
     }
   };
   const handleGoogleLogin = async () => {
-    const user = await authClient.signIn.social({
-      provider : "google",
-      callbackURL : "/"
-    })
-    if (user) {
-        toast.success("Login Successfully With Your Google Account")
-      }
+  try {
+    const { error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+
+    if (error) {
+      toast.error(error.message || "Google login failed");
+    }
+  } catch (error) {
+    toast.error("Something went wrong with Google login");
+    console.error("Google login error:", error);
   }
+};
     return (
         <div className="min-h-screen bg-slate-50 py-16 px-4">
               <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 ">

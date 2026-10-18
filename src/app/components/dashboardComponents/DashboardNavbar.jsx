@@ -44,13 +44,7 @@ export default function DashboardNavbar({ onMenuClick }) {
             </button>
 
             <Link href="/" className="flex items-center gap-3">
-              <Image
-                src={navImg}
-                alt="Logo"
-                width={50}
-                height={50}
-                priority
-                className="rounded-xl bg-sky-50 p-3"
+              <Image src={navImg} alt="Logo" width={50} height={50} priority className="rounded-xl bg-sky-50 p-3"
               />
 
               <h2

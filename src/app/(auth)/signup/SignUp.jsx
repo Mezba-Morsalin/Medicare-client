@@ -117,15 +117,23 @@ try {
     setLoading(false);
   }
   };
-  const handleGoogleLogin = async () => {
-   const user = await authClient.signIn.social({
-    provider: "google",
-    callbackURL : "/"
-  });
-  if(user) {
-    toast.success("Sign Up Successfully With Your Google Account")
+  
+const handleGoogleLogin = async () => {
+  try {
+    const { error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+
+    if (error) {
+      toast.error(error.message || "Google sign-up failed");
+    }
+  } catch (error) {
+    console.error("Google sign-up error:", error);
+    toast.error("Something went wrong. Please try again.");
   }
-}
+};
+
 
   return (
     <div className="min-h-screen bg-slate-50 py-16 px-4">

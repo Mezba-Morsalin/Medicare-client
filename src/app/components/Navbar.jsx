@@ -138,14 +138,24 @@ if (user) {
                     className="flex items-center gap-3 border border-slate-200 hover:bg-slate-50 p-1.5 pr-4 rounded-full cursor-pointer transition"
                   >
 
-                    <div className="hidden lg:flex flex-col text-left">
-                      <span className="text-slate-800 text-sm font-semibold leading-tight">
-                        {user.name}
-                      </span>
-                      <span className="text-xs text-slate-500 leading-tight">
-                        {user.role}
-                      </span>
-                    </div>
+                    <div className="flex items-center gap-3">
+  {/* User Image */}
+  <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-slate-200">
+    <Image src={user.image || "/default-avatar.png"} alt={user.name || "User"} fill sizes="40px" className="object-cover"
+    />
+  </div>
+
+  {/* User Info */}
+  <div className="hidden lg:flex flex-col text-left">
+    <span className="text-slate-800 text-sm font-semibold leading-tight">
+      {user.name}
+    </span>
+
+    <span className="text-xs text-slate-500 leading-tight capitalize">
+      {user.role}
+    </span>
+  </div>
+</div>
 
                     <motion.div
                       animate={{ rotate: showMenu ? 180 : 0 }}
@@ -246,14 +256,22 @@ if (user) {
                   <div className="space-y-4">
   <div className="flex items-center gap-3">
 
-    <div>
-      <h4 className="text-slate-800 font-semibold">
-        {user.name}
-      </h4>
-      <p className="text-xs text-slate-500">
-        {user.role}
-      </p>
-    </div>
+    <div className="flex items-center gap-2 min-w-0">
+  <div className="relative w-9 h-9 shrink-0 overflow-hidden rounded-full border border-slate-200">
+    <Image src={user?.image || "/default-avatar.png"} alt={user?.name || "User"} fill sizes="36px" className="object-cover"
+    />
+  </div>
+
+  <div className="min-w-0">
+    <h4 className="text-slate-800 text-sm font-semibold truncate">
+      {user?.name}
+    </h4>
+
+    <p className="text-xs text-slate-500 capitalize truncate">
+      {user?.role}
+    </p>
+  </div>
+</div>
   </div>
 
   <Link href="/profile" onClick={() => setOpen(false)}>
