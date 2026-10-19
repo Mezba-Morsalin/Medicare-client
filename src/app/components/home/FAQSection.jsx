@@ -125,7 +125,7 @@ const FAQSection = () => {
 
           <a
             href="/contact"
-            className="mt-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-sky-700 via-sky-800 to-sky-600 px-6 py-3 font-semibold text-white shadow-lg shadow-sky-900/15 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="mt-4 inline-flex items-center justify-center rounded-xl bg-sky-600 px-6 py-3 font-semibold text-white shadow-lg shadow-sky-900/15 transition-all duration-300 hover:-translate-y-1 hover:bg-sky-700 hover:shadow-xl"
           >
             Contact Us
           </a>
