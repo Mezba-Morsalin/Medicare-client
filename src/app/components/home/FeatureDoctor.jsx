@@ -9,7 +9,7 @@ const FeatureDoctor = async () => {
     const data = await res.json();
     const doctors = data.data
     return (
-         <section className="py-16 max-w-7xl mx-auto px-5 lg:px-0">
+         <section className="py-16 max-w-7xl mx-auto px-4 sm:px-3">
       <div className="flex flex-col md:flex-row gap-8 items-center justify-between mb-8">
         <div className='text-center md:text-left'>
           <h2 className="text-3xl font-bold">

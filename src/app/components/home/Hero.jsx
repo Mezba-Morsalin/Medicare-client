@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section className="bg-slate-50 py-20 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-3">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* Left */}
