@@ -17,45 +17,72 @@ const SigninPage = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-    const handleSubmit = async(e) => {
-    e.preventDefault();
-setLoading(true);
-    setMessage("");
+    
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const formData = new FormData(e.currentTarget);
-    const user = Object.fromEntries(formData.entries());
+  setLoading(true);
+  setMessage("");
 
-    console.log(user);
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+  const user = Object.fromEntries(formData.entries());
 
-    try {
-      const {data, error } = await authClient.signIn.email({
-        email: user.email,
-        password: user.password,
-        rememberMe: true,
-      });
+  try {
+    const { data, error } = await authClient.signIn.email({
+      email: user.email,
+      password: user.password,
+      rememberMe: true,
+    });
 
-      if (error) {
+    if (error) {
+      setIsSuccess(false);
+      setMessage(error.message || "Failed to sign in.");
+      return;
+    }
+
+    if (data) {
+      // Login successful; get the actual logged-in user's session.
+      const { data: sessionData, error: sessionError } =
+        await authClient.getSession();
+
+      if (sessionError || !sessionData?.user) {
         setIsSuccess(false);
-        setMessage(error.message || "Failed to sign in.");
+        setMessage(
+          "Login successful, but unable to load your session. Please try again."
+        );
         return;
       }
 
-      if (data) {
-        setIsSuccess(true);
-      setMessage("Welcome back! You have signed in successfully.");
-      e.target.reset();
-      setTimeout(() => {
-  router.push("/");
-}, 2000);
+      const role = sessionData.user.role;
+
+      // Only allow dashboard routes that actually belong to your app.
+      if (role !== "doctor" && role !== "patient") {
+        setIsSuccess(false);
+        setMessage(
+          "Your account role is missing or invalid. Please contact support."
+        );
+        return;
       }
 
-    } catch (error) {
-      setIsSuccess(false);
-      setMessage("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+      setIsSuccess(true);
+      setMessage("Welcome back! You have signed in successfully.");
+
+      form.reset();
+
+      setTimeout(() => {
+        router.push(`/dashboard/${role}`);
+      },2000)
     }
-  };
+  } catch (error) {
+    console.error("Sign in error:", error);
+    setIsSuccess(false);
+    setMessage("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
   const handleGoogleLogin = async () => {
   try {
     const { error } = await authClient.signIn.social({
@@ -112,7 +139,7 @@ setLoading(true);
                         name="email"
                         className="w-full"
                       >
-                        <Label>Email Coordinates *</Label>
+                        <Label>Email</Label>
         
                         <div className="relative w-full">
                           <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
@@ -134,7 +161,7 @@ setLoading(true);
                       name="password"
                       className="w-full relative"
                     >
-                      <Label>Account Passkey *</Label>
+                      <Label>Password</Label>
         
                       <div className="relative w-full">
                         <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 z-10" />
