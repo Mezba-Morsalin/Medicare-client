@@ -44,14 +44,14 @@ const FAQSection = () => {
       <div className="mx-auto max-w-7xl">
         {/* Section Heading */}
         <div className="mx-auto mb-12 max-w-2xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-700">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-semibold text-sky-600">
             <FaQuestionCircle />
             Got Questions?
           </div>
 
           <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
             Frequently Asked{" "}
-            <span className="text-sky-700">Questions</span>
+            <span className="text-sky-600">Questions</span>
           </h2>
 
           <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
@@ -84,7 +84,7 @@ const FAQSection = () => {
                 >
                   <span
                     className={`text-base font-semibold sm:text-lg ${
-                      isOpen ? "text-sky-800" : "text-slate-800"
+                      isOpen ? "text-sky-600" : "text-slate-800"
                     }`}
                   >
                     {faq.question}
@@ -93,7 +93,7 @@ const FAQSection = () => {
                   <span
                     className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
                       isOpen
-                        ? "rotate-180 bg-sky-700 text-white"
+                        ? "rotate-180 bg-sky-600 text-white"
                         : "bg-slate-100 text-slate-600"
                     }`}
                   >
