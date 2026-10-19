@@ -1,3 +1,5 @@
+import CTASection from "../components/home/CTASection";
+import FAQSection from "../components/home/FAQSection";
 import FeatureDoctor from "../components/home/FeatureDoctor";
 import Hero from "../components/home/Hero";
 import Reviews from "../components/home/Reviews";
@@ -16,6 +18,8 @@ export default function Home() {
       <Specialties/>
       <WhyChooseUs/>
       <Reviews/>
+      <FAQSection/>
+      <CTASection/>
     </div>
   );
 }
