@@ -257,6 +257,31 @@ const faqRules = [
       "আমি উপযুক্ত specialist খুঁজতে সাহায্য করতে পারি, কিন্তু রোগ নির্ণয় বা ওষুধের প্রেসক্রিপশন দিতে পারি না। সঠিক পরামর্শের জন্য একজন যোগ্য চিকিৎসকের সঙ্গে কথা বলো।",
     ],
   },
+  {
+  id: "thank_you",
+  keywords: [
+    "thank you",
+    "thankyou",
+    "thanks",
+    "thank u",
+    "thank",
+    "thx",
+    "many thanks",
+    "thanks a lot",
+    "ধন্যবাদ",
+    "অনেক ধন্যবাদ",
+    "আপনাকে ধন্যবাদ",
+    "থ্যাংক ইউ",
+  ],
+  en: [
+    "You're very welcome! 😊 I'm happy to help you with MediCare Connect. Is there anything else you'd like to know?",
+    "You're welcome! 💙 Feel free to ask me about finding doctors, appointments, or using our website.",
+  ],
+  bn: [
+    "আপনাকে স্বাগতম! 😊 MediCare Connect ব্যবহার করতে আর কোনো সাহায্য লাগলে আমাকে জানাবেন।",
+    "ধন্যবাদ! 💙 ডাক্তার খোঁজা, অ্যাপয়েন্টমেন্ট বা ওয়েবসাইট সম্পর্কে কিছু জানতে চাইলে জিজ্ঞাসা করতে পারেন।",
+  ],
+},
 ];
 
 const doctorDirectory = [
