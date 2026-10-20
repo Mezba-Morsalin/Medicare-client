@@ -117,8 +117,8 @@ const handleSubmit = async (e) => {
                 {/* RIGHT SIDE */}
                 <div className="w-full max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
                   <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-slate-900">
-  Access Your Healthcare Dashboard
+                    <h1 className="text-2xl md:text-3xl font-bold text-slate-900">
+  Access Your Medicare Dashboard
 </h1>
 
 <p className="mt-2 text-sm text-slate-500">
@@ -169,7 +169,7 @@ const handleSubmit = async (e) => {
                         <Input
                           type={showPassword ? "text" : "password"}
                           className="w-full pl-10"
-                          placeholder="6+ chars, 1 number, 1 special sign"
+                          placeholder="Type Password"
                         />
                       </div>
                       <span onClick={()=> setShowPassword(!showPassword)} className="absolute top-8.5 cursor-pointer right-5">

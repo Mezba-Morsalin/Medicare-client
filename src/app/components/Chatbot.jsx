@@ -269,10 +269,7 @@ export default function Chatbot() {
               className="flex shrink-0 items-center justify-between gap-2 bg-sky-600 px-3 py-3 text-white sm:px-4 sm:py-4"
             >
               <div className="flex min-w-0 items-center gap-2.5 sm:gap-3">
-                <motion.div
-                  whileHover={{ rotate: 8, scale: 1.08 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 sm:h-11 sm:w-11"
+                <motion.div whileHover={{ rotate: 8, scale: 1.08 }} transition={{ type: "spring", stiffness: 300 }} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 sm:h-11 sm:w-11"
                 >
                   <Stethoscope size={22} />
                 </motion.div>
@@ -293,11 +290,7 @@ export default function Chatbot() {
                 className="flex shrink-0 items-center gap-0.5 rounded-lg bg-white/15 p-1"
                 aria-label="Choose language"
               >
-                <button
-                  type="button"
-                  onClick={() => changeLanguage("en")}
-                  aria-pressed={language === "en"}
-                  className={`rounded-md px-2 py-1.5 text-xs font-semibold transition ${
+                <button type="button" onClick={() => changeLanguage("en")} aria-pressed={language === "en"} className={`rounded-md px-2 py-1.5 text-xs font-semibold transition ${
                     language === "en"
                       ? "bg-white text-sky-700 shadow-sm"
                       : "text-white hover:bg-white/10"
@@ -306,11 +299,7 @@ export default function Chatbot() {
                   EN
                 </button>
 
-                <button
-                  type="button"
-                  onClick={() => changeLanguage("bn")}
-                  aria-pressed={language === "bn"}
-                  className={`rounded-md px-2 py-1.5 text-xs font-semibold transition ${
+                <button type="button" onClick={() => changeLanguage("bn")} aria-pressed={language === "bn"} className={`rounded-md px-2 py-1.5 text-xs font-semibold transition ${
                     language === "bn"
                       ? "bg-white text-sky-700 shadow-sm"
                       : "text-white hover:bg-white/10"
@@ -322,26 +311,12 @@ export default function Chatbot() {
 
               {/* Header actions */}
               <div className="flex shrink-0 items-center gap-0.5">
-                <motion.button
-                  type="button"
-                  onClick={resetChat}
-                  title={t.newChat}
-                  aria-label={t.newChat}
-                  whileHover={{ rotate: -35, scale: 1.1 }}
-                  whileTap={{ scale: 0.88 }}
-                  className="rounded-full p-2 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                <motion.button type="button" onClick={resetChat} title={t.newChat} aria-label={t.newChat} whileHover={{ rotate: -35, scale: 1.1 }} whileTap={{ scale: 0.88 }} className="rounded-full p-2 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   <RotateCcw size={17} />
                 </motion.button>
 
-                <motion.button
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  title={t.close}
-                  aria-label={t.close}
-                  whileHover={{ rotate: 90, scale: 1.1 }}
-                  whileTap={{ scale: 0.88 }}
-                  className="rounded-full p-2 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                <motion.button type="button" onClick={() => setIsOpen(false)} title={t.close} aria-label={t.close} whileHover={{ rotate: 90, scale: 1.1 }} whileTap={{ scale: 0.88 }} className="rounded-full p-2 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   <X size={20} />
                 </motion.button>
@@ -357,13 +332,7 @@ export default function Chatbot() {
               {/* Messages */}
               <AnimatePresence initial={false}>
                 {messages.map((message) => (
-                  <motion.div
-                    key={message.id}
-                    layout
-                    variants={messageVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit={{
+                  <motion.div key={message.id} layout variants={messageVariants} initial="hidden" animate="visible" exit={{
                       opacity: 0,
                       scale: 0.96,
                       transition: { duration: 0.12 },
@@ -438,13 +407,7 @@ export default function Chatbot() {
               {/* Typing indicator */}
               <AnimatePresence>
                 {isThinking && (
-                  <motion.div
-                    key="typing-indicator"
-                    variants={messageVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit={{ opacity: 0, y: -5 }}
-                    className="flex items-start gap-2"
+                  <motion.div key="typing-indicator" variants={messageVariants} initial="hidden" animate="visible" exit={{ opacity: 0, y: -5 }} className="flex items-start gap-2"
                   >
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700">
                       <Bot size={17} />
@@ -483,13 +446,7 @@ export default function Chatbot() {
               {/* Quick questions */}
               <AnimatePresence>
                 {messages.length === 1 && !isThinking && (
-                  <motion.div
-                    key="quick-questions"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -5 }}
-                    transition={{ duration: 0.25 }}
-                    className="pt-2"
+                  <motion.div key="quick-questions" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -5 }} transition={{ duration: 0.25 }} className="pt-2"
                   >
                     <p className="mb-2 text-xs font-medium text-slate-500">
                       {t.quickQuestions}
@@ -503,18 +460,10 @@ export default function Chatbot() {
                             staggerChildren: 0.06,
                           },
                         },
-                      }}
-                      initial="hidden"
-                      animate="visible"
-                      className="flex flex-wrap gap-2"
+                      }} initial="hidden" animate="visible" className="flex flex-wrap gap-2"
                     >
                       {quickQuestions.map((question) => (
-                        <motion.button
-                          key={question.label}
-                          type="button"
-                          disabled={isThinking}
-                          variants={quickQuestionVariants}
-                          whileHover={{
+                        <motion.button key={question.label} type="button" disabled={isThinking} variants={quickQuestionVariants} whileHover={{
                             y: -2,
                             scale: 1.025,
                             transition: { duration: 0.15 },
@@ -559,26 +508,12 @@ export default function Chatbot() {
               }}
               className="flex shrink-0 items-center gap-2 border-t border-slate-200 bg-white p-2.5 sm:p-3"
             >
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                placeholder={
+              <input ref={inputRef} type="text" value={input} onChange={(event) => setInput(event.target.value)} placeholder={
                   isThinking ? t.waiting : t.placeholder
-                }
-                aria-label={t.placeholder}
-                maxLength={500}
-                disabled={isThinking}
-                className="h-11 min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100 disabled:cursor-wait disabled:opacity-70 sm:px-3.5"
+                } aria-label={t.placeholder} maxLength={500} disabled={isThinking} className="h-11 min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-100 disabled:cursor-wait disabled:opacity-70 sm:px-3.5"
               />
 
-              <motion.button
-                type="submit"
-                disabled={!input.trim() || isThinking}
-                aria-label={t.send}
-                title={t.send}
-                whileHover={
+              <motion.button type="submit" disabled={!input.trim() || isThinking} aria-label={t.send} title={t.send} whileHover={
                   input.trim() && !isThinking
                     ? { scale: 1.06, y: -1 }
                     : undefined
@@ -657,13 +592,7 @@ export default function Chatbot() {
             type="button"
             onClick={() =>
               setIsOpen((current) => !current)
-            }
-            aria-label={isOpen ? t.close : t.openChat}
-            aria-expanded={isOpen}
-            aria-controls="medicare-chat-panel"
-            whileHover={{ scale: 1.07 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{
+            } aria-label={isOpen ? t.close : t.openChat} aria-expanded={isOpen} aria-controls="medicare-chat-panel" whileHover={{ scale: 1.07 }} whileTap={{ scale: 0.9 }} transition={{
               type: "spring",
               stiffness: 400,
               damping: 17,

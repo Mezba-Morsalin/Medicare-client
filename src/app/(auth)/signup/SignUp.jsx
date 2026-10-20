@@ -173,8 +173,8 @@ export default function SignUpPage() {
         {/* RIGHT SIDE */}
         <div className="w-full max-w-2xl rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-900">
-              Launch Your MediCare Account
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-900">
+              Launch Your Medicare Account
             </h1>
 
             <p className="mt-2 text-sm text-slate-500">
@@ -426,13 +426,7 @@ export default function SignUpPage() {
 
                 {logo && (
                   <div className="flex justify-center mt-3">
-                    <Image
-                      src={URL.createObjectURL(logo)}
-                      alt="Preview"
-                      className="rounded-full object-cover border-2 border-sky-500"
-                      width={40}
-                      height={40}
-                      unoptimized
+                    <Image src={URL.createObjectURL(logo)} alt="Preview" className="rounded-full object-cover border-2 border-sky-500" width={40} height={40} unoptimized
                     />
                   </div>
                 )}
@@ -453,7 +447,7 @@ export default function SignUpPage() {
                 <Input
                   type={showPassword ? "text" : "password"}
                   className="w-full pl-10"
-                  placeholder="Type Your Password"
+                  placeholder="Type Password"
                 />
 
                 <span
