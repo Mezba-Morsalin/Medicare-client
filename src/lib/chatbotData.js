@@ -1,54 +1,73 @@
+
 const faqRules = [
   {
     id: "greeting",
     keywords: [
-      "hello", "hi", "hey", "good morning", "good evening",
-      "good afternoon", "হ্যালো", "হাই", "আসসালামু আলাইকুম",
-      "শুভ সকাল", "শুভ সন্ধ্যা",
+      "hello", "hi", "hey", "heya", "hiya", "hello there",
+      "good morning", "good afternoon", "good evening",
+      "assalamu alaikum", "salam", "as salamualaikum",
+      "হ্যালো", "হাই", "হেই", "আসসালামু আলাইকুম",
+      "আসসালামু আলাইকুম ভাই", "সালাম", "শুভ সকাল",
+      "শুভ সন্ধ্যা", "শুভ অপরাহ্ন",
     ],
     en: [
       "Hey there! 👋 Welcome to MediCare Connect. What can I help you with today?",
       "Hello! 😊 Are you looking for a doctor or need help with an appointment?",
+      "Hi! Welcome to MediCare Connect. I'm here to help you find doctors and explore our website.",
     ],
     bn: [
       "আসসালামু আলাইকুম! 👋 MediCare Connect-এ স্বাগতম। আজ কীভাবে সাহায্য করতে পারি?",
       "হ্যালো! 😊 ডাক্তার খুঁজছ, নাকি অ্যাপয়েন্টমেন্ট নিয়ে সাহায্য দরকার?",
+      "স্বাগতম! ❤️ আমি ডাক্তার খোঁজা, specialization ও ওয়েবসাইট ব্যবহার করতে সাহায্য করতে পারি।",
     ],
   },
   {
     id: "wellbeing",
     keywords: [
       "how are you", "how are you doing", "are you okay",
-      "কেমন আছ", "কেমন আছেন", "তুমি কেমন",
+      "how is it going", "how have you been", "what's up",
+      "কেমন আছ", "কেমন আছেন", "তুমি কেমন", "আপনি কেমন",
+      "কি খবর", "কী খবর", "সব কেমন", "ভালো আছ",
     ],
-    en: ["I'm doing well, thanks for asking! 😊 How can I help you today?"],
-    bn: ["আমি ভালো আছি! 😊 খোঁজ নেওয়ার জন্য ধন্যবাদ। কীভাবে সাহায্য করব?"],
+    en: [
+      "I'm doing well, thanks for asking! 😊 How can I help you today?",
+      "I'm great and ready to help! What would you like to know about MediCare Connect?",
+    ],
+    bn: [
+      "আমি ভালো আছি! 😊 খোঁজ নেওয়ার জন্য ধন্যবাদ। কীভাবে সাহায্য করব?",
+      "ভালো আছি! ❤️ তুমি কেমন আছ? ডাক্তার বা অ্যাপয়েন্টমেন্ট নিয়ে কিছু জানতে চাও?",
+    ],
   },
   {
     id: "identity",
     keywords: [
-      "who are you", "your name", "what are you",
-      "তোমার নাম", "তুমি কে", "আপনি কে",
+      "who are you", "what are you", "your name", "who is this",
+      "introduce yourself", "what is your name",
+      "তোমার নাম", "তুমি কে", "আপনি কে", "তোমার পরিচয়",
+      "তোমার পরিচয়", "তোমাকে কি বলে", "তোমার নাম কি",
     ],
     en: [
-      "I'm MediCare Assistant, your guide to MediCare Connect. I can help you find doctors, explore specializations, and understand appointments.",
+      "I'm MediCare Assistant! 🤖 Your virtual guide to MediCare Connect. I can help you explore doctors, specializations, appointments, and website features.",
     ],
     bn: [
-      "আমি MediCare Assistant! 😊 MediCare Connect-এ ডাক্তার খোঁজা, specialization জানা এবং অ্যাপয়েন্টমেন্ট সম্পর্কে সাহায্য করতে পারি।",
+      "আমি MediCare Assistant! 🤖 MediCare Connect-এর virtual assistant। ডাক্তার খোঁজা, specialization, অ্যাপয়েন্টমেন্ট এবং ওয়েবসাইট ব্যবহার করতে সাহায্য করতে পারি।",
     ],
   },
   {
     id: "capabilities",
     keywords: [
       "what can you do", "how can you help", "what can you help",
+      "what do you do", "help me", "help me please",
+      "your features", "your services",
       "কি করতে পারো", "কী করতে পারো", "সাহায্য করো",
-      "কীভাবে সাহায্য", "কি কি করতে পার",
+      "সাহায্য চাই", "কীভাবে সাহায্য", "কি কি করতে পার",
+      "তুমি কি করতে পার", "তোমার কাজ কি",
     ],
     en: [
-      "I can help you find doctors by specialization, explore our doctor list, navigate sign-in and sign-up, and understand appointment booking. What do you need?",
+      "I can help you find doctors by specialization, explore the doctor directory, navigate sign-in and sign-up, and understand appointment booking. What would you like to do?",
     ],
     bn: [
-      "আমি specialization অনুযায়ী ডাক্তার খোঁজা, ডাক্তারদের তালিকা দেখা, লগইন, অ্যাকাউন্ট তৈরি এবং অ্যাপয়েন্টমেন্ট সম্পর্কে সাহায্য করতে পারি। কী জানতে চাও?",
+      "আমি specialization অনুযায়ী ডাক্তার খোঁজা, ডাক্তারদের তালিকা দেখা, লগইন, নতুন অ্যাকাউন্ট তৈরি এবং অ্যাপয়েন্টমেন্ট সম্পর্কে সাহায্য করতে পারি। কী জানতে চাও?",
     ],
   },
   {
@@ -56,8 +75,11 @@ const faqRules = [
     keywords: [
       "find a doctor", "find doctor", "search doctor",
       "doctor list", "show doctors", "doctors", "doctor",
-      "physician", "ডাক্তার খুঁজ", "ডাক্তার দেখ",
-      "ডাক্তার তালিকা", "ডাক্তার কোথায়", "চিকিৎসক",
+      "physician", "need a doctor", "looking for a doctor",
+      "doctor directory", "available doctors",
+      "ডাক্তার খুঁজ", "ডাক্তার দেখ", "ডাক্তার তালিকা",
+      "ডাক্তার কোথায়", "চিকিৎসক", "ডাক্তার লাগবে",
+      "ডাক্তারদের তালিকা", "ডাক্তার দেখাতে চাই",
     ],
     en: [
       "You can explore the doctors listed on MediCare Connect and review their specializations on our Find Doctor page.",
@@ -74,14 +96,19 @@ const faqRules = [
     keywords: [
       "book an appointment", "book appointment", "appointment",
       "booking", "schedule", "consultation",
+      "make an appointment", "schedule an appointment",
+      "appointment booking", "doctor appointment",
+      "how to book", "book a doctor",
       "অ্যাপয়েন্টমেন্ট", "এপয়েন্টমেন্ট", "সিরিয়াল",
       "ডাক্তারের সময়", "ডাক্তার দেখানোর সময়",
+      "সিরিয়াল নিতে চাই", "ডাক্তার দেখাব",
+      "কিভাবে অ্যাপয়েন্টমেন্ট", "বুকিং করতে চাই",
     ],
     en: [
-      "Start on the Find Doctor page, choose a doctor, and follow the booking options available on their profile. The exact steps depend on the features enabled on the website.",
+      "To get started, open Find Doctor, select a doctor, and review the booking options available on their profile. The exact steps depend on the features enabled on the website.",
     ],
     bn: [
-      "প্রথমে Find Doctor পেজে যাও, তারপর একজন ডাক্তার নির্বাচন করো। তাঁর প্রোফাইলে থাকা booking option অনুসরণ করো।",
+      "প্রথমে Find Doctor পেজে যাও, তারপর একজন ডাক্তার নির্বাচন করো। তাঁর প্রোফাইলে থাকা booking option অনুসরণ করো। 😊",
     ],
     href: "/find-doctor",
     linkTextEn: "Find a Doctor",
@@ -90,8 +117,10 @@ const faqRules = [
   {
     id: "login",
     keywords: [
-      "log in", "login", "sign in", "signin",
+      "log in", "login", "sign in", "signin", "log me in",
+      "access my account", "login help",
       "লগইন", "লগ ইন", "সাইন ইন", "অ্যাকাউন্টে ঢুক",
+      "অ্যাকাউন্টে লগইন", "লগইন করতে চাই",
     ],
     en: [
       "You can access your account from the Sign In page. If you don't have an account yet, you'll need to register first.",
@@ -107,9 +136,11 @@ const faqRules = [
     id: "signup",
     keywords: [
       "sign up", "signup", "register", "registration",
-      "create account", "new account",
+      "create account", "new account", "join",
+      "register me", "create an account",
       "রেজিস্টার", "রেজিস্ট্রেশন", "অ্যাকাউন্ট তৈরি",
-      "একাউন্ট খুল", "অ্যাকাউন্ট খুল",
+      "একাউন্ট খুল", "অ্যাকাউন্ট খুল", "নতুন অ্যাকাউন্ট চাই",
+      "নতুন একাউন্ট", "অ্যাকাউন্ট বানাতে চাই",
     ],
     en: [
       "To create an account, visit the Sign Up page and complete the requested information.",
@@ -125,7 +156,9 @@ const faqRules = [
     id: "password",
     keywords: [
       "forgot password", "reset password", "password problem",
+      "forgot my password", "change password",
       "পাসওয়ার্ড", "পাসওয়ার্ড", "পাসওয়ার্ড ভুলে",
+      "পাসওয়ার্ড ভুলে গেছি", "পাসওয়ার্ড পরিবর্তন",
     ],
     en: [
       "Check whether the Sign In page offers password recovery. Never share your password or verification codes in this chat.",
@@ -141,7 +174,9 @@ const faqRules = [
     id: "contact",
     keywords: [
       "contact us", "contact", "support", "customer service",
+      "help center", "customer support", "complaint",
       "যোগাযোগ", "সাপোর্ট", "কাস্টমার সার্ভিস",
+      "অভিযোগ", "যোগাযোগ করতে চাই",
     ],
     en: [
       "For account-specific or booking-related help, check the Contact or Support information listed on the website.",
@@ -154,39 +189,49 @@ const faqRules = [
     id: "thanks",
     keywords: [
       "thank you", "thanks", "thank u", "thanks a lot",
+      "thank you so much", "many thanks", "much appreciated",
       "ধন্যবাদ", "অনেক ধন্যবাদ", "থ্যাংক ইউ",
+      "অসংখ্য ধন্যবাদ", "কৃতজ্ঞ",
     ],
     en: [
       "You're very welcome! 😊 Let me know if there's anything else I can help you with.",
-      "Anytime! 😊 Have another question?",
+      "Anytime! ❤️ I'm happy to help. Have another question?",
+      "Glad I could help! 😊 Feel free to ask me anything about MediCare Connect.",
     ],
     bn: [
       "তোমাকে স্বাগতম! 😊 আর কোনো সাহায্য লাগলে নির্দ্বিধায় বলো।",
       "কোনো ব্যাপার না! ❤️ আর কিছু জানতে চাও?",
+      "সাহায্য করতে পেরে ভালো লাগল! 😊 আরও কিছু জানতে চাইলে বলো।",
     ],
   },
   {
     id: "goodbye",
     keywords: [
-      "goodbye", "bye", "see you", "talk later",
+      "goodbye", "bye", "see you", "talk later", "see ya",
+      "take care", "have a nice day", "good night",
       "বিদায়", "আবার কথা হবে", "আল্লাহ হাফেজ",
+      "পরে কথা হবে", "ভালো থেকো", "যাই", "এখন যাই",
     ],
     en: [
       "Take care! 👋 Thanks for visiting MediCare Connect. I'm here whenever you need website help.",
+      "Goodbye! 😊 Have a great day. Feel free to come back if you need any help.",
     ],
     bn: [
       "ভালো থেকো! 👋 আবার কোনো সাহায্য লাগলে এসো। আল্লাহ হাফেজ!",
+      "আল্লাহ হাফেজ! ❤️ সুস্থ থেকো। আবার কোনো প্রশ্ন থাকলে চলে এসো।",
     ],
   },
   {
     id: "emergency",
     keywords: [
       "emergency", "chest pain", "can't breathe",
-      "cannot breathe", "difficulty breathing", "severe bleeding",
-      "heart attack", "stroke symptoms",
+      "cannot breathe", "difficulty breathing", "trouble breathing",
+      "severe bleeding", "heart attack", "stroke symptoms",
+      "unconscious", "overdose", "suicidal",
       "জরুরি", "বুকে ব্যথা", "শ্বাসকষ্ট",
       "শ্বাস নিতে পারছি না", "অতিরিক্ত রক্তপাত",
-      "হার্ট অ্যাটাক", "স্ট্রোক",
+      "হার্ট অ্যাটাক", "স্ট্রোক", "অজ্ঞান",
+      "বিষ খেয়েছি", "বিষ খেয়েছি",
     ],
     en: [
       "This may be a medical emergency. Contact your local emergency service or go to the nearest emergency department immediately. Please don't wait for a chatbot response.",
@@ -200,8 +245,10 @@ const faqRules = [
     keywords: [
       "which medicine", "what medicine", "prescription",
       "diagnosis", "treatment", "medicine", "medication",
+      "what should i take", "which drug", "dosage",
       "ওষুধ", "ঔষধ", "প্রেসক্রিপশন", "রোগ নির্ণয়",
       "চিকিৎসা", "কোন ওষুধ", "কি ওষুধ",
+      "কী ওষুধ", "কতটুকু ওষুধ", "ওষুধ খাব",
     ],
     en: [
       "I can help you find a relevant medical specialist, but I can't diagnose a condition or prescribe medication. A qualified healthcare professional can assess your symptoms and recommend appropriate care.",
@@ -235,55 +282,94 @@ const doctorDirectory = [
 const specializationKeywords = [
   {
     name: "General Physician",
-    keywords: ["general physician", "general doctor", "জেনারেল ফিজিশিয়ান", "সাধারণ ডাক্তার"],
+    keywords: [
+      "general physician", "general doctor",
+      "জেনারেল ফিজিশিয়ান", "সাধারণ ডাক্তার",
+    ],
   },
   {
     name: "Cardiology",
-    keywords: ["cardiology", "cardiologist", "heart specialist", "heart doctor", "হার্টের ডাক্তার", "হৃদরোগ বিশেষজ্ঞ"],
+    keywords: [
+      "cardiology", "cardiologist", "heart specialist",
+      "heart doctor", "হার্টের ডাক্তার", "হৃদরোগ বিশেষজ্ঞ",
+    ],
   },
   {
     name: "Dermatology",
-    keywords: ["dermatology", "dermatologist", "skin specialist", "skin doctor", "চর্মরোগ বিশেষজ্ঞ", "ত্বকের ডাক্তার"],
+    keywords: [
+      "dermatology", "dermatologist", "skin specialist",
+      "skin doctor", "চর্মরোগ বিশেষজ্ঞ", "ত্বকের ডাক্তার",
+    ],
   },
   {
     name: "Psychiatry",
-    keywords: ["psychiatry", "psychiatrist", "mental health specialist", "মনোরোগ বিশেষজ্ঞ"],
+    keywords: [
+      "psychiatry", "psychiatrist", "mental health specialist",
+      "মনোরোগ বিশেষজ্ঞ",
+    ],
   },
   {
     name: "ENT Specialist",
-    keywords: ["ent specialist", "ent doctor", "ear nose throat", "নাক কান গলা", "নাক কান গলা বিশেষজ্ঞ"],
+    keywords: [
+      "ent specialist", "ent doctor", "ear nose throat",
+      "নাক কান গলা", "নাক কান গলা বিশেষজ্ঞ",
+    ],
   },
   {
     name: "Pediatrics",
-    keywords: ["pediatrics", "pediatrician", "child specialist", "baby doctor", "শিশু বিশেষজ্ঞ", "বাচ্চার ডাক্তার"],
+    keywords: [
+      "pediatrics", "pediatrician", "child specialist",
+      "baby doctor", "শিশু বিশেষজ্ঞ", "বাচ্চার ডাক্তার",
+    ],
   },
   {
     name: "Endocrinology",
-    keywords: ["endocrinology", "endocrinologist", "hormone specialist", "thyroid specialist", "হরমোন বিশেষজ্ঞ"],
+    keywords: [
+      "endocrinology", "endocrinologist", "hormone specialist",
+      "thyroid specialist", "হরমোন বিশেষজ্ঞ",
+    ],
   },
   {
     name: "Neurology",
-    keywords: ["neurology", "neurologist", "nerve specialist", "brain specialist", "স্নায়ুরোগ বিশেষজ্ঞ"],
+    keywords: [
+      "neurology", "neurologist", "nerve specialist",
+      "brain specialist", "স্নায়ুরোগ বিশেষজ্ঞ",
+    ],
   },
   {
     name: "Orthopedics",
-    keywords: ["orthopedics", "orthopedic", "bone specialist", "joint specialist", "অর্থোপেডিক", "হাড়ের ডাক্তার"],
+    keywords: [
+      "orthopedics", "orthopedic", "bone specialist",
+      "joint specialist", "অর্থোপেডিক", "হাড়ের ডাক্তার",
+    ],
   },
   {
     name: "Urology",
-    keywords: ["urology", "urologist", "urinary specialist", "মূত্ররোগ বিশেষজ্ঞ"],
+    keywords: [
+      "urology", "urologist", "urinary specialist",
+      "মূত্ররোগ বিশেষজ্ঞ",
+    ],
   },
   {
     name: "Gynecology",
-    keywords: ["gynecology", "gynecologist", "gynecologist doctor", "women's health specialist", "স্ত্রীরোগ বিশেষজ্ঞ"],
+    keywords: [
+      "gynecology", "gynecologist", "women's health specialist",
+      "স্ত্রীরোগ বিশেষজ্ঞ",
+    ],
   },
   {
     name: "Ophthalmology",
-    keywords: ["ophthalmology", "ophthalmologist", "eye specialist", "eye doctor", "চক্ষু বিশেষজ্ঞ", "চোখের ডাক্তার"],
+    keywords: [
+      "ophthalmology", "ophthalmologist", "eye specialist",
+      "eye doctor", "চক্ষু বিশেষজ্ঞ", "চোখের ডাক্তার",
+    ],
   },
   {
     name: "Oncology",
-    keywords: ["oncology", "oncologist", "cancer specialist", "ক্যান্সার বিশেষজ্ঞ"],
+    keywords: [
+      "oncology", "oncologist", "cancer specialist",
+      "ক্যান্সার বিশেষজ্ঞ",
+    ],
   },
 ];
 
@@ -387,7 +473,10 @@ const symptomRules = [
   },
   {
     specialization: "Oncology",
-    keywords: ["cancer", "tumor", "oncology", "ক্যান্সার", "টিউমার"],
+    keywords: [
+      "cancer", "tumor", "oncology",
+      "ক্যান্সার", "টিউমার",
+    ],
   },
   {
     specialization: "General Physician",
@@ -402,10 +491,11 @@ const symptomRules = [
 
 const banglaPattern = /[\u0980-\u09FF]/;
 
-function normalizeText(value = "") {
+export function normalizeText(value = "") {
   return String(value)
     .toLowerCase()
-    .replace(/[?!.,;:'"()\[\]{}]/g, " ")
+    .normalize("NFC")
+    .replace(/[?!.,;:'"()[\]{}।,!?]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -414,13 +504,15 @@ function getLanguage(text = "") {
   return banglaPattern.test(text) ? "bn" : "en";
 }
 
-function getLanguageCommand(message) {
+function getLanguageCommand(message = "") {
   const text = normalizeText(message);
 
   const banglaCommands = [
     "bangla",
     "bengali",
     "বাংলা",
+    "বাংলায়",
+    "বাংলায়",
     "বাংলায় বলো",
     "বাংলায় বলো",
     "বাংলায় কথা বলো",
@@ -429,12 +521,15 @@ function getLanguageCommand(message) {
     "বাংলায় উত্তর দাও",
     "বাংলা ভাষায়",
     "বাংলা ভাষায়",
+    "বাংলা ভাষায় বলো",
+    "বাংলা ভাষায় বলো",
   ];
 
   const englishCommands = [
     "english",
     "ইংলিশ",
     "ইংরেজি",
+    "ইংরেজিতে",
     "ইংরেজিতে বলো",
     "ইংরেজিতে কথা বলো",
     "ইংরেজিতে উত্তর দাও",
@@ -446,7 +541,6 @@ function getLanguageCommand(message) {
   return null;
 }
 
-// Detect requests for languages other than English and Bangla.
 const unsupportedLanguages = [
   { names: ["hindi", "হিন্দি", "हिंदी"], label: "Hindi" },
   { names: ["urdu", "উর্দু", "اردو"], label: "Urdu" },
@@ -474,76 +568,60 @@ const unsupportedLanguages = [
   { names: ["hebrew", "হিব্রু"], label: "Hebrew" },
 ];
 
-function getUnsupportedLanguageRequest(message) {
+function getUnsupportedLanguageRequest(message = "") {
   const text = normalizeText(message);
-
-  const englishRequestIndicators = [
-    "reply in",
-    "answer in",
-    "speak in",
-    "talk in",
-    "respond in",
-    "write in",
-    "chat in",
-    "translate to",
-    "switch to",
-    "change to",
-    "use ",
-    "in ",
-    "speak ",
-    "talk ",
-    "reply ",
-    "answer ",
-    "write ",
-    "please speak",
-    "can you speak",
-    "can you reply",
-    "can you answer",
-    "i want ",
-    "i need ",
-  ];
-
-  const banglaRequestIndicators = [
-    "ভাষায়",
-    "ভাষায়",
-    "তে বলো",
-    "তে কথা বলো",
-    "তে উত্তর দাও",
-    "তে কথা",
-    "ভাষায় বলো",
-    "ভাষায় বলো",
-    "ভাষায় উত্তর",
-    "ভাষায় উত্তর",
-  ];
 
   for (const language of unsupportedLanguages) {
     for (const name of language.names) {
       const normalizedName = normalizeText(name);
 
-      // An exact language name, such as "Hindi" or "Urdu".
       if (text === normalizedName) {
         return language.label;
       }
 
-      const explicitlyRequested =
-        englishRequestIndicators.some((indicator) =>
-          text.includes(`${indicator}${normalizedName}`)
-        ) ||
-        banglaRequestIndicators.some(
-          (indicator) =>
-            text.includes(normalizedName) &&
-            text.includes(indicator)
-        ) ||
-        (
-          text.includes(normalizedName) &&
-          (
-            text.includes("please") ||
-            text.includes("দয়া করে") ||
-            text.includes("দয়া করে")
-          )
-        );
+      const containsLanguage =
+        (` ${text} `).includes(` ${normalizedName} `);
 
-      if (explicitlyRequested) {
+      if (!containsLanguage) continue;
+
+      const englishIndicators = [
+        "reply in",
+        "answer in",
+        "speak in",
+        "talk in",
+        "respond in",
+        "write in",
+        "chat in",
+        "translate to",
+        "switch to",
+        "change to",
+        "use",
+        "please speak",
+        "can you speak",
+        "can you reply",
+        "can you answer",
+        "i want",
+        "i need",
+      ];
+
+      const banglaIndicators = [
+        "ভাষায়",
+        "ভাষায়",
+        "ভাষায় বলো",
+        "ভাষায় বলো",
+        "ভাষায় উত্তর",
+        "ভাষায় উত্তর",
+        "তে কথা বলো",
+        "তে উত্তর দাও",
+      ];
+
+      if (
+        englishIndicators.some((indicator) => text.includes(indicator)) ||
+        banglaIndicators.some((indicator) => text.includes(indicator)) ||
+        text.includes("please") ||
+        text.includes("দয়া করে") ||
+        text.includes("দয়া করে")
+      ) {
         return language.label;
       }
     }
@@ -552,43 +630,53 @@ function getUnsupportedLanguageRequest(message) {
   return null;
 }
 
-function getPreferredLanguage(message, previousMessages = []) {
-  const currentCommand = getLanguageCommand(message);
+function getPreferredLanguage(
+  message = "",
+  previousMessages = []
+) {
+  const command = getLanguageCommand(message);
 
-  if (currentCommand) return currentCommand;
+  if (command) return command;
 
   for (const item of [...previousMessages].reverse()) {
     if (item.role !== "user") continue;
 
-    const command = getLanguageCommand(item.text);
+    const previousCommand = getLanguageCommand(item.text);
 
-    if (command) return command;
+    if (previousCommand) return previousCommand;
   }
 
   return getLanguage(message);
 }
 
-function scoreRule(message, keywords) {
+function scoreRule(message, keywords = []) {
   const normalizedMessage = normalizeText(message);
+  let score = 0;
 
-  return keywords.reduce((score, keyword) => {
+  for (const keyword of keywords) {
     const normalizedKeyword = normalizeText(keyword);
 
-    if (!normalizedKeyword) return score;
+    if (!normalizedKeyword) continue;
 
     if (normalizedMessage === normalizedKeyword) {
-      return score + 5;
+      score = Math.max(score, 10 + normalizedKeyword.length / 100);
+      continue;
     }
 
-    if (` ${normalizedMessage} `.includes(` ${normalizedKeyword} `)) {
-      return score + 3;
-    }
+    const paddedMessage = ` ${normalizedMessage} `;
+    const paddedKeyword = ` ${normalizedKeyword} `;
 
-    return score;
-  }, 0);
+    if (paddedMessage.includes(paddedKeyword)) {
+      score = Math.max(score, 5 + normalizedKeyword.length / 100);
+    }
+  }
+
+  return score;
 }
 
 function pickResponse(responses, message) {
+  if (!responses?.length) return "";
+
   const normalized = normalizeText(message);
 
   const hash = [...normalized].reduce(
@@ -612,6 +700,7 @@ function findDoctorByName(message) {
 
   return doctorDirectory.find((doctor) => {
     const fullName = normalizeText(doctor.name);
+
     const nameWithoutTitle = normalizeText(
       doctor.name.replace(/^Dr\.?\s*/i, "")
     );
@@ -645,12 +734,94 @@ function formatDoctorList(doctors, language) {
 function findSpecialization(message) {
   const normalized = normalizeText(message);
 
-  return specializationKeywords.find((item) =>
-    item.keywords.some((keyword) => {
-      const normalizedKeyword = normalizeText(keyword);
-      return ` ${normalized} `.includes(` ${normalizedKeyword} `);
-    })
-  );
+  return specializationKeywords
+    .map((item) => ({
+      item,
+      score: scoreRule(message, item.keywords),
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((a, b) => b.score - a.score)[0]?.item;
+}
+
+function reply(text, href = null, linkText = null) {
+  return { text, href, linkText };
+}
+
+const positiveAcknowledgements = new Set([
+  "ok",
+  "okay",
+  "okey",
+  "k",
+  "kk",
+  "alright",
+  "all right",
+  "sure",
+  "fine",
+  "got it",
+  "understood",
+  "sounds good",
+  "perfect",
+  "great",
+  "cool",
+  "awesome",
+  "nice",
+  "good",
+  "yes",
+  "yeah",
+  "yep",
+  "yup",
+  "correct",
+  "exactly",
+  "i see",
+  "i understand",
+  "thanks",
+  "thank you",
+  "হ্যাঁ",
+  "জি",
+  "জ্বি",
+  "হুম",
+  "ঠিক আছে",
+  "আচ্ছা",
+  "বেশ",
+  "বুঝেছি",
+  "বুঝলাম",
+  "ঠিক",
+  "হ্যাঁ ঠিক আছে",
+  "হ্যাঁ বুঝেছি",
+  "ঠিক বলেছ",
+  "ধন্যবাদ",
+]);
+
+const negativeAcknowledgements = new Set([
+  "no",
+  "nope",
+  "nah",
+  "not now",
+  "no thanks",
+  "no thank you",
+  "না",
+  "না ধন্যবাদ",
+  "এখন না",
+  "লাগবে না",
+  "দরকার নেই",
+]);
+
+function isDoctorListRequest(message) {
+  const text = normalizeText(message);
+
+  const patterns = [
+    /\b(show|give|display|list|see|view)\b.*\b(all )?doctors\b/,
+    /\b(all|list of) doctors\b/,
+    /\bdoctor list\b/,
+    /\bwho are the doctors\b/,
+    /সব ডাক্তার/,
+    /সকল ডাক্তার/,
+    /ডাক্তারদের তালিকা/,
+    /সব ডাক্তারের তালিকা/,
+    /সকল ডাক্তারের তালিকা/,
+  ];
+
+  return patterns.some((pattern) => pattern.test(text));
 }
 
 export function getBotReply(
@@ -658,6 +829,8 @@ export function getBotReply(
   previousMessages = [],
   preferredLanguage = null
 ) {
+  const normalizedMessage = normalizeText(message);
+
   const commandLanguage = getLanguageCommand(message);
 
   const language =
@@ -665,82 +838,119 @@ export function getBotReply(
     preferredLanguage ||
     getPreferredLanguage(message, previousMessages);
 
-  // FIX: normalizedMessage was previously used without being declared.
-  const normalizedMessage = normalizeText(message);
-
-  const reply = (text, href = null, linkText = null) => ({
-    text,
-    href,
-    linkText,
-  });
-
-  // Switch language for the rest of the current chat.
-  if (commandLanguage) {
+  // Ignore empty input safely.
+  if (!normalizedMessage) {
     return reply(
       language === "bn"
+        ? "তুমি কী জানতে চাও? 😊 তোমার প্রশ্নটি লিখে পাঠাও।"
+        : "What would you like to know? 😊 Type your question and I'll try to help."
+    );
+  }
+
+  // Switch the conversation language.
+  if (commandLanguage) {
+    return reply(
+      commandLanguage === "bn"
         ? "ঠিক আছে! 😊 এখন থেকে এই চ্যাটে বাংলায় উত্তর দেব। ডাক্তার, specialization বা অ্যাপয়েন্টমেন্ট সম্পর্কে জানতে পারো।"
         : "Of course! 😊 I'll reply in English from now on in this chat. You can ask about doctors, specializations, and appointments."
     );
   }
 
-  // Only English and Bangla are supported.
-  const unsupportedLanguage = getUnsupportedLanguageRequest(message);
+  // Unsupported language requests.
+  const unsupportedLanguage =
+    getUnsupportedLanguageRequest(message);
 
   if (unsupportedLanguage) {
     return reply(
       language === "bn"
-        ? `দুঃখিত! 😊 MediCare Assistant বর্তমানে ${unsupportedLanguage} ভাষা সাপোর্ট করে না। এই চ্যাটবট শুধু বাংলা ও ইংরেজিতে উত্তর দিতে পারে। অনুগ্রহ করে বাংলা অথবা ইংরেজিতে কথা বলো।`
+        ? `দুঃখিত! 😊 MediCare Assistant বর্তমানে ${unsupportedLanguage} ভাষা সাপোর্ট করে না। এই চ্যাটবট শুধু বাংলা ও ইংরেজিতে উত্তর দিতে পারে। অনুগ্রহ করে বাংলা অথবা ইংরেজিতে প্রশ্ন করো।`
         : `Sorry! 😊 MediCare Assistant doesn't support ${unsupportedLanguage} at the moment. This chatbot can only reply in English and Bangla. Please ask your question in English or Bangla.`
     );
   }
 
-  // Emergency messages take priority over ordinary doctor matching.
-  const emergencyRule = faqRules.find((rule) => rule.id === "emergency");
+  // Emergency detection must run before ordinary matching.
+  const emergencyRule = faqRules.find(
+    (rule) => rule.id === "emergency"
+  );
 
   if (scoreRule(message, emergencyRule.keywords) > 0) {
     return reply(pickResponse(emergencyRule[language], message));
   }
 
   // Medical advice boundary.
-  const medicalRule = faqRules.find((rule) => rule.id === "medicalAdvice");
+  const medicalRule = faqRules.find(
+    (rule) => rule.id === "medicalAdvice"
+  );
 
   if (scoreRule(message, medicalRule.keywords) > 0) {
     return reply(pickResponse(medicalRule[language], message));
   }
 
+  // Context from the most recent assistant response.
   const lastBotMessage = [...previousMessages]
     .reverse()
     .find((item) => item.role === "assistant");
 
-  // Yes/no follow-ups.
-  if (/^(yes|yeah|yep|হ্যাঁ|জি|হুম)$/.test(normalizedMessage)) {
+  // Positive acknowledgement: OK, okay, sure, got it, etc.
+  if (positiveAcknowledgements.has(normalizedMessage)) {
+    if (lastBotMessage?.href) {
+      return reply(
+        language === "bn"
+          ? "ঠিক আছে! 😊 নিচের লিংকে চাপ দিয়ে পেজটি খুলতে পারো।"
+          : "Sure! 😊 You can open the page using the link below.",
+        lastBotMessage.href,
+        lastBotMessage.linkText ||
+          (language === "bn" ? "পেজটি খুলুন" : "Open Page")
+      );
+    }
+
     return reply(
       language === "bn"
-        ? lastBotMessage?.href
-          ? "ঠিক আছে! 😊 উপরের লিংকে চাপ দিয়ে পেজটি খুলতে পারো।"
-          : "আচ্ছা! 😊 আর কী জানতে চাও?"
-        : lastBotMessage?.href
-          ? "Great! 😊 Use the link above to open the page."
-          : "Sure! 😊 What else would you like to know?",
-      lastBotMessage?.href || null,
-      lastBotMessage?.linkText || null
+        ? "ঠিক আছে! 😊 আমি সাহায্য করতে প্রস্তুত। ডাক্তার খোঁজা, specialization, অ্যাপয়েন্টমেন্ট বা অন্য কোনো বিষয় জানতে চাইলে বলো।"
+        : "Alright! 😊 I'm here to help. You can ask me about finding doctors, specializations, appointments, or anything about MediCare Connect."
     );
   }
 
-  if (/^(no|nope|না|না ধন্যবাদ)$/.test(normalizedMessage)) {
+  // Negative acknowledgement.
+  if (negativeAcknowledgements.has(normalizedMessage)) {
     return reply(
       language === "bn"
-        ? "ঠিক আছে, কোনো সমস্যা নেই! 😊 অন্য কিছু জানতে চাইলে বলো।"
-        : "No problem at all! 😊 Let me know if there's anything else you'd like to know."
+        ? "ঠিক আছে, কোনো সমস্যা নেই! 😊 অন্য কিছু জানতে চাইলে আমাকে বলো।"
+        : "No problem at all! 😊 Let me know if there's anything else I can help you with."
     );
   }
 
-  // Show all doctors.
+  // Follow-up asking to open the previous page.
+  const openPagePhrases = [
+    "open it",
+    "open the page",
+    "go there",
+    "take me there",
+    "show me",
+    "ওপেন করো",
+    "পেজটি খোলো",
+    "সেখানে যাও",
+    "দেখাও",
+  ];
+
   if (
-    /show me the doctor list|list all doctors|all doctors|show doctors|সব ডাক্তার|ডাক্তারদের তালিকা|সকল ডাক্তার/.test(
-      normalizedMessage
+    lastBotMessage?.href &&
+    openPagePhrases.some((phrase) =>
+      normalizedMessage.includes(normalizeText(phrase))
     )
   ) {
+    return reply(
+      language === "bn"
+        ? "অবশ্যই! নিচের লিংকে চাপ দিয়ে পেজটি খুলতে পারো। 😊"
+        : "Of course! Click the link below to open the page. 😊",
+      lastBotMessage.href,
+      lastBotMessage.linkText ||
+        (language === "bn" ? "পেজটি খুলুন" : "Open Page")
+    );
+  }
+
+  // Explicit requests to list all doctors.
+  if (isDoctorListRequest(message)) {
     return reply(
       formatDoctorList(doctorDirectory, language),
       "/find-doctor",
@@ -748,16 +958,18 @@ export function getBotReply(
     );
   }
 
-  // Look up a specific doctor by name.
+  // Match a specific doctor by name.
   const namedDoctor = findDoctorByName(message);
 
   if (namedDoctor) {
     return reply(
       language === "bn"
-        ? `${namedDoctor.name} হলেন ${namedDoctor.specialization} specialist। তাঁর প্রোফাইলে থাকা তথ্য দেখে বিস্তারিত জানতে পারো।`
+        ? `${namedDoctor.name} আমাদের তালিকায় ${namedDoctor.specialization} specialist হিসেবে আছেন। তাঁর প্রোফাইলে থাকা তথ্য দেখে বিস্তারিত জানতে পারো।`
         : `${namedDoctor.name} is listed as a ${namedDoctor.specialization} specialist. You can review their profile for more information.`,
       "/find-doctor",
-      language === "bn" ? "ডাক্তারের প্রোফাইল দেখুন" : "View Doctor Profiles"
+      language === "bn"
+        ? "ডাক্তারের প্রোফাইল দেখুন"
+        : "View Doctor Profiles"
     );
   }
 
@@ -775,18 +987,22 @@ export function getBotReply(
       matchedSymptom.specialization
     );
 
-    const doctorNames = doctors.map((doctor) => doctor.name).join(", ");
+    const doctorNames = doctors.length
+      ? doctors.map((doctor) => doctor.name).join(", ")
+      : language === "bn"
+        ? "এই মুহূর্তে তালিকায় কোনো ডাক্তার পাওয়া যায়নি।"
+        : "No doctors in this specialty were found in the current directory.";
 
     return reply(
       language === "bn"
-        ? `তোমার বলা সমস্যার জন্য ${matchedSymptom.specialization} specialist-এর পরামর্শ নেওয়া উপযুক্ত হতে পারে। আমাদের তালিকায় আছেন: ${doctorNames}।\n\nএটি রোগ নির্ণয় নয়। উপসর্গ গুরুতর হলে বা বাড়তে থাকলে চিকিৎসকের পরামর্শ নাও।`
-        : `A ${matchedSymptom.specialization} specialist may be an appropriate starting point for the concern you described. Doctors in our list: ${doctorNames}.\n\nThis is not a diagnosis. Please consult a healthcare professional, especially if your symptoms are severe or worsening.`,
+        ? `তোমার বলা সমস্যার জন্য ${matchedSymptom.specialization} specialist-এর পরামর্শ নেওয়া উপযুক্ত হতে পারে। আমাদের তালিকায়: ${doctorNames}।\n\nএটি রোগ নির্ণয় নয়। উপসর্গ গুরুতর হলে, হঠাৎ শুরু হলে বা বাড়তে থাকলে দ্রুত চিকিৎসা নাও।`
+        : `A ${matchedSymptom.specialization} specialist may be an appropriate starting point for the concern you described. Doctors in our list: ${doctorNames}.\n\nThis is not a diagnosis. Seek medical care promptly if symptoms are severe, sudden, or worsening.`,
       "/find-doctor",
       language === "bn" ? "ডাক্তার খুঁজুন" : "Find a Doctor"
     );
   }
 
-  // List doctors for a requested specialty.
+  // Match a requested specialization.
   const matchedSpecialization = findSpecialization(message);
 
   if (matchedSpecialization) {
@@ -800,12 +1016,11 @@ export function getBotReply(
     );
   }
 
-  // Existing FAQ matching.
+  // FAQ matching.
   const matchedRule = faqRules
     .filter(
       (rule) =>
-        rule.id !== "emergency" &&
-        rule.id !== "medicalAdvice"
+        !["emergency", "medicalAdvice"].includes(rule.id)
     )
     .map((rule) => ({
       rule,
@@ -833,9 +1048,28 @@ export function getBotReply(
 }
 
 export const quickQuestions = [
-  { label: "Find a doctor", message: "Show me the doctor list" },
-  { label: "Heart specialist", message: "Who is the heart specialist?" },
-  { label: "Eye doctor", message: "Who is the eye specialist?" },
-  { label: "Appointment", message: "How can I book an appointment?" },
-  { label: "বাংলা", message: "বাংলা" },
+  {
+    label: "Find a doctor",
+    message: "Show me the doctor list",
+  },
+  {
+    label: "Heart specialist",
+    message: "Who is the heart specialist?",
+  },
+  {
+    label: "Eye doctor",
+    message: "Who is the eye specialist?",
+  },
+  {
+    label: "Appointment",
+    message: "How can I book an appointment?",
+  },
+  {
+    label: "Login help",
+    message: "How can I sign in?",
+  },
+  {
+    label: "বাংলা",
+    message: "বাংলা",
+  },
 ];

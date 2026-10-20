@@ -37,30 +37,21 @@ const initialMessages = {
 const panelVariants = {
   hidden: {
     opacity: 0,
-    y: 28,
-    scale: 0.94,
-    filter: "blur(4px)",
+    y: 12,
   },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    filter: "blur(0px)",
     transition: {
-      type: "spring",
-      stiffness: 320,
-      damping: 28,
-      mass: 0.85,
-      staggerChildren: 0.05,
+      duration: 0.16,
+      ease: "easeOut",
     },
   },
   exit: {
     opacity: 0,
-    y: 18,
-    scale: 0.96,
-    filter: "blur(3px)",
+    y: 8,
     transition: {
-      duration: 0.18,
+      duration: 0.1,
       ease: "easeIn",
     },
   },
@@ -268,19 +259,9 @@ export default function Chatbot() {
   return (
     <div className="fixed inset-x-3 bottom-3 z-[100] font-sans sm:inset-x-auto sm:bottom-5 sm:right-5">
       {/* Animated chat window */}
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.section
-            key="medicare-chat-panel"
-            id="medicare-chat-panel"
-            role="dialog"
-            aria-label="MediCare Connect chatbot"
-            aria-describedby="medicare-chat-disclaimer"
-            variants={panelVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="mb-3 flex h-[min(600px,calc(100dvh-88px))] w-full max-w-[400px] origin-bottom-right flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl sm:mb-4 sm:h-[min(650px,calc(100dvh-112px))] sm:w-[min(400px,calc(100vw-40px))]"
+          <motion.section key="medicare-chat-panel" id="medicare-chat-panel" role="dialog" aria-label="MediCare Connect chatbot" aria-describedby="medicare-chat-disclaimer" variants={panelVariants} initial="hidden" animate="visible" exit="exit" className="mb-3 flex h-[min(600px,calc(100dvh-88px))] w-full max-w-[400px] origin-bottom-right flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl sm:mb-4 sm:h-[min(650px,calc(100dvh-112px))] sm:w-[min(400px,calc(100vw-40px))]"
           >
             {/* Header */}
             <motion.div
